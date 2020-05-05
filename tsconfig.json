@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"esModuleInterop": true,
+		"jsx": "react"
+	},
+	"jsx": "react",
+	"module": "commonjs",
+	"noImplicitReturns": true,
+	"sourceMap": true,
+	"strict": true,
+	"noUnusedLocals": true
+}
