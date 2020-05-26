@@ -1,6 +1,6 @@
-import { AdjudicatorTableHeaderStyled } from "./AdjudicatorTableHeader.styles"
+import { AdjudicatorTable } from "./AdjudicatorTable"
 import React from "react"
 
 export const Scorrz: React.FC = () => {
-	return <AdjudicatorTableHeaderStyled />
+	return <AdjudicatorTable adjudicatorId={1} />
 }

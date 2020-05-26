@@ -1,24 +1,32 @@
-type CompetitorId = string;
+export type CompetitorId = string;
 
-interface Competitor {
+export interface Competitor {
 	id: CompetitorId;
 	name: string;
 	school: string;
 }
 
-interface Adjudicator {
+export interface Adjudicator {
 	id: number;
 	name: string;
 }
 
-interface ResultLine {
+export interface ResultLine {
 	competitorId: CompetitorId;
 	score: number[];
 	cumulativeSum: number[];
 	cumulativeGridScore: number[];
 }
 
-interface AdjudicatorResults {
+export interface AdjudicatorResults {
 	adjudicatorId: number;
 	resultLines: ResultLine[];
 }
+
+export interface IState {
+	dummy: string;
+}
+
+export const initialState: IState = {
+	dummy: "hello",
+};
