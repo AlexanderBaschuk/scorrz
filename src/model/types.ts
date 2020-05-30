@@ -7,8 +7,12 @@ export interface Competitor {
 }
 
 export interface Adjudicator {
-	id: number;
 	name: string;
+}
+
+export interface Round {
+	name: string;
+	shortName: string;
 }
 
 export interface ResultLine {
@@ -24,9 +28,15 @@ export interface AdjudicatorResults {
 }
 
 export interface IState {
-	dummy: string;
+	rounds: Round[];
+	adjudicators: Adjudicator[];
+	competitors: Competitor[];
+	results: AdjudicatorResults[];
 }
 
 export const initialState: IState = {
-	dummy: "hello",
+	rounds: [],
+	adjudicators: [],
+	competitors: [],
+	results: [],
 };
