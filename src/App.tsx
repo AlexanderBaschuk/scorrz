@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import React from "react";
 import { Scorrz } from "./Scorrz";
-import { configureStore } from "redux-toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { initialState } from "./model/types";
 
 const rootReducer = (state) => {
