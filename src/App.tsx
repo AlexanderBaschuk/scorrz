@@ -8,8 +8,10 @@ const rootReducer = (state) => {
 	return state;
 };
 
-// const store = createStore(rootReducer, initialState);
-const store = configureStore(rootReducer, initialState);
+const store = configureStore({
+	reducer: rootReducer,
+	preloadedState: initialState,
+});
 
 export const App: React.FC = () => {
 	return (
