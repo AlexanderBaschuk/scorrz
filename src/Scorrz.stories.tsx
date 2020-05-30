@@ -10,5 +10,10 @@ export default {
 };
 
 export const AdjudicatorTableStory: React.FC = () => {
-	return <AdjudicatorTable adjudicatorId={1} />;
+	return (
+		<AdjudicatorTable
+			adjudicatorId={number("adjudicatorId", 1)}
+			adjudicatorName={text("adjudicatorName", "Adjudicator 1")}
+		/>
+	);
 };

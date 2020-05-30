@@ -1,8 +1,9 @@
+import { initialState, testInitialState } from "./model/types";
+
 import { Provider } from "react-redux";
 import React from "react";
 import { Scorrz } from "./Scorrz";
 import { configureStore } from "@reduxjs/toolkit";
-import { initialState } from "./model/types";
 
 const rootReducer = (state) => {
 	return state;
@@ -10,7 +11,7 @@ const rootReducer = (state) => {
 
 const store = configureStore({
 	reducer: rootReducer,
-	preloadedState: initialState,
+	preloadedState: testInitialState,
 });
 
 export const App: React.FC = () => {
