@@ -1,5 +1,5 @@
-import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
-import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
+import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader/AdjudicatorTableHeader";
+import { AdjudicatorTableRow } from "./AdjudicatorTableRow/AdjudicatorTableRow";
 import React from "react";
 
 interface AdjudicatorTableProps {

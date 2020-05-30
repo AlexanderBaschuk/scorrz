@@ -1,6 +1,6 @@
 import { boolean, number, text, withKnobs } from "@storybook/addon-knobs";
 
-import { AdjudicatorTable } from "./AdjudicatorTable";
+import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 

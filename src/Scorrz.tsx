@@ -1,4 +1,4 @@
-import { AdjudicatorTable } from "./AdjudicatorTable"
+import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable"
 import React from "react"
 
 export const Scorrz: React.FC = () => {
