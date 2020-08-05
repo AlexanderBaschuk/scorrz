@@ -115,7 +115,7 @@ export const testInitialState: State = {
 					cumulativeGridScore: [100, 200, 300],
 				},
 				{
-					competitorId: "120",
+					competitorId: "560",
 					score: [77, 82, 74],
 					cumulativeSum: [0, 0, 0],
 					cumulativeGridScore: [100, 200, 300],
