@@ -27,21 +27,21 @@ export interface AdjudicatorResults {
 	resultLines: ResultLine[];
 }
 
-export interface IState {
+export interface State {
 	rounds: Round[];
 	adjudicators: Adjudicator[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 }
 
-export const initialState: IState = {
+export const initialState: State = {
 	rounds: [],
 	adjudicators: [],
 	competitors: [],
 	results: [],
 };
 
-export const testInitialState: IState = {
+export const testInitialState: State = {
 	rounds: [
 		{ name: "Heavy", shortName: "H" },
 		{ name: "Light", shortName: "L" },
