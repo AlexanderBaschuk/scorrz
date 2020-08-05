@@ -1,11 +1,13 @@
 import { AdjudicatorTableRowStyled } from "./AdjudicatorTableRow.styles";
 import React from "react";
 
-interface AdjudicatorTableRowProps {
+export type Score = number | undefined;
+
+export interface AdjudicatorTableRowProps {
 	competitorName: string;
-	scores: number[];
-	sum: number;
-	gridScore: number;
+	scores: Score[];
+	sum: Score;
+	gridScore: Score;
 }
 
 export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
