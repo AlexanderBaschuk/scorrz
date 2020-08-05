@@ -1,10 +1,11 @@
-import {
-	AdjudicatorTable,
-	CompetitorRow,
-} from "./AdjudicatorTable/AdjudicatorTable";
 import React, { useCallback, useMemo } from "react";
-import { allResultsSelector, competitorsSelector } from "./Scorrz.selectors";
+import {
+	adjudicatorsSelector,
+	allResultsSelector,
+	competitorsSelector,
+} from "./Scorrz.selectors";
 
+import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { CompetitorId } from "./model/types";
 import { useSelector } from "react-redux";
 
@@ -17,13 +18,12 @@ export const Scorrz: React.FC = () => {
 		},
 		[competitors],
 	);
+	const adjudicators = useSelector(adjudicatorsSelector);
 	const rounds = ["H", "L", "S"];
 	const results = useSelector(allResultsSelector);
-	const adjudicatorId = 0;
-	const adjudicatorName = "adjudicator 1";
 
-	const adjudicatorResults: CompetitorRow[] = useMemo(
-		() =>
+	const getAdjudicatorResults = useCallback(
+		(adjudicatorId) =>
 			results[adjudicatorId].resultLines.map((r) => ({
 				id: r.competitorId,
 				name: getCompetitor(r.competitorId).name,
@@ -35,10 +35,15 @@ export const Scorrz: React.FC = () => {
 	);
 
 	return (
-		<AdjudicatorTable
-			adjudicatorName={adjudicatorName}
-			rounds={rounds}
-			results={adjudicatorResults}
-		/>
+		<>
+			{adjudicators.map((adj, i) => (
+				<AdjudicatorTable
+					key={i}
+					adjudicatorName={adj.name}
+					rounds={rounds}
+					results={getAdjudicatorResults(i)}
+				/>
+			))}
+		</>
 	);
 };
