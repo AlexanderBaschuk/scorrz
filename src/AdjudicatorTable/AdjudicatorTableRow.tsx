@@ -1,7 +1,5 @@
-import { AdjudicatorTableRowStyled } from "./AdjudicatorTableRow.styles";
 import React from "react";
-
-export type Score = number | undefined;
+import { Score } from "src/model/types";
 
 export interface AdjudicatorTableRowProps {
 	competitorName: string;
@@ -17,13 +15,13 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 	gridScore,
 }) => {
 	return (
-		<AdjudicatorTableRowStyled>
+		<tr>
 			<td>{competitorName}</td>
 			{scores.map((score, i) => (
 				<td key={i}>{score}</td>
 			))}
 			<td>{sum}</td>
 			<td>{Math.round(gridScore * 100) / 100}</td>
-		</AdjudicatorTableRowStyled>
+		</tr>
 	);
 };

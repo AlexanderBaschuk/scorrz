@@ -1,5 +1,7 @@
 export type CompetitorId = string;
 
+export type Score = number | undefined;
+
 export interface Competitor {
 	id: CompetitorId;
 	name: string;

@@ -1,11 +1,8 @@
-import {
-	AdjudicatorTableRow,
-	Score,
-} from "./AdjudicatorTableRow/AdjudicatorTableRow";
+import { CompetitorId, Score } from "src/model/types";
 
-import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader/AdjudicatorTableHeader";
+import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
+import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
 import { AdjudicatorTableWrapperStyled } from "./AdjudicatorTable.styles";
-import { CompetitorId } from "src/model/types";
 import React from "react";
 
 interface AdjudicatorTableProps {

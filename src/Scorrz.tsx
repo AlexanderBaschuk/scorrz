@@ -7,10 +7,14 @@ import {
 
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { CompetitorId } from "./model/types";
+import { FinalTable } from "./FinalTable/FinalTable";
 import { useSelector } from "react-redux";
 
 export const Scorrz: React.FC = () => {
 	const competitors = useSelector(competitorsSelector);
+	const adjudicators = useSelector(adjudicatorsSelector);
+	const rounds = ["H", "L", "S"];
+	const results = useSelector(allResultsSelector);
 
 	const getCompetitor = useCallback(
 		(id: CompetitorId) => {
@@ -18,9 +22,6 @@ export const Scorrz: React.FC = () => {
 		},
 		[competitors],
 	);
-	const adjudicators = useSelector(adjudicatorsSelector);
-	const rounds = ["H", "L", "S"];
-	const results = useSelector(allResultsSelector);
 
 	const getAdjudicatorResults = useCallback(
 		(adjudicatorId) =>
@@ -34,6 +35,18 @@ export const Scorrz: React.FC = () => {
 		[results, getCompetitor, rounds.length],
 	);
 
+	const finalResults = useMemo(
+		() =>
+			// TODO: calculate the results
+			competitors.map((c, i) => ({
+				place: i + 1,
+				id: c.id,
+				name: c.name,
+				gridSum: 300 - 10 * i,
+			})),
+		[competitors],
+	);
+
 	return (
 		<>
 			{adjudicators.map((adj, i) => (
@@ -44,6 +57,7 @@ export const Scorrz: React.FC = () => {
 					results={getAdjudicatorResults(i)}
 				/>
 			))}
+			<FinalTable results={finalResults} />
 		</>
 	);
 };
