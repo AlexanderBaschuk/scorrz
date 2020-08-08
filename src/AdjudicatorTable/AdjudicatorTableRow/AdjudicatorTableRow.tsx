@@ -23,7 +23,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 				<td key={i}>{score}</td>
 			))}
 			<td>{sum}</td>
-			<td>{gridScore}</td>
+			<td>{Math.round(gridScore * 100) / 100}</td>
 		</AdjudicatorTableRowStyled>
 	);
 };
