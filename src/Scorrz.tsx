@@ -8,6 +8,7 @@ import {
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { CompetitorId } from "./model/types";
 import { FinalTable } from "./FinalTable/FinalTable";
+import { calculateGridScores } from "./Calculations/calculations";
 import { useSelector } from "react-redux";
 
 export const Scorrz: React.FC = () => {
@@ -24,15 +25,18 @@ export const Scorrz: React.FC = () => {
 	);
 
 	const getAdjudicatorResults = useCallback(
-		(adjudicatorId) =>
-			results[adjudicatorId].resultLines.map((r) => ({
+		(adjudicatorId) => {
+			const resultLines = results[adjudicatorId].resultLines;
+			const sumsAndGrids = calculateGridScores(resultLines);
+			return resultLines.map((r) => ({
 				id: r.competitorId,
 				name: getCompetitor(r.competitorId).name,
 				scores: r.score,
-				sum: r.cumulativeSum[rounds.length - 1],
-				gridScore: r.cumulativeGridScore[rounds.length - 1],
-			})),
-		[results, getCompetitor, rounds.length],
+				sum: sumsAndGrids.get(r.competitorId).sum,
+				gridScore: sumsAndGrids.get(r.competitorId).grid,
+			}));
+		},
+		[results, getCompetitor],
 	);
 
 	const finalResults = useMemo(

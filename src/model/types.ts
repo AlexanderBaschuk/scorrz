@@ -20,8 +20,6 @@ export interface Round {
 export interface ResultLine {
 	competitorId: CompetitorId;
 	score: number[];
-	cumulativeSum: number[];
-	cumulativeGridScore: number[];
 }
 
 export interface AdjudicatorResults {
@@ -66,38 +64,26 @@ export const testInitialState: State = {
 				{
 					competitorId: "10",
 					score: [74, 82, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "120",
 					score: [82, 74, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "560",
 					score: [77, 82, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "340",
 					score: [74, 77, 82],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "670",
 					score: [82, 77, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "230",
 					score: [77, 74, 82],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 			],
 		},
@@ -107,32 +93,22 @@ export const testInitialState: State = {
 				{
 					competitorId: "10",
 					score: [74, 82, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "120",
 					score: [82, 74, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "560",
 					score: [77, 82, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "230",
 					score: [74, 77, 82],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "340",
 					score: [82, 77, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 			],
 		},
