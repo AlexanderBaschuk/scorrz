@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import React from "react";
 import createMockStore from "redux-mock-store";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import { testInitialState } from "./model/types";
 import { useResults } from "./useResults";
 
@@ -12,21 +12,20 @@ const createStore = () => {
 	return store;
 };
 
-export const renderConnectedHook = <T extends any, P extends any>(
-	hook: (arg0: P) => T,
-	hookParams: P,
+export const executeHookWithStore = <T extends any>(
+	hook: () => T,
 	store: any,
 ): T => {
 	let hookResult: T;
 
-	const HookWrapper = ({ hook, hookParams }) => {
-		hookResult = hook(hookParams);
+	const HookWrapper = () => {
+		hookResult = hook();
 		return null;
 	};
 
-	shallow(
+	mount(
 		<Provider store={store}>
-			<HookWrapper hook={hook} hookParams={hookParams}/>
+			<HookWrapper />
 		</Provider>,
 	);
 	return hookResult;
@@ -34,6 +33,6 @@ export const renderConnectedHook = <T extends any, P extends any>(
 
 it("test hook", () => {
 	const store = createStore();
-	const hookResult = renderConnectedHook(useResults, undefined, store);
+	const hookResult = executeHookWithStore(() => useResults(), store);
 	expect(hookResult).toBeDefined()
 });
