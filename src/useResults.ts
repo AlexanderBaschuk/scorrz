@@ -2,12 +2,21 @@ import { allResultsSelector, competitorsSelector } from "./Scorrz.selectors";
 import { useCallback, useMemo } from "react";
 
 import { CompetitorId } from "./model/types";
+import { CompetitorRow } from "./AdjudicatorTable/AdjudicatorTable";
 import { calculateGridScores } from "./Calculations/calculations";
 import { useSelector } from "react-redux";
 
 export const useResults = () => {
 	const competitors = useSelector(competitorsSelector);
 	const results = useSelector(allResultsSelector);
+
+	const sumsAndGrids = useMemo(
+		() =>
+			results.map((adjudicator) =>
+				calculateGridScores(adjudicator.resultLines),
+			),
+		[results],
+	);
 
 	const getCompetitor = useCallback(
 		(id: CompetitorId) => {
@@ -16,26 +25,28 @@ export const useResults = () => {
 		[competitors],
 	);
 
-	const getAdjudicatorResults = useCallback(
-		(adjudicatorId: number) => {
-			const resultLines = results[adjudicatorId].resultLines;
-			const sumsAndGrids = calculateGridScores(resultLines);
-			return resultLines
-				.map((r) => ({
-					id: r.competitorId,
-					name: getCompetitor(r.competitorId).name,
-					scores: r.score,
-					sum: sumsAndGrids.get(r.competitorId).sum,
-					gridScore: sumsAndGrids.get(r.competitorId).grid,
-				}))
-				.sort((result1, result2) => {
-					const diff = result2.sum - result1.sum;
-					if (diff !== 0) return diff;
-					if (result1.id === result2.id) return 0;
-					return result1.id > result2.id ? 1 : -1;
-				});
-		},
-		[results, getCompetitor],
+	const resultsByAdjudicators = useMemo(
+		() =>
+			results.map((adjudicator, adjId) => ({
+				adjudicator: adjudicator.adjudicatorName,
+				resultLines: adjudicator.resultLines
+					.map(
+						(r): CompetitorRow => ({
+							id: r.competitorId,
+							name: getCompetitor(r.competitorId).name,
+							scores: r.score,
+							sum: sumsAndGrids[adjId].get(r.competitorId).sum,
+							gridScore: sumsAndGrids[adjId].get(r.competitorId).grid,
+						}),
+					)
+					.sort((result1, result2) => {
+						const diff = result2.sum - result1.sum;
+						if (diff !== 0) return diff;
+						if (result1.id === result2.id) return 0;
+						return result1.id > result2.id ? 1 : -1;
+					}),
+			})),
+		[results, getCompetitor, sumsAndGrids],
 	);
 
 	const finalResults = useMemo(
@@ -51,7 +62,7 @@ export const useResults = () => {
 	);
 
 	return {
-		getAdjudicatorResults,
+		resultsByAdjudicators,
 		finalResults,
 	};
 };

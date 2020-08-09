@@ -1,4 +1,4 @@
-import { CompetitorId, Score } from "src/model/types";
+import { CompetitorId, Score } from "@/model/types";
 
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";

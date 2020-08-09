@@ -1,16 +1,8 @@
+import { Create } from "./testHelpers/dsl";
 import { Provider } from "react-redux";
 import React from "react";
-import createMockStore from "redux-mock-store";
 import { mount } from "enzyme";
-import { testInitialState } from "./model/types";
 import { useResults } from "./useResults";
-
-const createStore = () => {
-	const mockStore = createMockStore();
-	const store = mockStore(testInitialState);
-	store.clearActions();
-	return store;
-};
 
 export const executeHookWithStore = <T extends any>(
 	hook: () => T,
@@ -31,8 +23,15 @@ export const executeHookWithStore = <T extends any>(
 	return hookResult;
 };
 
-it("test hook", () => {
-	const store = createStore();
+it("hook test attempt", () => {
+	const state = Create.state()
+		.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
+		.withResults(0, Create.adjudicator().withResult("123", [75, 77, 72]));
+	const store = Create.store(state);
 	const hookResult = executeHookWithStore(() => useResults(), store);
-	expect(hookResult).toBeDefined()
+	expect(hookResult.resultsByAdjudicators[0].resultLines[0].sum).toBe(
+		75 + 77 + 72,
+	);
 });
+
+// TODO. Test that it works  correctly when competitor with id doesn't exist
