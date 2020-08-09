@@ -20,13 +20,20 @@ export const useResults = () => {
 		(adjudicatorId: number) => {
 			const resultLines = results[adjudicatorId].resultLines;
 			const sumsAndGrids = calculateGridScores(resultLines);
-			return resultLines.map((r) => ({
-				id: r.competitorId,
-				name: getCompetitor(r.competitorId).name,
-				scores: r.score,
-				sum: sumsAndGrids.get(r.competitorId).sum,
-				gridScore: sumsAndGrids.get(r.competitorId).grid,
-			}));
+			return resultLines
+				.map((r) => ({
+					id: r.competitorId,
+					name: getCompetitor(r.competitorId).name,
+					scores: r.score,
+					sum: sumsAndGrids.get(r.competitorId).sum,
+					gridScore: sumsAndGrids.get(r.competitorId).grid,
+				}))
+				.sort((result1, result2) => {
+					const diff = result2.sum - result1.sum;
+					if (diff !== 0) return diff;
+					if (result1.id === result2.id) return 0;
+					return result1.id > result2.id ? 1 : -1;
+				});
 		},
 		[results, getCompetitor],
 	);

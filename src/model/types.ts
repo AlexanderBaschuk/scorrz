@@ -67,7 +67,7 @@ export const testInitialState: State = {
 				},
 				{
 					competitorId: "120",
-					score: [82, 74, 77],
+					score: [82, 75, 77],
 				},
 				{
 					competitorId: "560",
@@ -79,11 +79,11 @@ export const testInitialState: State = {
 				},
 				{
 					competitorId: "670",
-					score: [82, 77, 74],
+					score: [82, 77, 75],
 				},
 				{
 					competitorId: "230",
-					score: [77, 74, 82],
+					score: [77, 75, 82],
 				},
 			],
 		},
