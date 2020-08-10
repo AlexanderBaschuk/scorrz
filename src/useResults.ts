@@ -1,7 +1,7 @@
+import { Competitor, CompetitorId } from "./model/types";
 import { allResultsSelector, competitorsSelector } from "./Scorrz.selectors";
 import { useCallback, useMemo } from "react";
 
-import { CompetitorId } from "./model/types";
 import { CompetitorRow } from "./AdjudicatorTable/AdjudicatorTable";
 import { calculateGridScores } from "./Calculations/calculations";
 import { useSelector } from "react-redux";
@@ -19,8 +19,8 @@ export const useResults = () => {
 	);
 
 	const getCompetitor = useCallback(
-		(id: CompetitorId) => {
-			return competitors.filter((c) => c.id === id)[0];
+		(id: CompetitorId): Competitor | undefined => {
+			return competitors.find((c) => c.id === id);
 		},
 		[competitors],
 	);
@@ -33,7 +33,7 @@ export const useResults = () => {
 					.map(
 						(r): CompetitorRow => ({
 							id: r.competitorId,
-							name: getCompetitor(r.competitorId).name,
+							name: getCompetitor(r.competitorId)?.name ?? "",
 							scores: r.score,
 							sum: sumsAndGrids[adjId].get(r.competitorId).sum,
 							gridScore: sumsAndGrids[adjId].get(r.competitorId).grid,
