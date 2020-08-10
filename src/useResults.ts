@@ -1,16 +1,21 @@
 import { Competitor, CompetitorId } from "./model/types";
+import {
+	SumAndGrid,
+	calculateFinalResults,
+	calculateGridScores,
+} from "./Calculations/calculations";
 import { allResultsSelector, competitorsSelector } from "./Scorrz.selectors";
 import { useCallback, useMemo } from "react";
 
+import { CompetitorFinalResultRow } from "./FinalTable/FinalTable";
 import { CompetitorRow } from "./AdjudicatorTable/AdjudicatorTable";
-import { calculateGridScores } from "./Calculations/calculations";
 import { useSelector } from "react-redux";
 
 export const useResults = () => {
 	const competitors = useSelector(competitorsSelector);
 	const results = useSelector(allResultsSelector);
 
-	const sumsAndGrids = useMemo(
+	const sumsAndGrids: Map<CompetitorId, SumAndGrid>[] = useMemo(
 		() =>
 			results.map((adjudicator) =>
 				calculateGridScores(adjudicator.resultLines),
@@ -49,17 +54,21 @@ export const useResults = () => {
 		[results, getCompetitor, sumsAndGrids],
 	);
 
-	const finalResults = useMemo(
-		() =>
-			// TODO: calculate the results
-			competitors.map((c, i) => ({
-				place: i + 1,
-				id: c.id,
-				name: c.name,
-				gridSum: 300 - 10 * i,
-			})),
-		[competitors],
-	);
+	const finalResults = useMemo(() => {
+		const finalResults = calculateFinalResults(sumsAndGrids);
+		
+		return Array.from(finalResults, ([id, value]) => ({
+			place: value.place,
+			id,
+			name: getCompetitor(id)?.name ?? "",
+			gridSum: value.gridSum,
+		})).sort((result1, result2) => {
+			const diff = result1.place - result2.place;
+			if (diff !== 0) return diff;
+			if (result1.id === result2.id) return 0;
+			return result1.id > result2.id ? 1 : -1;
+		});
+	}, [getCompetitor, sumsAndGrids]);
 
 	return {
 		resultsByAdjudicators,
