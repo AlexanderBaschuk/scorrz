@@ -2,10 +2,10 @@
 	"compilerOptions": {
 		"baseUrl": "./",
 		"esModuleInterop": true,
-		"jsx": "react"
+		"jsx": "react",
+		"paths": { "@/*": ["src/*"] }
 	},
 	"jsx": "react",
-	"paths": { "@/*": ["src/*"] },
 	"module": "commonjs",
 	"noImplicitReturns": true,
 	"sourceMap": true,
