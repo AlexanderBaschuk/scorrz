@@ -6,6 +6,7 @@
 		"paths": { "@/*": ["src/*"] }
 	},
 	"jsx": "react",
+	"paths": { "@/*": ["src/*"] },
 	"module": "commonjs",
 	"noImplicitReturns": true,
 	"sourceMap": true,

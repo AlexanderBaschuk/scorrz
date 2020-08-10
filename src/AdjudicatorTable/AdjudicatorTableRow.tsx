@@ -1,5 +1,5 @@
 import React from "react";
-import { Score } from "src/model/types";
+import { Score } from "@/model/types";
 
 export interface AdjudicatorTableRowProps {
 	competitorName: string;
