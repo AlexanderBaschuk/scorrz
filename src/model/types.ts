@@ -1,5 +1,7 @@
 export type CompetitorId = string;
 
+export type Score = number | undefined;
+
 export interface Competitor {
 	id: CompetitorId;
 	name: string;
@@ -18,8 +20,6 @@ export interface Round {
 export interface ResultLine {
 	competitorId: CompetitorId;
 	score: number[];
-	cumulativeSum: number[];
-	cumulativeGridScore: number[];
 }
 
 export interface AdjudicatorResults {
@@ -27,21 +27,21 @@ export interface AdjudicatorResults {
 	resultLines: ResultLine[];
 }
 
-export interface IState {
+export interface State {
 	rounds: Round[];
 	adjudicators: Adjudicator[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 }
 
-export const initialState: IState = {
+export const initialState: State = {
 	rounds: [],
 	adjudicators: [],
 	competitors: [],
 	results: [],
 };
 
-export const testInitialState: IState = {
+export const testInitialState: State = {
 	rounds: [
 		{ name: "Heavy", shortName: "H" },
 		{ name: "Light", shortName: "L" },
@@ -64,38 +64,26 @@ export const testInitialState: IState = {
 				{
 					competitorId: "10",
 					score: [74, 82, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "120",
 					score: [82, 74, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "560",
 					score: [77, 82, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "340",
 					score: [74, 77, 82],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "670",
 					score: [82, 77, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "230",
 					score: [77, 74, 82],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 			],
 		},
@@ -105,32 +93,22 @@ export const testInitialState: IState = {
 				{
 					competitorId: "10",
 					score: [74, 82, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "120",
 					score: [82, 74, 77],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
-					competitorId: "120",
+					competitorId: "560",
 					score: [77, 82, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "230",
 					score: [74, 77, 82],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 				{
 					competitorId: "340",
 					score: [82, 77, 74],
-					cumulativeSum: [0, 0, 0],
-					cumulativeGridScore: [100, 200, 300],
 				},
 			],
 		},

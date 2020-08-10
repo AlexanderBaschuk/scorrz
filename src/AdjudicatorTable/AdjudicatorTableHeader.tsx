@@ -1,4 +1,3 @@
-import { AdjudicatorTableHeaderStyled } from "./AdjudicatorTableHeader.styles";
 import React from "react";
 
 interface AdjudicatorTableHeaderProps {
@@ -11,13 +10,13 @@ export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
 	rounds,
 }) => {
 	return (
-		<AdjudicatorTableHeaderStyled>
+		<tr>
 			<th>{adjudicatorName}</th>
 			{rounds.map((roundName) => (
 				<th key={roundName}>{roundName}</th>
 			))}
 			<th>Sum</th>
 			<th>Grid</th>
-		</AdjudicatorTableHeaderStyled>
+		</tr>
 	);
 };

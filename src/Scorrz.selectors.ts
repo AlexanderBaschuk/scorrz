@@ -1,13 +1,7 @@
-import { IState } from "./model/types";
-import { createSelector } from "@reduxjs/toolkit";
+import { State } from "./model/types";
 
-export const adjudicatorsSelector = (state: IState) => state.adjudicators;
+export const adjudicatorsSelector = (state: State) => state.adjudicators;
 
-export const allResultsSelector = (state: IState) => state.results;
+export const allResultsSelector = (state: State) => state.results;
 
-export const competitorsSelector = (state: IState) => state.competitors;
-
-export const resultsSelector = createSelector(
-	allResultsSelector,
-	(allResults) => allResults,
-);
+export const competitorsSelector = (state: State) => state.competitors;

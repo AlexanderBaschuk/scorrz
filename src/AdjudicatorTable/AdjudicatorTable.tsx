@@ -1,10 +1,8 @@
-import {
-	AdjudicatorTableRow,
-	Score,
-} from "./AdjudicatorTableRow/AdjudicatorTableRow";
+import { CompetitorId, Score } from "src/model/types";
 
-import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader/AdjudicatorTableHeader";
-import { CompetitorId } from "src/model/types";
+import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
+import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
+import { AdjudicatorTableWrapperStyled } from "./AdjudicatorTable.styles";
 import React from "react";
 
 interface AdjudicatorTableProps {
@@ -27,20 +25,22 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	results,
 }) => {
 	return (
-		<table>
-			<AdjudicatorTableHeader
-				adjudicatorName={adjudicatorName}
-				rounds={rounds}
-			/>
-			{results.map((r) => (
-				<AdjudicatorTableRow
-					key={r.id}
-					competitorName={r.name}
-					scores={r.scores}
-					sum={r.sum}
-					gridScore={r.gridScore}
+		<AdjudicatorTableWrapperStyled>
+			<table>
+				<AdjudicatorTableHeader
+					adjudicatorName={adjudicatorName}
+					rounds={rounds}
 				/>
-			))}
-		</table>
+				{results.map((r) => (
+					<AdjudicatorTableRow
+						key={r.id}
+						competitorName={r.name}
+						scores={r.scores}
+						sum={r.sum}
+						gridScore={r.gridScore}
+					/>
+				))}
+			</table>
+		</AdjudicatorTableWrapperStyled>
 	);
 };
