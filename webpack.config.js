@@ -7,6 +7,7 @@ module.exports = {
 	entry: "./src/index.tsx",
 	devtool: "source-map",
 	resolve: {
+		alias: { "@": path.resolve(__dirname, "src") },
 		extensions: [".ts", ".tsx", ".mjs", ".cjs", ".js", ".json"], // excluded ".wasm"
 	},
 	output: {

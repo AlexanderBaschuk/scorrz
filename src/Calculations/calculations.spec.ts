@@ -1,4 +1,4 @@
-import { CompetitorId, ResultLine } from "src/model/types";
+import { CompetitorId, ResultLine } from "@/model/types";
 import { SumAndGrid, calculateGridScores } from "./calculations";
 import { getGridScore, getSharedGridScore } from "./gridScores";
 

@@ -1,11 +1,11 @@
-import { initialState, testInitialState } from "./model/types";
+import { State, initialState, testInitialState } from "./model/types";
 
 import { Provider } from "react-redux";
 import React from "react";
 import { Scorrz } from "./Scorrz";
 import { configureStore } from "@reduxjs/toolkit";
 
-const rootReducer = (state) => {
+export const rootReducer = (state: State): State => {
 	return state;
 };
 

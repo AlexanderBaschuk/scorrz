@@ -1,4 +1,4 @@
-import { CompetitorId, Score } from "src/model/types";
+import { CompetitorId, Score } from "@/model/types";
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
