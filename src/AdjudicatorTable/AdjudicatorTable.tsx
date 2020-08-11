@@ -10,13 +10,13 @@ import React from "react";
 export interface AdjudicatorTableProps {
 	adjudicatorName: string;
 	rounds: string[];
-	results: AdjudicatorTableRowProps[];
+	resultRows: AdjudicatorTableRowProps[];
 }
 
 export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	adjudicatorName,
 	rounds,
-	results,
+	resultRows,
 }) => {
 	return (
 		<AdjudicatorTableWrapperStyled>
@@ -25,7 +25,7 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 					adjudicatorName={adjudicatorName}
 					rounds={rounds}
 				/>
-				{results.map((r) => (
+				{resultRows.map((r) => (
 					<AdjudicatorTableRow key={r.id} {...r} />
 				))}
 			</table>

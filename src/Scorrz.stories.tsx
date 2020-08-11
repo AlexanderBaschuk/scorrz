@@ -30,7 +30,7 @@ export const AdjudicatorTableStory: React.FC = () => {
 		<AdjudicatorTable
 			adjudicatorName={text("adjudicatorName", "Adjudicator 1")}
 			rounds={rounds}
-			results={rows}
+			resultRows={rows}
 		/>
 	);
 };

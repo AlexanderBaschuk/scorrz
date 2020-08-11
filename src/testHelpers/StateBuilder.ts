@@ -6,10 +6,16 @@ import {
 	initialState,
 } from "@/model/types";
 
+import { AdjudicatorTableProps } from "@/AdjudicatorTable/AdjudicatorTable";
+import { FinalTableProps } from "@/FinalTable/FinalTable";
+
 export class StateBuilder implements State {
 	rounds: Round[] = [];
 	competitors: Competitor[] = [];
 	results: AdjudicatorResults[] = [];
+
+	adjudicatorTables: AdjudicatorTableProps[];
+	finalTable: FinalTableProps;
 
 	constructor() {
 		Object.assign(this, JSON.parse(JSON.stringify(initialState)));

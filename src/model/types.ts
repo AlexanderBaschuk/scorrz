@@ -35,16 +35,16 @@ export interface State {
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	adjudicatorTables: AdjudicatorTableProps[];
-	finalTable: FinalTableProps[];
+	finalTable: FinalTableProps;
 }
 
-export const initialState : State = {
+export const initialState: State = {
 	rounds: [],
 	competitors: [],
 	results: [],
 	adjudicatorTables: [],
-	finalTable: [],
-}
+	finalTable: { results: [] },
+};
 
 export const testInitialState: State = {
 	rounds: [
@@ -118,5 +118,5 @@ export const testInitialState: State = {
 		},
 	],
 	adjudicatorTables: [],
-	finalTable: [],
+	finalTable: { results: [] },
 };
