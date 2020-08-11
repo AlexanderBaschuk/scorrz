@@ -1,3 +1,6 @@
+import { AdjudicatorTableProps } from "@/AdjudicatorTable/AdjudicatorTable";
+import { FinalTableProps } from "@/FinalTable/FinalTable";
+
 export type CompetitorId = string;
 
 export type Score = number | undefined;
@@ -31,12 +34,16 @@ export interface State {
 	rounds: Round[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
+	adjudicatorTables: AdjudicatorTableProps[];
+	finalTable: FinalTableProps[];
 }
 
 export const initialState : State = {
 	rounds: [],
 	competitors: [],
 	results: [],
+	adjudicatorTables: [],
+	finalTable: [],
 }
 
 export const testInitialState: State = {
@@ -110,4 +117,6 @@ export const testInitialState: State = {
 			],
 		},
 	],
+	adjudicatorTables: [],
+	finalTable: [],
 };

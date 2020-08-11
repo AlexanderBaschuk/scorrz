@@ -7,7 +7,7 @@ import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableWrapperStyled } from "./AdjudicatorTable.styles";
 import React from "react";
 
-interface AdjudicatorTableProps {
+export interface AdjudicatorTableProps {
 	adjudicatorName: string;
 	rounds: string[];
 	results: AdjudicatorTableRowProps[];
