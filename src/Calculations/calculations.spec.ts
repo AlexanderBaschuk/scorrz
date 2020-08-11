@@ -1,5 +1,10 @@
 import { CompetitorId, ResultLine } from "@/model/types";
-import { SumAndGrid, calculateGridScores } from "./calculations";
+import {
+	GridSumAndPlace,
+	SumAndGrid,
+	calculateFinalResults,
+	calculateGridScores,
+} from "./calculations";
 import { getGridScore, getSharedGridScore } from "./gridScores";
 
 test.each`
@@ -9,13 +14,10 @@ test.each`
 	${50}  | ${1}
 	${51}  | ${0}
 	${999} | ${0}
-`(
-	"getGridScore: for place $place",
-	({ place, expectedResult }) => {
-		const gridResult = getGridScore(place);
-		expect(gridResult).toBe(expectedResult);
-	},
-);
+`("getGridScore: for place $place", ({ place, expectedResult }) => {
+	const gridResult = getGridScore(place);
+	expect(gridResult).toBe(expectedResult);
+});
 
 test.each`
 	place  | count | expectedResult
@@ -43,17 +45,17 @@ test.each`
 
 test.each([
 	[
-		"1 competitor, 1 judge",
+		"1 adjudicator, 1 competitor",
 		[{ competitorId: "123", score: [55] }],
 		[["123", { sum: 55, grid: 100 }]],
 	],
 	[
-		"1 competitor, 3 judges",
+		"3 adjudicators, 1 competitor",
 		[{ competitorId: "123", score: [55, 60, 70] }],
 		[["123", { sum: 185, grid: 100 }]],
 	],
 	[
-		"2 competitors, 1 judge",
+		"1 adjudicator, 2 competitors",
 		[
 			{ competitorId: "123", score: [79] },
 			{ competitorId: "234", score: [80] },
@@ -64,7 +66,7 @@ test.each([
 		],
 	],
 	[
-		"4 competitors, 1 judge, shared places",
+		"1 adjudicator, 4 competitors, shared places",
 		[
 			{ competitorId: "123", score: [72] },
 			{ competitorId: "234", score: [80] },
@@ -79,7 +81,7 @@ test.each([
 		],
 	],
 	[
-		"4 competitors, 3 judges, shared places",
+		"3 adjudicators, 4 competitors, shared places",
 		[
 			{ competitorId: "123", score: [62, 58, 60] },
 			{ competitorId: "234", score: [82, 78, 80] },
@@ -98,10 +100,115 @@ test.each([
 	(
 		_description: string,
 		scores: ResultLine[],
-		expectedGrids: [string, SumAndGrid][],
+		expectedGrids: [CompetitorId, SumAndGrid][],
 	) => {
 		const result = calculateGridScores(scores);
 		const expectedResult = new Map<CompetitorId, SumAndGrid>(expectedGrids);
+		expect(result).toEqual(expectedResult);
+	},
+);
+
+test.each([
+	[
+		"1 adjudicator, 1 competitor",
+		[[["123", 300]]],
+		[["123", { gridSum: 300, place: 1 }]],
+	],
+	[
+		"1 adjudicator, 3 competitors",
+		[
+			[
+				["345", 75],
+				["123", 65],
+				["234", 100],
+			],
+		],
+		[
+			["234", { gridSum: 100, place: 1 }],
+			["345", { gridSum: 75, place: 2 }],
+			["123", { gridSum: 65, place: 3 }],
+		],
+	],
+	[
+		"3 adjudicators, 1 competitor",
+		[[["123", 100]], [["123", 100]], [["123", 100]]],
+		[["123", { gridSum: 300, place: 1 }]],
+	],
+	[
+		"2 adjudicators, 3 competitors",
+		[
+			[
+				["123", 65],
+				["345", 75],
+				["234", 100],
+			],
+			[
+				["345", 87.5],
+				["234", 100],
+				["123", 87.5],
+			],
+		],
+		[
+			["234", { gridSum: 200, place: 1 }],
+			["345", { gridSum: 162.5, place: 2 }],
+			["123", { gridSum: 152.5, place: 3 }],
+		],
+	],
+	[
+		"2 adjudicators, 3 competitors, some values absent",
+		[
+			[
+				["123", 75],
+				["234", 100],
+			],
+			[
+				["345", 65],
+				["234", 100],
+			],
+		],
+		[
+			["234", { gridSum: 200, place: 1 }],
+			["123", { gridSum: 75, place: 2 }],
+			["345", { gridSum: 65, place: 3 }],
+		],
+	],
+	[
+		"2 adjudicators, 4 competitors, shared places",
+		[
+			[
+				["234", 100],
+				["345", 75],
+				["123", 65],
+				["456", 60],
+			],
+			[
+				["234", 100],
+				["345", 65],
+				["123", 75],
+				["456", 60],
+			],
+		],
+		[
+			["234", { gridSum: 200, place: 1 }],
+			["123", { gridSum: 140, place: 2 }],
+			["345", { gridSum: 140, place: 2 }],
+			["456", { gridSum: 120, place: 4 }],
+		],
+	],
+])(
+	"calculateFinalResults: %s",
+	(
+		_description: string,
+		allGrids: [CompetitorId, number][][],
+		expectedFinalResults: [CompetitorId, GridSumAndPlace][],
+	) => {
+		const allGridsMaps = allGrids.map(
+			(adjGrids) => new Map<CompetitorId, number>(adjGrids),
+		);
+		const result = calculateFinalResults(allGridsMaps);
+		const expectedResult = new Map<CompetitorId, GridSumAndPlace>(
+			expectedFinalResults,
+		);
 		expect(result).toEqual(expectedResult);
 	},
 );

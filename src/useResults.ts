@@ -55,8 +55,13 @@ export const useResults = () => {
 	);
 
 	const finalResults = useMemo(() => {
-		const finalResults = calculateFinalResults(sumsAndGrids);
-		
+		const allGrids = sumsAndGrids.map((adjResults) => {
+			const gridsMap = new Map<CompetitorId, number>();
+			adjResults.forEach((value, id) => gridsMap.set(id, value.grid));
+			return gridsMap;
+		});
+		const finalResults = calculateFinalResults(allGrids);
+
 		return Array.from(finalResults, ([id, value]) => ({
 			place: value.place,
 			id,

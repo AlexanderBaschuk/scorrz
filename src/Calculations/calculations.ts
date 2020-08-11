@@ -46,16 +46,16 @@ export const calculateGridScores = (
 };
 
 export const calculateFinalResults = (
-	adjudicatorResults: Map<CompetitorId, SumAndGrid>[],
+	adjudicatorResults: Map<CompetitorId, number>[],
 ): Map<CompetitorId, GridSumAndPlace> => {
 	const finalGrids = new Map<CompetitorId, number>();
 	for (const adj of adjudicatorResults) {
-		for (const [id, adjResult] of Array.from(adj)) {
+		for (const [id, grid] of Array.from(adj)) {
 			if (finalGrids.has(id)) {
 				const existingGrid = finalGrids.get(id);
-				finalGrids.set(id, existingGrid + adjResult.grid);
+				finalGrids.set(id, existingGrid + grid);
 			} else {
-				finalGrids.set(id, adjResult.grid);
+				finalGrids.set(id, grid);
 			}
 		}
 	}
