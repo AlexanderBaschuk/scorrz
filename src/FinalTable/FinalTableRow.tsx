@@ -4,23 +4,23 @@ import React from "react";
 
 export interface FinalTableRowProps {
 	place: number;
-	competitorId: CompetitorId;
-	competitorName: string;
-	gridScore: Score;
+	id: CompetitorId;
+	name: string;
+	gridSum: Score;
 }
 
 export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 	place,
-	competitorId,
-	competitorName,
-	gridScore,
+	id,
+	name,
+	gridSum,
 }) => {
 	return (
 		<tr>
 			<td>{place}</td>
-			<td>{competitorId}</td>
-			<td>{competitorName}</td>
-			<td>{Math.round(gridScore * 100) / 100}</td>
+			<td>{id}</td>
+			<td>{name}</td>
+			<td>{Math.round(gridSum * 100) / 100}</td>
 		</tr>
 	);
 };

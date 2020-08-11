@@ -1,10 +1,9 @@
-import {
-	AdjudicatorTable,
-	CompetitorRow,
-} from "./AdjudicatorTable/AdjudicatorTable";
 import { boolean, number, text, withKnobs } from "@storybook/addon-knobs";
 
+import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
+import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow";
 import { FinalTable } from "./FinalTable/FinalTable";
+import { FinalTableRowProps } from "./FinalTable/FinalTableRow";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -16,13 +15,16 @@ export default {
 export const AdjudicatorTableStory: React.FC = () => {
 	const rowsCount = number("rowsCount", 10);
 	const rounds = ["H", "L", "S"];
-	const rows = Array.from({ length: rowsCount }, (_, i) => ({
-		id: (100 + i).toString(),
-		name: "Competitor Name",
-		scores: [75 - i / 2, 77 - i, 65 - 2 * i],
-		sum: 99.55 - i,
-		gridScore: 100 - i,
-	}));
+	const rows: AdjudicatorTableRowProps[] = Array.from(
+		{ length: rowsCount },
+		(_, i) => ({
+			id: (100 + i).toString(),
+			name: "Competitor Name",
+			scores: [75 - i / 2, 77 - i, 65 - 2 * i],
+			sum: 99.55 - i,
+			gridScore: 100 - i,
+		}),
+	);
 
 	return (
 		<AdjudicatorTable
@@ -35,16 +37,15 @@ export const AdjudicatorTableStory: React.FC = () => {
 
 export const FinalTableStory: React.FC = () => {
 	const rowsCount = number("rowsCount", 10);
-	const rows = Array.from({ length: rowsCount }, (_, i) => ({
-		place: i,
-		id: (100 + i).toString(),
-		name: "Competitor Name",
-		gridSum: 100 - i,
-	}));
-
-	return (
-		<FinalTable
-			results={rows}
-		/>
+	const rows: FinalTableRowProps[] = Array.from(
+		{ length: rowsCount },
+		(_, i) => ({
+			place: i,
+			id: (100 + i).toString(),
+			name: "Competitor Name",
+			gridSum: 100 - i,
+		}),
 	);
+
+	return <FinalTable results={rows} />;
 };

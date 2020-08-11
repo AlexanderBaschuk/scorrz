@@ -7,8 +7,7 @@ import {
 import { allResultsSelector, competitorsSelector } from "./Scorrz.selectors";
 import { useCallback, useMemo } from "react";
 
-import { CompetitorFinalResultRow } from "./FinalTable/FinalTable";
-import { CompetitorRow } from "./AdjudicatorTable/AdjudicatorTable";
+import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow";
 import { useSelector } from "react-redux";
 
 export const useResults = () => {
@@ -36,7 +35,7 @@ export const useResults = () => {
 				adjudicator: adjudicator.adjudicatorName,
 				resultLines: adjudicator.resultLines
 					.map(
-						(r): CompetitorRow => ({
+						(r): AdjudicatorTableRowProps => ({
 							id: r.competitorId,
 							name: getCompetitor(r.competitorId)?.name ?? "",
 							scores: r.score,
