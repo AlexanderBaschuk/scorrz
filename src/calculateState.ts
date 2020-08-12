@@ -27,38 +27,49 @@ const calculateAdjudicatorTables = (
 	state: State,
 	sumsAndGrids: Map<CompetitorId, SumAndGrid>[],
 ): AdjudicatorTableProps[] =>
-	state.results.map((adjudicator, adjId) => ({
-		adjudicatorName: adjudicator.adjudicatorName,
-		rounds: state.rounds.map((r) => r.shortName),
-		resultRows: adjudicator.resultLines
-			.map(
-				(r): AdjudicatorTableRowProps => ({
-					id: r.competitorId,
-					name: getCompetitorName(state, r.competitorId),
-					scores: r.score,
-					sum: sumsAndGrids[adjId].get(r.competitorId).sum,
-					gridScore: sumsAndGrids[adjId].get(r.competitorId).grid,
+	state.results.map((adjudicator, adjId) => {
+		if (state.selectedAdjudicators[adjId] === false) {
+			return null;
+		}
+
+		return {
+			adjudicatorName: adjudicator.adjudicatorName,
+			rounds: state.rounds.map((r) => r.shortName),
+			resultRows: adjudicator.resultLines
+				.map(
+					(r): AdjudicatorTableRowProps => ({
+						id: r.competitorId,
+						name: getCompetitorName(state, r.competitorId),
+						scores: r.score,
+						sum: sumsAndGrids[adjId].get(r.competitorId).sum,
+						gridScore: sumsAndGrids[adjId].get(r.competitorId).grid,
+					}),
+				)
+				.sort((result1, result2) => {
+					const diff = result2.sum - result1.sum;
+					if (diff !== 0) return diff;
+					if (result1.id === result2.id) return 0;
+					return result1.id > result2.id ? 1 : -1;
 				}),
-			)
-			.sort((result1, result2) => {
-				const diff = result2.sum - result1.sum;
-				if (diff !== 0) return diff;
-				if (result1.id === result2.id) return 0;
-				return result1.id > result2.id ? 1 : -1;
-			}),
-	}));
+		};
+	});
 
 const calculateFinalTable = (
 	state: State,
 	sumsAndGrids: Map<CompetitorId, SumAndGrid>[],
 ): FinalTableProps => {
-	const allGrids = sumsAndGrids.map((adjResults) => {
-		const gridsMap = new Map<CompetitorId, number>();
-		adjResults.forEach((value, id) => gridsMap.set(id, value.grid));
-		return gridsMap;
-	});
+	if (state.selectedAdjudicators.filter((a) => a === true).length <= 1)
+		return null;
 
-	const finalResults = calculateFinalResults(allGrids);
+	const allRequiredGrids = sumsAndGrids
+		.filter((_sg, i) => state.selectedAdjudicators[i] === true)
+		.map((adjResults) => {
+			const gridsMap = new Map<CompetitorId, number>();
+			adjResults.forEach((value, id) => gridsMap.set(id, value.grid));
+			return gridsMap;
+		});
+
+	const finalResults = calculateFinalResults(allRequiredGrids);
 
 	const finalTableRows = Array.from(finalResults, ([id, value]) => ({
 		place: value.place,

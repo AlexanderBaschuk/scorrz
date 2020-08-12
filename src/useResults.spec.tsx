@@ -208,3 +208,8 @@ describe("useResults - specific tests", () => {
 		expect(resultLines[1].name).toEqual("");
 	});
 });
+
+test.todo("AdjudicatorTables when not all adjudicators selected");
+test.todo("Final results when not all adjudicators selected");
+test.todo("Final results when only 1 adjudicator selected");
+test.todo("Final results when no adjudicators selected");

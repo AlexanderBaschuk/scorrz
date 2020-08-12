@@ -119,7 +119,7 @@ export const testInitialState: State = {
 			],
 		},
 	],
-	selectedAdjudicators: [],
+	selectedAdjudicators: [true, true],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };

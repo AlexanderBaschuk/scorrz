@@ -38,7 +38,7 @@ export const Scorrz: React.FC = () => {
 				toggleAdjudicator={toggleAdjudicatorInternal}
 			/>
 			{adjudicatorTables.map((adjResults, i) => (
-				<AdjudicatorTable key={i} {...adjResults} />
+				adjResults && <AdjudicatorTable key={i} {...adjResults} />
 			))}
 			{finalTable && <FinalTable {...finalTable} />}
 		</>
