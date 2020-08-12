@@ -5,7 +5,7 @@ import {
 	finalTableSelector,
 	selectedAdjudicatorSelector,
 } from "./Scorrz.selectors";
-import { calculate, selectAdjudicator } from "./rootReducer";
+import { calculate, selectAdjudicator } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
