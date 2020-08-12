@@ -14,6 +14,7 @@ export class StateBuilder implements State {
 	competitors: Competitor[] = [];
 	results: AdjudicatorResults[] = [];
 	selectedAdjudicators: boolean[];
+	selectedRounds: boolean[];
 
 	adjudicatorTables: AdjudicatorTableProps[];
 	finalTable: FinalTableProps;
@@ -49,6 +50,11 @@ export class StateBuilder implements State {
 
 	withSelectedAdjudicators = (values: boolean[]) => {
 		this.selectedAdjudicators = values;
+		return this;
+	};
+
+	withSelectedRounds = (values: boolean[]) => {
+		this.selectedRounds = values;
 		return this;
 	};
 }

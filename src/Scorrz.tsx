@@ -3,14 +3,17 @@ import {
 	adjudicatorTablesSelector,
 	adjudicatorsSelector,
 	finalTableSelector,
+	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
+	selectedRoundsSelector,
 } from "./Scorrz.selectors";
-import { calculate, toggleAdjudicator } from "./actions";
+import { calculate, toggleAdjudicator, toggleRound } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { FinalTable } from "./FinalTable/FinalTable";
+import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
 
 export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
@@ -18,14 +21,24 @@ export const Scorrz: React.FC = () => {
 		dispatch(calculate());
 	}, [dispatch]);
 
+	const adjudicators = useSelector(adjudicatorsSelector);
+	const rounds = useSelector(roundsNamesSelector);
+	const selectedAdjudicators = useSelector(selectedAdjudicatorsSelector);
+	const selectedRounds = useSelector(selectedRoundsSelector);
+
 	const adjudicatorTables = useSelector(adjudicatorTablesSelector);
 	const finalTable = useSelector(finalTableSelector);
-	const adjudicators = useSelector(adjudicatorsSelector);
-	const selectedAdjudicators = useSelector(selectedAdjudicatorsSelector);
 
 	const toggleAdjudicatorInternal = useCallback(
 		(id: number | null) => {
 			dispatch(toggleAdjudicator(id));
+		},
+		[dispatch],
+	);
+
+	const toggleRoundInternal = useCallback(
+		(id: number | null) => {
+			dispatch(toggleRound(id));
 		},
 		[dispatch],
 	);
@@ -37,9 +50,15 @@ export const Scorrz: React.FC = () => {
 				selectedAdjudicators={selectedAdjudicators}
 				toggleAdjudicator={toggleAdjudicatorInternal}
 			/>
-			{adjudicatorTables.map((adjResults, i) => (
-				adjResults && <AdjudicatorTable key={i} {...adjResults} />
-			))}
+			<RoundsSelection
+				rounds={rounds}
+				selectedRounds={selectedRounds}
+				toggleRound={toggleRoundInternal}
+			/>
+			{adjudicatorTables.map(
+				(adjResults, i) =>
+					adjResults && <AdjudicatorTable key={i} {...adjResults} />,
+			)}
 			{finalTable && <FinalTable {...finalTable} />}
 		</>
 	);

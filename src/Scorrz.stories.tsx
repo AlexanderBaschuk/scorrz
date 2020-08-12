@@ -1,10 +1,4 @@
-import {
-	array,
-	number,
-	object,
-	text,
-	withKnobs,
-} from "@storybook/addon-knobs";
+import { number, object, text, withKnobs } from "@storybook/addon-knobs";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
@@ -12,6 +6,7 @@ import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow
 import { FinalTable } from "./FinalTable/FinalTable";
 import { FinalTableRowProps } from "./FinalTable/FinalTableRow";
 import React from "react";
+import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
 import { action } from "@storybook/addon-actions";
 
 export default {
@@ -25,7 +20,18 @@ export const AdjudicationSelectionStory: React.FC = () => {
 		<AdjudicatorSelection
 			adjudicators={adjudicators}
 			selectedAdjudicators={object("selectedAdjudicators", [true, false, true])}
-			toggleAdjudicator={action("selectAdjudicator")}
+			toggleAdjudicator={action("toggleAdjudicator")}
+		/>
+	);
+};
+
+export const RoundsSelectionStory: React.FC = () => {
+	const rounds = ["heavy", "Light", "Set"];
+	return (
+		<RoundsSelection
+			rounds={rounds}
+			selectedRounds={object("selectedRounds", [false, true, false])}
+			toggleRound={action("toggleRound")}
 		/>
 	);
 };

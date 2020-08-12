@@ -1,4 +1,8 @@
-import { calculate as calculateAction, toggleAdjudicator } from "./actions";
+import {
+	calculate as calculateAction,
+	toggleAdjudicator,
+	toggleRound,
+} from "./actions";
 
 import { calculateResultTables } from "./calculateState";
 import { createReducer } from "@reduxjs/toolkit";
@@ -9,7 +13,15 @@ export const rootReducer = createReducer(testInitialState, {
 		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
 	},
 	[toggleAdjudicator.type]: (state, action) => {
-		state.selectedAdjudicators[action.payload] = !state.selectedAdjudicators[action.payload];
+		state.selectedAdjudicators[action.payload] = !state.selectedAdjudicators[
+			action.payload
+		];
+		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
+	},
+	[toggleRound.type]: (state, action) => {
+		state.selectedRounds[action.payload] = !state.selectedRounds[
+			action.payload
+		];
 		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
 	},
 });
