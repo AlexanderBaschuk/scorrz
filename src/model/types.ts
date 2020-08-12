@@ -118,8 +118,29 @@ export const testInitialState: State = {
 				},
 			],
 		},
+		{
+			adjudicatorName: "John Cullinane",
+			resultLines: [
+				{
+					competitorId: "10",
+					score: [74, 82, 77],
+				},
+				{
+					competitorId: "230",
+					score: [74, 77, 82],
+				},
+				{
+					competitorId: "670",
+					score: [82, 77, 75],
+				},
+				{
+					competitorId: "340",
+					score: [82, 77, 74],
+				},
+			],
+		},
 	],
-	selectedAdjudicators: [true, true],
+	selectedAdjudicators: [true, true, true],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };
