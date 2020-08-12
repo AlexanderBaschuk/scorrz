@@ -1,22 +1,24 @@
+import { CompetitorId, Score } from "@/model/types";
+
 import React from "react";
-import { Score } from "@/model/types";
 
 export interface AdjudicatorTableRowProps {
-	competitorName: string;
+	id: CompetitorId;
+	name: string;
 	scores: Score[];
 	sum: Score;
 	gridScore: Score;
 }
 
 export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
-	competitorName,
+	name,
 	scores,
 	sum,
 	gridScore,
 }) => {
 	return (
 		<tr>
-			<td>{competitorName}</td>
+			<td>{name}</td>
 			{scores.map((score, i) => (
 				<td key={i}>{score}</td>
 			))}

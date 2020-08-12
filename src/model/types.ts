@@ -1,3 +1,6 @@
+import { AdjudicatorTableProps } from "@/AdjudicatorTable/AdjudicatorTable";
+import { FinalTableProps } from "@/FinalTable/FinalTable";
+
 export type CompetitorId = string;
 
 export type Score = number | undefined;
@@ -23,22 +26,24 @@ export interface ResultLine {
 }
 
 export interface AdjudicatorResults {
-	adjudicatorId: number;
+	adjudicatorName: string;
 	resultLines: ResultLine[];
 }
 
 export interface State {
 	rounds: Round[];
-	adjudicators: Adjudicator[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
+	adjudicatorTables: AdjudicatorTableProps[];
+	finalTable: FinalTableProps;
 }
 
 export const initialState: State = {
 	rounds: [],
-	adjudicators: [],
 	competitors: [],
 	results: [],
+	adjudicatorTables: [],
+	finalTable: { results: [] },
 };
 
 export const testInitialState: State = {
@@ -47,7 +52,6 @@ export const testInitialState: State = {
 		{ name: "Light", shortName: "L" },
 		{ name: "Set", shortName: "S" },
 	],
-	adjudicators: [{ name: "Brian" }, { name: "Mary" }],
 	competitors: [
 		{ id: "10", name: "Sasha", school: "SchoolName" },
 		{ id: "120", name: "John", school: "SchoolName" },
@@ -59,7 +63,7 @@ export const testInitialState: State = {
 	],
 	results: [
 		{
-			adjudicatorId: 0,
+			adjudicatorName: "Brendan O'Brian",
 			resultLines: [
 				{
 					competitorId: "10",
@@ -88,7 +92,7 @@ export const testInitialState: State = {
 			],
 		},
 		{
-			adjudicatorId: 1,
+			adjudicatorName: "Mary MacElroy",
 			resultLines: [
 				{
 					competitorId: "10",
@@ -113,4 +117,6 @@ export const testInitialState: State = {
 			],
 		},
 	],
+	adjudicatorTables: [],
+	finalTable: { results: [] },
 };

@@ -7,6 +7,11 @@ export interface SumAndGrid {
 	grid: number;
 }
 
+export interface GridSumAndPlace {
+	place: number;
+	gridSum: number;
+}
+
 export const calculateGridScores = (
 	scores: ResultLine[],
 ): Map<CompetitorId, SumAndGrid> => {
@@ -38,4 +43,29 @@ export const calculateGridScores = (
 	}
 
 	return result;
+};
+
+export const calculateFinalResults = (
+	adjudicatorResults: Map<CompetitorId, number>[],
+): Map<CompetitorId, GridSumAndPlace> => {
+	const finalGrids = new Map<CompetitorId, number>();
+	for (const adj of adjudicatorResults) {
+		for (const [id, grid] of Array.from(adj)) {
+			if (finalGrids.has(id)) {
+				const existingGrid = finalGrids.get(id);
+				finalGrids.set(id, existingGrid + grid);
+			} else {
+				finalGrids.set(id, grid);
+			}
+		}
+	}
+
+	const finalResults = new Map<CompetitorId, GridSumAndPlace>();
+	finalGrids.forEach((competitorGrid, id) => {
+		const place =
+			Array.from(finalGrids.values()).filter((grid) => grid > competitorGrid)
+				.length + 1;
+		finalResults.set(id, { gridSum: competitorGrid, place });
+	});
+	return finalResults;
 };
