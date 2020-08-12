@@ -34,6 +34,7 @@ export interface State {
 	rounds: Round[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
+	selectedAdjudicator: number | null;
 	adjudicatorTables: AdjudicatorTableProps[];
 	finalTable: FinalTableProps;
 }

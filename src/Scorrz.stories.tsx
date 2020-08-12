@@ -1,5 +1,6 @@
 import { boolean, number, text, withKnobs } from "@storybook/addon-knobs";
 
+import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow";
 import { FinalTable } from "./FinalTable/FinalTable";
@@ -10,6 +11,12 @@ import { action } from "@storybook/addon-actions";
 export default {
 	title: "Results table",
 	decorators: [withKnobs],
+};
+
+export const AdjudicationSelectionStory: React.FC = () => {
+	const adjudicators = ["Mary McElroy", "Brendan O'Brien", "John Cullinane"];
+	return <AdjudicatorSelection adjudicators={adjudicators} selectedAdjudicator={number("selectedAdjudicator", 0)}
+		selectAdjudicator={action("selectAdjudicator")}/>
 };
 
 export const AdjudicatorTableStory: React.FC = () => {

@@ -9,10 +9,13 @@ import { AdjudicatorTableProps } from "./AdjudicatorTable/AdjudicatorTable";
 import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow";
 
 export const calculate = createAction("CALCULATE");
+export const selectAdjudicator = createAction<number | null>(
+	"SELECT_ADJUDICATOR",
+);
 
 export const rootReducer = createReducer(testInitialState, {
 	[calculate.type]: (state) => {
-		global.console.log("starting reducer")
+		global.console.log("starting reducer");
 		const getCompetitor = (id: CompetitorId): Competitor | undefined =>
 			state.competitors.find((c) => c.id === id);
 
@@ -26,7 +29,7 @@ export const rootReducer = createReducer(testInitialState, {
 		const adjudicatorTables: AdjudicatorTableProps[] = state.results.map(
 			(adjudicator, adjId) => ({
 				adjudicatorName: adjudicator.adjudicatorName,
-				rounds: state.rounds.map(r => r.shortName),
+				rounds: state.rounds.map((r) => r.shortName),
 				resultRows: adjudicator.resultLines
 					.map(
 						(r): AdjudicatorTableRowProps => ({
@@ -67,6 +70,6 @@ export const rootReducer = createReducer(testInitialState, {
 		});
 
 		state.adjudicatorTables = adjudicatorTables;
-		state.finalTable = {results: finalTable};
+		state.finalTable = { results: finalTable };
 	},
 });
