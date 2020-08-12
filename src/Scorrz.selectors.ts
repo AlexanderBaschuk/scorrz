@@ -6,7 +6,7 @@ export const allResultsSelector = (state: State) => state.results;
 
 export const competitorsSelector = (state: State) => state.competitors;
 
-export const selectedAdjudicatorSelector = (state: State) => state.selectedAdjudicator;
+export const selectedAdjudicatorsSelector = (state: State) => state.selectedAdjudicators;
 
 export const adjudicatorTablesSelector = (state: State) => state.adjudicatorTables;
 

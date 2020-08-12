@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
 export const calculate = createAction("CALCULATE");
-export const selectAdjudicator = createAction<number | null>(
+export const toggleAdjudicator = createAction<number>(
 	"SELECT_ADJUDICATOR",
 );

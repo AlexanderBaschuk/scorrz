@@ -13,7 +13,7 @@ export class StateBuilder implements State {
 	rounds: Round[] = [];
 	competitors: Competitor[] = [];
 	results: AdjudicatorResults[] = [];
-	selectedAdjudicator: number | null = null;
+	selectedAdjudicators: boolean[];
 
 	adjudicatorTables: AdjudicatorTableProps[];
 	finalTable: FinalTableProps;
@@ -47,8 +47,8 @@ export class StateBuilder implements State {
 		return this;
 	};
 
-	withSelectedAdjudicator = (value: number | null) => {
-		this.selectedAdjudicator = value;
+	withSelectedAdjudicators = (values: boolean[]) => {
+		this.selectedAdjudicators = values;
 		return this;
 	};
 }

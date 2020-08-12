@@ -3,9 +3,9 @@ import {
 	adjudicatorTablesSelector,
 	adjudicatorsSelector,
 	finalTableSelector,
-	selectedAdjudicatorSelector,
+	selectedAdjudicatorsSelector,
 } from "./Scorrz.selectors";
-import { calculate, selectAdjudicator } from "./actions";
+import { calculate, toggleAdjudicator } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
@@ -21,23 +21,26 @@ export const Scorrz: React.FC = () => {
 	const adjudicatorTables = useSelector(adjudicatorTablesSelector);
 	const finalTable = useSelector(finalTableSelector);
 	const adjudicators = useSelector(adjudicatorsSelector);
-	const selectedAdjudicator = useSelector(selectedAdjudicatorSelector);
+	const selectedAdjudicators = useSelector(selectedAdjudicatorsSelector);
 
-	const selectAdjudicatorInternal = useCallback((id: number | null) => {
-		dispatch(selectAdjudicator(id));
-	}, [dispatch]);
+	const toggleAdjudicatorInternal = useCallback(
+		(id: number | null) => {
+			dispatch(toggleAdjudicator(id));
+		},
+		[dispatch],
+	);
 
 	return (
 		<>
 			<AdjudicatorSelection
 				adjudicators={adjudicators}
-				selectedAdjudicator={selectedAdjudicator}
-				selectAdjudicator={selectAdjudicatorInternal}
+				selectedAdjudicators={selectedAdjudicators}
+				toggleAdjudicator={toggleAdjudicatorInternal}
 			/>
 			{adjudicatorTables.map((adjResults, i) => (
 				<AdjudicatorTable key={i} {...adjResults} />
 			))}
-			<FinalTable {...finalTable} />
+			{finalTable && <FinalTable {...finalTable} />}
 		</>
 	);
 };

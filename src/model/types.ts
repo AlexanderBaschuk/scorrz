@@ -34,7 +34,7 @@ export interface State {
 	rounds: Round[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
-	selectedAdjudicator: number | null;
+	selectedAdjudicators: boolean[];
 	adjudicatorTables: AdjudicatorTableProps[];
 	finalTable: FinalTableProps;
 }
@@ -43,7 +43,7 @@ export const initialState: State = {
 	rounds: [],
 	competitors: [],
 	results: [],
-	selectedAdjudicator: null,
+	selectedAdjudicators: [],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };
@@ -119,7 +119,7 @@ export const testInitialState: State = {
 			],
 		},
 	],
-	selectedAdjudicator: null,
+	selectedAdjudicators: [],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };
