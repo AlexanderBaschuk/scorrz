@@ -13,6 +13,7 @@ export class StateBuilder implements State {
 	rounds: Round[] = [];
 	competitors: Competitor[] = [];
 	results: AdjudicatorResults[] = [];
+	selectedAdjudicator: number | null = null;
 
 	adjudicatorTables: AdjudicatorTableProps[];
 	finalTable: FinalTableProps;
@@ -43,6 +44,11 @@ export class StateBuilder implements State {
 
 	withResults = (adjudicatorId: number, results: AdjudicatorResults) => {
 		this.results[adjudicatorId] = results;
+		return this;
+	};
+
+	withSelectedAdjudicator = (value: number | null) => {
+		this.selectedAdjudicator = value;
 		return this;
 	};
 }

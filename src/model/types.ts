@@ -43,6 +43,7 @@ export const initialState: State = {
 	rounds: [],
 	competitors: [],
 	results: [],
+	selectedAdjudicator: null,
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };
@@ -93,7 +94,7 @@ export const testInitialState: State = {
 			],
 		},
 		{
-			adjudicatorName: "Mary MacElroy",
+			adjudicatorName: "Mary McElroy",
 			resultLines: [
 				{
 					competitorId: "10",
@@ -118,6 +119,7 @@ export const testInitialState: State = {
 			],
 		},
 	],
+	selectedAdjudicator: null,
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };
