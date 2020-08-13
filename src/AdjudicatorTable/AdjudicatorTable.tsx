@@ -26,23 +26,27 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	return (
 		<AdjudicatorTableWrapperStyled>
 			<table>
-				<AdjudicatorTableHeader
-					adjudicatorName={adjudicatorName}
-					selectedRounds={selectedRounds}
-					rounds={rounds}
-					shouldShowSums={shouldShowSums}
-				/>
-				{resultRows.map((row) => (
-					<AdjudicatorTableRow
-						key={row.id}
-						name={row.name}
+				<thead>
+					<AdjudicatorTableHeader
+						adjudicatorName={adjudicatorName}
 						selectedRounds={selectedRounds}
-						scores={row.scores}
-						sum={row.sum}
-						gridScore={row.gridScore}
+						rounds={rounds}
 						shouldShowSums={shouldShowSums}
 					/>
-				))}
+				</thead>
+				<tbody>
+					{resultRows.map((row) => (
+						<AdjudicatorTableRow
+							key={row.id}
+							name={row.name}
+							selectedRounds={selectedRounds}
+							scores={row.scores}
+							sum={row.sum}
+							gridScore={row.gridScore}
+							shouldShowSums={shouldShowSums}
+						/>
+					))}
+				</tbody>
 			</table>
 		</AdjudicatorTableWrapperStyled>
 	);

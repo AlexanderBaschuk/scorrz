@@ -13,10 +13,14 @@ export const FinalTable: React.FC<FinalTableProps> = ({ results }) => {
 	return (
 		<FinalTableWrapperStyled>
 			<table>
-				<FinalTableHeader />
-				{results.map((resultRow) => (
-					<FinalTableRow key={resultRow.id} {...resultRow} />
-				))}
+				<thead>
+					<FinalTableHeader />
+				</thead>
+				<tbody>
+					{results.map((resultRow) => (
+						<FinalTableRow key={resultRow.id} {...resultRow} />
+					))}
+				</tbody>
 			</table>
 		</FinalTableWrapperStyled>
 	);
