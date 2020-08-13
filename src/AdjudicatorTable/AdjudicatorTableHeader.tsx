@@ -4,12 +4,14 @@ interface AdjudicatorTableHeaderProps {
 	adjudicatorName: string;
 	selectedRounds: boolean[];
 	rounds: string[];
+	shouldShowSums: boolean;
 }
 
 export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
 	selectedRounds,
 	adjudicatorName,
 	rounds,
+	shouldShowSums,
 }) => {
 	return (
 		<tr>
@@ -17,7 +19,7 @@ export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
 			{rounds.map(
 				(roundName, i) => selectedRounds[i] && <th key={i}>{roundName}</th>,
 			)}
-			<th>Sum</th>
+			{shouldShowSums && <th>Sum</th>}
 			<th>Grid</th>
 		</tr>
 	);

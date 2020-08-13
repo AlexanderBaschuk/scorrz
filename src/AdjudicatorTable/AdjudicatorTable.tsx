@@ -1,8 +1,9 @@
+import React, { useMemo } from "react";
+
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
 import { AdjudicatorTableRowView } from "@/model/types";
 import { AdjudicatorTableWrapperStyled } from "./AdjudicatorTable.styles";
-import React from "react";
 
 interface AdjudicatorTableProps {
 	adjudicatorName: string;
@@ -17,6 +18,11 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	rounds,
 	resultRows,
 }) => {
+	const shouldShowSums = useMemo(
+		() => selectedRounds.filter((isSelected) => isSelected).length > 1,
+		[selectedRounds],
+	);
+
 	return (
 		<AdjudicatorTableWrapperStyled>
 			<table>
@@ -24,6 +30,7 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 					adjudicatorName={adjudicatorName}
 					selectedRounds={selectedRounds}
 					rounds={rounds}
+					shouldShowSums={shouldShowSums}
 				/>
 				{resultRows.map((row) => (
 					<AdjudicatorTableRow
@@ -33,6 +40,7 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 						scores={row.scores}
 						sum={row.sum}
 						gridScore={row.gridScore}
+						shouldShowSums={shouldShowSums}
 					/>
 				))}
 			</table>
