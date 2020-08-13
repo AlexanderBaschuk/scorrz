@@ -1,6 +1,5 @@
-import { FinalTableRow, FinalTableRowProps } from "./FinalTableRow";
-
 import { FinalTableHeader } from "./FinalTableHeader";
+import { FinalTableRow } from "./FinalTableRow";
 import { FinalTableRowView } from "@/model/types";
 import { FinalTableWrapperStyled } from "./FinalTable.styles";
 import React from "react";
