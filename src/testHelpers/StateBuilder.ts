@@ -46,6 +46,7 @@ export class StateBuilder implements State {
 
 	withResults = (adjudicatorId: number, results: AdjudicatorResults) => {
 		this.results[adjudicatorId] = results;
+		this.selectedAdjudicators[adjudicatorId] = true;
 		return this;
 	};
 
