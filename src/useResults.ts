@@ -1,4 +1,4 @@
-import { Competitor, CompetitorId } from "./model/types";
+import { AdjudicatorTableRowView, Competitor, CompetitorId } from "./model/types";
 import {
 	SumAndGrid,
 	calculateFinalResults,
@@ -7,7 +7,6 @@ import {
 import { allResultsSelector, competitorsSelector } from "./Scorrz.selectors";
 import { useCallback, useMemo } from "react";
 
-import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow";
 import { useSelector } from "react-redux";
 
 export const useResults = () => {
@@ -35,7 +34,7 @@ export const useResults = () => {
 				adjudicator: adjudicator.adjudicatorName,
 				resultLines: adjudicator.resultLines
 					.map(
-						(r): AdjudicatorTableRowProps => ({
+						(r): AdjudicatorTableRowView => ({
 							id: r.competitorId,
 							name: getCompetitor(r.competitorId)?.name ?? "",
 							scores: r.score,

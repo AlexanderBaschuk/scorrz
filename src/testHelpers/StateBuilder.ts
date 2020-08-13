@@ -1,12 +1,12 @@
 import {
 	AdjudicatorResults,
+	AdjudicatorTableView,
 	Competitor,
 	Round,
 	State,
 	initialState,
 } from "@/model/types";
 
-import { AdjudicatorTableProps } from "@/AdjudicatorTable/AdjudicatorTable";
 import { FinalTableProps } from "@/FinalTable/FinalTable";
 
 export class StateBuilder implements State {
@@ -16,7 +16,7 @@ export class StateBuilder implements State {
 	selectedAdjudicators: boolean[];
 	selectedRounds: boolean[];
 
-	adjudicatorTables: AdjudicatorTableProps[];
+	adjudicatorTables: AdjudicatorTableView[];
 	finalTable: FinalTableProps;
 
 	constructor() {

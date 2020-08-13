@@ -1,16 +1,13 @@
-import {
-	AdjudicatorTableRow,
-	AdjudicatorTableRowProps,
-} from "./AdjudicatorTableRow";
-
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
+import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
+import { AdjudicatorTableRowView } from "@/model/types";
 import { AdjudicatorTableWrapperStyled } from "./AdjudicatorTable.styles";
 import React from "react";
 
-export interface AdjudicatorTableProps {
+interface AdjudicatorTableProps {
 	adjudicatorName: string;
 	rounds: string[];
-	resultRows: AdjudicatorTableRowProps[];
+	resultRows: AdjudicatorTableRowView[];
 }
 
 export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
@@ -25,8 +22,15 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 					adjudicatorName={adjudicatorName}
 					rounds={rounds}
 				/>
-				{resultRows.map((r) => (
-					<AdjudicatorTableRow key={r.id} {...r} />
+				{resultRows.map((row) => (
+					<AdjudicatorTableRow
+						key={row.id}
+						name={row.name}
+						rounds={rounds}
+						scores={row.scores}
+						sum={row.sum}
+						gridScore={row.gridScore}
+					/>
 				))}
 			</table>
 		</AdjudicatorTableWrapperStyled>

@@ -1,17 +1,21 @@
-import { Competitor, CompetitorId, State } from "./model/types";
+import {
+	AdjudicatorTableRowView,
+	AdjudicatorTableView,
+	Competitor,
+	CompetitorId,
+	State,
+} from "./model/types";
 import {
 	SumAndGrid,
 	calculateFinalResults,
 	calculateGridScores,
 } from "./Calculations/calculations";
 
-import { AdjudicatorTableProps } from "./AdjudicatorTable/AdjudicatorTable";
-import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow";
 import { FinalTableProps } from "./FinalTable/FinalTable";
 
 export const calculateResultTables = (
 	state: State,
-): [AdjudicatorTableProps[], FinalTableProps] => {
+): [AdjudicatorTableView[], FinalTableProps] => {
 	const sumsAndGrids = calculateSumsAndGrids(state);
 	const adjudicatorTables = calculateAdjudicatorTables(state, sumsAndGrids);
 	const finalTable = calculateFinalTable(state, sumsAndGrids);
@@ -26,7 +30,7 @@ const calculateSumsAndGrids = (state: State): Map<CompetitorId, SumAndGrid>[] =>
 const calculateAdjudicatorTables = (
 	state: State,
 	sumsAndGrids: Map<CompetitorId, SumAndGrid>[],
-): AdjudicatorTableProps[] =>
+): AdjudicatorTableView[] =>
 	state.results.map((adjudicator, adjId) => {
 		if (state.selectedAdjudicators[adjId] === false) {
 			return null;
@@ -37,7 +41,7 @@ const calculateAdjudicatorTables = (
 			rounds: state.rounds.map((r) => r.shortName),
 			resultRows: adjudicator.resultLines
 				.map(
-					(r): AdjudicatorTableRowProps => ({
+					(r): AdjudicatorTableRowView => ({
 						id: r.competitorId,
 						name: getCompetitorName(state, r.competitorId),
 						scores: r.score,

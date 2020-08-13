@@ -57,7 +57,14 @@ export const Scorrz: React.FC = () => {
 			/>
 			{adjudicatorTables.map(
 				(adjResults, i) =>
-					adjResults && <AdjudicatorTable key={i} {...adjResults} />,
+					adjResults && (
+						<AdjudicatorTable
+							key={i}
+							adjudicatorName={adjResults.adjudicatorName}
+							rounds={adjResults.rounds}
+							resultRows={adjResults.resultRows}
+						/>
+					),
 			)}
 			{finalTable && <FinalTable {...finalTable} />}
 		</>

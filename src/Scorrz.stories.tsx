@@ -2,7 +2,7 @@ import { number, object, text, withKnobs } from "@storybook/addon-knobs";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
-import { AdjudicatorTableRowProps } from "./AdjudicatorTable/AdjudicatorTableRow";
+import { AdjudicatorTableRowView } from "./model/types";
 import { FinalTable } from "./FinalTable/FinalTable";
 import { FinalTableRowProps } from "./FinalTable/FinalTableRow";
 import React from "react";
@@ -39,7 +39,7 @@ export const RoundsSelectionStory: React.FC = () => {
 export const AdjudicatorTableStory: React.FC = () => {
 	const rowsCount = number("rowsCount", 10);
 	const rounds = ["H", "L", "S"];
-	const rows: AdjudicatorTableRowProps[] = Array.from(
+	const rows: AdjudicatorTableRowView[] = Array.from(
 		{ length: rowsCount },
 		(_, i) => ({
 			id: (100 + i).toString(),

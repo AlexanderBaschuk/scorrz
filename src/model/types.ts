@@ -1,4 +1,3 @@
-import { AdjudicatorTableProps } from "@/AdjudicatorTable/AdjudicatorTable";
 import { FinalTableProps } from "@/FinalTable/FinalTable";
 
 export type CompetitorId = string;
@@ -30,13 +29,27 @@ export interface AdjudicatorResults {
 	resultLines: ResultLine[];
 }
 
+export interface AdjudicatorTableView {
+	adjudicatorName: string;
+	rounds: string[];
+	resultRows: AdjudicatorTableRowView[];
+}
+
+export interface AdjudicatorTableRowView {
+	id: CompetitorId;
+	name: string;
+	scores: Score[];
+	sum: Score;
+	gridScore: Score;
+}
+
 export interface State {
 	rounds: Round[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
 	selectedRounds: boolean[];
-	adjudicatorTables: AdjudicatorTableProps[];
+	adjudicatorTables: AdjudicatorTableView[];
 	finalTable: FinalTableProps;
 }
 
