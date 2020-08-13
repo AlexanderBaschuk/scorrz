@@ -22,9 +22,15 @@ export const calculateResultTables = (
 };
 
 const calculateSumsAndGrids = (state: State): Map<CompetitorId, SumAndGrid>[] =>
-	state.results.map((adjudicator) =>
-		calculateGridScores(adjudicator.resultLines),
-	);
+	state.results.map((adjudicator) => {
+		const selectedResults = adjudicator.resultLines.map((resultLine) => ({
+			competitorId: resultLine.competitorId,
+			score: resultLine.score.filter(
+				(_, i) => state.selectedRounds[i] === true,
+			),
+		}));
+		return calculateGridScores(selectedResults);
+	});
 
 const calculateAdjudicatorTables = (
 	state: State,
