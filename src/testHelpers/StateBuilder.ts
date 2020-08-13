@@ -24,11 +24,13 @@ export class StateBuilder implements State {
 
 	withRound = (value: Round) => {
 		this.rounds.push(value);
+		this.selectedRounds.push(true);
 		return this;
 	};
 
 	withRounds = (values: Round[]) => {
 		this.rounds.push(...values);
+		this.selectedRounds.push(...values.map((_) => true));
 		return this;
 	};
 
@@ -57,3 +59,7 @@ export class StateBuilder implements State {
 		return this;
 	};
 }
+
+export const HEAVY: Round = { name: "Heavy", shortName: "H" };
+export const LIGHT: Round = { name: "Light", shortName: "L" };
+export const SET: Round = { name: "Set", shortName: "S" };
