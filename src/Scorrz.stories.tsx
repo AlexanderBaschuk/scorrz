@@ -1,10 +1,9 @@
+import { AdjudicatorTableRowView, FinalTableRowView } from "./model/types";
 import { number, object, text, withKnobs } from "@storybook/addon-knobs";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
-import { AdjudicatorTableRowView } from "./model/types";
 import { FinalTable } from "./FinalTable/FinalTable";
-import { FinalTableRowProps } from "./FinalTable/FinalTableRow";
 import React from "react";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
 import { action } from "@storybook/addon-actions";
@@ -53,6 +52,7 @@ export const AdjudicatorTableStory: React.FC = () => {
 	return (
 		<AdjudicatorTable
 			adjudicatorName={text("adjudicatorName", "Adjudicator 1")}
+			selectedRounds={object("selectedRounds", [true, false, true])}
 			rounds={rounds}
 			resultRows={rows}
 		/>
@@ -61,7 +61,7 @@ export const AdjudicatorTableStory: React.FC = () => {
 
 export const FinalTableStory: React.FC = () => {
 	const rowsCount = number("rowsCount", 10);
-	const rows: FinalTableRowProps[] = Array.from(
+	const rows: FinalTableRowView[] = Array.from(
 		{ length: rowsCount },
 		(_, i) => ({
 			place: i,

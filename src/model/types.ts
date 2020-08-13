@@ -1,5 +1,3 @@
-import { FinalTableProps } from "@/FinalTable/FinalTable";
-
 export type CompetitorId = string;
 
 export type Score = number | undefined;
@@ -43,6 +41,17 @@ export interface AdjudicatorTableRowView {
 	gridScore: Score;
 }
 
+export interface FinalTableView {
+	results: FinalTableRowView[];
+}
+
+export interface FinalTableRowView {
+	place: number;
+	id: CompetitorId;
+	name: string;
+	gridSum: Score;
+}
+
 export interface State {
 	rounds: Round[];
 	competitors: Competitor[];
@@ -50,7 +59,7 @@ export interface State {
 	selectedAdjudicators: boolean[];
 	selectedRounds: boolean[];
 	adjudicatorTables: AdjudicatorTableView[];
-	finalTable: FinalTableProps;
+	finalTable: FinalTableView;
 }
 
 export const initialState: State = {

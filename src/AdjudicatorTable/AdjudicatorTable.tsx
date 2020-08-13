@@ -6,12 +6,14 @@ import React from "react";
 
 interface AdjudicatorTableProps {
 	adjudicatorName: string;
+	selectedRounds: boolean[];
 	rounds: string[];
 	resultRows: AdjudicatorTableRowView[];
 }
 
 export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	adjudicatorName,
+	selectedRounds,
 	rounds,
 	resultRows,
 }) => {
@@ -20,13 +22,14 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 			<table>
 				<AdjudicatorTableHeader
 					adjudicatorName={adjudicatorName}
+					selectedRounds={selectedRounds}
 					rounds={rounds}
 				/>
 				{resultRows.map((row) => (
 					<AdjudicatorTableRow
 						key={row.id}
 						name={row.name}
-						rounds={rounds}
+						selectedRounds={selectedRounds}
 						scores={row.scores}
 						sum={row.sum}
 						gridScore={row.gridScore}

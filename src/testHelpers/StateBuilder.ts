@@ -2,12 +2,11 @@ import {
 	AdjudicatorResults,
 	AdjudicatorTableView,
 	Competitor,
+	FinalTableView,
 	Round,
 	State,
 	initialState,
 } from "@/model/types";
-
-import { FinalTableProps } from "@/FinalTable/FinalTable";
 
 export class StateBuilder implements State {
 	rounds: Round[] = [];
@@ -17,7 +16,7 @@ export class StateBuilder implements State {
 	selectedRounds: boolean[];
 
 	adjudicatorTables: AdjudicatorTableView[];
-	finalTable: FinalTableProps;
+	finalTable: FinalTableView;
 
 	constructor() {
 		Object.assign(this, JSON.parse(JSON.stringify(initialState)));

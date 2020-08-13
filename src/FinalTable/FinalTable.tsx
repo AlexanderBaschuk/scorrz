@@ -1,11 +1,12 @@
 import { FinalTableRow, FinalTableRowProps } from "./FinalTableRow";
 
 import { FinalTableHeader } from "./FinalTableHeader";
+import { FinalTableRowView } from "@/model/types";
 import { FinalTableWrapperStyled } from "./FinalTable.styles";
 import React from "react";
 
-export interface FinalTableProps {
-	results: FinalTableRowProps[];
+interface FinalTableProps {
+	results: FinalTableRowView[];
 }
 
 export const FinalTable: React.FC<FinalTableProps> = ({ results }) => {

@@ -3,6 +3,7 @@ import {
 	AdjudicatorTableView,
 	Competitor,
 	CompetitorId,
+	FinalTableView,
 	State,
 } from "./model/types";
 import {
@@ -11,11 +12,9 @@ import {
 	calculateGridScores,
 } from "./Calculations/calculations";
 
-import { FinalTableProps } from "./FinalTable/FinalTable";
-
 export const calculateResultTables = (
 	state: State,
-): [AdjudicatorTableView[], FinalTableProps] => {
+): [AdjudicatorTableView[], FinalTableView] => {
 	const sumsAndGrids = calculateSumsAndGrids(state);
 	const adjudicatorTables = calculateAdjudicatorTables(state, sumsAndGrids);
 	const finalTable = calculateFinalTable(state, sumsAndGrids);
@@ -38,15 +37,19 @@ const calculateAdjudicatorTables = (
 
 		return {
 			adjudicatorName: adjudicator.adjudicatorName,
-			rounds: state.rounds.map((r) => r.shortName),
+			rounds: state.rounds.map((round, i) =>
+				state.selectedRounds[i] === true ? round.shortName : null,
+			),
 			resultRows: adjudicator.resultLines
 				.map(
-					(r): AdjudicatorTableRowView => ({
-						id: r.competitorId,
-						name: getCompetitorName(state, r.competitorId),
-						scores: r.score,
-						sum: sumsAndGrids[adjId].get(r.competitorId).sum,
-						gridScore: sumsAndGrids[adjId].get(r.competitorId).grid,
+					(resultLine): AdjudicatorTableRowView => ({
+						id: resultLine.competitorId,
+						name: getCompetitorName(state, resultLine.competitorId),
+						scores: resultLine.score.map((score, i) =>
+							state.selectedRounds[i] === true ? score : null,
+						),
+						sum: sumsAndGrids[adjId].get(resultLine.competitorId).sum,
+						gridScore: sumsAndGrids[adjId].get(resultLine.competitorId).grid,
 					}),
 				)
 				.sort((result1, result2) => {
@@ -61,7 +64,7 @@ const calculateAdjudicatorTables = (
 const calculateFinalTable = (
 	state: State,
 	sumsAndGrids: Map<CompetitorId, SumAndGrid>[],
-): FinalTableProps => {
+): FinalTableView => {
 	if (state.selectedAdjudicators.filter((a) => a === true).length <= 1)
 		return null;
 

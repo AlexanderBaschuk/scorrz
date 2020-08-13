@@ -61,12 +61,13 @@ export const Scorrz: React.FC = () => {
 						<AdjudicatorTable
 							key={i}
 							adjudicatorName={adjResults.adjudicatorName}
+							selectedRounds={selectedRounds}
 							rounds={adjResults.rounds}
 							resultRows={adjResults.resultRows}
 						/>
 					),
 			)}
-			{finalTable && <FinalTable {...finalTable} />}
+			{finalTable && <FinalTable results={finalTable.results} />}
 		</>
 	);
 };

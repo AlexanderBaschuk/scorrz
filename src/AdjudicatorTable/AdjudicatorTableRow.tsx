@@ -3,7 +3,7 @@ import { Score } from "@/model/types";
 
 interface AdjudicatorTableRowProps {
 	name: string;
-	rounds: string[];
+	selectedRounds: boolean[];
 	scores: Score[];
 	sum: Score;
 	gridScore: Score;
@@ -11,7 +11,7 @@ interface AdjudicatorTableRowProps {
 
 export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 	name,
-	rounds,
+	selectedRounds,
 	scores,
 	sum,
 	gridScore,
@@ -20,7 +20,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 		<tr>
 			<td>{name}</td>
 			{scores.map((score, i) => (
-				<td key={rounds[i]}>{score}</td>
+				selectedRounds[i] && <td key={i}>{score}</td>
 			))}
 			<td>{sum}</td>
 			<td>{Math.round(gridScore * 100) / 100}</td>
