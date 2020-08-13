@@ -10,13 +10,13 @@ describe("1 adjudicator, 1 competitor", () => {
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withResults(0, Create.adjudicator().withResult("123", [75, 80, 65]));
 
-	test("returns result for 1 adjudicator", () => {
+	test("Returns result for 1 adjudicator", () => {
 		const state = prepareState();
 		const [adjudicatorTables] = calculateResultTables(state);
 		expect(adjudicatorTables).toHaveLength(1);
 	});
 
-	test("adjudicator results", () => {
+	test("Adjudicator results", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -31,7 +31,7 @@ describe("1 adjudicator, 1 competitor", () => {
 		});
 	});
 
-	test("final results should be empty", () => {
+	test("Final results should be empty", () => {
 		const state = prepareState();
 		const [_, finalTable] = calculateResultTables(state);
 		expect(finalTable).toBeNull();
@@ -53,13 +53,13 @@ describe("1 adjudicator, 3 competitors", () => {
 					.withResult("123", [75, 80, 65]),
 			);
 
-	test("returns result for 1 adjudicator", () => {
+	test("Returns result for 1 adjudicator", () => {
 		const state = prepareState();
 		const [adjudicatorTables] = calculateResultTables(state);
 		expect(adjudicatorTables).toHaveLength(1);
 	});
 
-	test("adjudicator results", () => {
+	test("Adjudicator results", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -91,7 +91,7 @@ describe("1 adjudicator, 3 competitors", () => {
 		]);
 	});
 
-	test("final results should be empty", () => {
+	test("Final results should be empty", () => {
 		const state = prepareState();
 		const [_, finalTable] = calculateResultTables(state);
 		expect(finalTable).toBeNull();
@@ -117,13 +117,13 @@ describe("2 adjudicators, 2 competitors", () => {
 					.withResult("234", [60, 60, 60.5]),
 			);
 
-	test("has results by both adjudicators", () => {
+	test("Has results by both adjudicators", () => {
 		const state = prepareState();
 		const [adjudicatorTables] = calculateResultTables(state);
 		expect(adjudicatorTables).toHaveLength(2);
 	});
 
-	test("results by adjudicator1", () => {
+	test("Results by adjudicator1", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -148,7 +148,7 @@ describe("2 adjudicators, 2 competitors", () => {
 		]);
 	});
 
-	test("results by adjudicator2", () => {
+	test("Results by adjudicator2", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -173,7 +173,7 @@ describe("2 adjudicators, 2 competitors", () => {
 		]);
 	});
 
-	test("final results", () => {
+	test("Final results", () => {
 		const state = prepareState();
 		const [_, finalTable] = calculateResultTables(state);
 		expect(finalTable.results).toHaveLength(2);
@@ -241,7 +241,7 @@ describe("Only 1 adjudicator selected", () => {
 			.withResults(2, Create.adjudicator().withResult("123", [60, 70, 50]))
 			.withSelectedAdjudicators([false, true, false]);
 
-	test("should return initial count of tables", () => {
+	test("Should return initial count of tables", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -252,7 +252,7 @@ describe("Only 1 adjudicator selected", () => {
 		expect(adjudicatorTables[2]).toBeNull();
 	});
 
-	test("results of selected adjudicator", () => {
+	test("Results of selected adjudicator", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -268,7 +268,7 @@ describe("Only 1 adjudicator selected", () => {
 		]);
 	});
 
-	test("final results should be empty", () => {
+	test("Final results should be empty", () => {
 		const state = prepareState();
 		const [_, finalTable] = calculateResultTables(state);
 		expect(finalTable).toBeNull();
@@ -301,7 +301,7 @@ describe("2 of 3 adjudicators selected", () => {
 			)
 			.withSelectedAdjudicators([true, false, true]);
 
-	test("should return initial count of tables", () => {
+	test("Should return initial count of tables", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -312,7 +312,7 @@ describe("2 of 3 adjudicators selected", () => {
 		expect(adjudicatorTables[2]).not.toBeNull();
 	});
 
-	test("results of adjudicator 1", () => {
+	test("Results of adjudicator 1", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -335,7 +335,7 @@ describe("2 of 3 adjudicators selected", () => {
 		]);
 	});
 
-	test("results of adjudicator 3", () => {
+	test("Results of adjudicator 3", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -358,7 +358,7 @@ describe("2 of 3 adjudicators selected", () => {
 		]);
 	});
 
-	test("final results", () => {
+	test("Final results", () => {
 		const state = prepareState();
 		const [_, finalTable] = calculateResultTables(state);
 		expect(finalTable.results).toEqual([
@@ -387,7 +387,7 @@ describe("No adjudicators selected", () => {
 			.withResults(1, Create.adjudicator().withResult("123", [50, 60, 70]))
 			.withSelectedAdjudicators([false, false]);
 
-	test("should return initial count of empty tables", () => {
+	test("Should return initial count of empty tables", () => {
 		const state = prepareState();
 
 		const [adjudicatorTables] = calculateResultTables(state);
@@ -397,9 +397,217 @@ describe("No adjudicators selected", () => {
 		expect(adjudicatorTables[1]).toBeNull();
 	});
 
-	test("final results should be empty", () => {
+	test("Final results should be empty", () => {
 		const state = prepareState();
 		const [_, finalTable] = calculateResultTables(state);
 		expect(finalTable).toBeNull();
+	});
+});
+
+describe("Only 1 round selected", () => {
+	const prepareState = () =>
+		Create.state()
+			.withRounds([HEAVY, LIGHT, SET])
+			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
+			.withCompetitor({ id: "234", name: "Natasha", school: "Avalon" })
+			.withResults(
+				0,
+				Create.adjudicator()
+					.withResult("234", [60, 70, 50])
+					.withResult("123", [70, 50, 60]),
+			)
+			.withResults(
+				1,
+				Create.adjudicator()
+					.withResult("123", [50, 60, 70])
+					.withResult("234", [60, 60, 60.5]),
+			)
+			.withSelectedRounds([false, true, false]);
+
+	test("Has results by both adjudicators", () => {
+		const state = prepareState();
+		const [adjudicatorTables] = calculateResultTables(state);
+		expect(adjudicatorTables).toHaveLength(2);
+		expect(adjudicatorTables[0]).not.toBeNull();
+		expect(adjudicatorTables[1]).not.toBeNull();
+	});
+
+	test("Has only selected round in adjudicator results", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		expect(adjudicatorTables[0].rounds).toEqual([null, "L", null]);
+	});
+
+	test("Results by adjudicator1", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		const resultRows = adjudicatorTables[0].resultRows;
+		expect(resultRows).toEqual([
+			{
+				id: "234",
+				name: "Natasha",
+				scores: [null, 70, null],
+				sum: 70,
+				gridScore: 100,
+			},
+			{
+				id: "123",
+				name: "Sasha",
+				scores: [null, 50, null],
+				sum: 50,
+				gridScore: 75,
+			},
+		]);
+	});
+
+	test("Results by adjudicator2", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		const resultRows = adjudicatorTables[1].resultRows;
+		expect(resultRows).toEqual([
+			{
+				id: "123",
+				name: "Sasha",
+				scores: [null, 60, null],
+				sum: 60,
+				gridScore: 87.5,
+			},
+			{
+				id: "234",
+				name: "Natasha",
+				scores: [null, 60, null],
+				sum: 60,
+				gridScore: 87.5,
+			},
+		]);
+	});
+
+	test("Final results", () => {
+		const state = prepareState();
+		const [_, finalTable] = calculateResultTables(state);
+		expect(finalTable.results).toEqual([
+			{
+				id: "234",
+				name: "Natasha",
+				gridSum: 100 + 87.5,
+				place: 1,
+			},
+			{
+				id: "123",
+				name: "Sasha",
+				gridSum: 75 + 87.5,
+				place: 2,
+			},
+		]);
+	});
+});
+
+describe("2 of 3 rounds selected", () => {
+	const prepareState = () =>
+		Create.state()
+			.withRounds([HEAVY, LIGHT, SET])
+			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
+			.withCompetitor({ id: "234", name: "Natasha", school: "Avalon" })
+			.withResults(
+				0,
+				Create.adjudicator()
+					.withResult("234", [60, 70, 50])
+					.withResult("123", [70, 50, 60]),
+			)
+			.withResults(
+				1,
+				Create.adjudicator()
+					.withResult("123", [50, 60, 70])
+					.withResult("234", [60, 60, 60.5]),
+			)
+			.withSelectedRounds([true, false, true]);
+
+	test("Has results by both adjudicators", () => {
+		const state = prepareState();
+		const [adjudicatorTables] = calculateResultTables(state);
+		expect(adjudicatorTables).toHaveLength(2);
+		expect(adjudicatorTables[0]).not.toBeNull();
+		expect(adjudicatorTables[1]).not.toBeNull();
+	});
+
+	test("Has only selected rounds in adjudicator results", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		expect(adjudicatorTables[0].rounds).toEqual(["H", null, "S"]);
+	});
+
+	test("Results by adjudicator1", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		const resultRows = adjudicatorTables[0].resultRows;
+		expect(resultRows).toEqual([
+			{
+				id: "123",
+				name: "Sasha",
+				scores: [70, null, 60],
+				sum: 130,
+				gridScore: 100,
+			},
+			{
+				id: "234",
+				name: "Natasha",
+				scores: [60, null, 50],
+				sum: 110,
+				gridScore: 75,
+			},
+		]);
+	});
+
+	test("Results by adjudicator2", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		const resultRows = adjudicatorTables[1].resultRows;
+		expect(resultRows).toEqual([
+			{
+				id: "234",
+				name: "Natasha",
+				scores: [60, null, 60.5],
+				sum: 120.5,
+				gridScore: 100,
+			},
+			{
+				id: "123",
+				name: "Sasha",
+				scores: [50, null, 70],
+				sum: 120,
+				gridScore: 75,
+			},
+		]);
+	});
+
+	test("Final results", () => {
+		const state = prepareState();
+		const [_, finalTable] = calculateResultTables(state);
+		expect(finalTable.results).toEqual([
+			{
+				id: "123",
+				name: "Sasha",
+				gridSum: 87.5 + 87.5,
+				place: 1,
+			},
+			{
+				id: "234",
+				name: "Natasha",
+				gridSum: 87.5 + 87.5,
+				place: 1,
+			},
+		]);
 	});
 });
