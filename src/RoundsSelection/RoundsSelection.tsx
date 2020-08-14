@@ -1,4 +1,5 @@
 import React from "react";
+import { RoundsSelectionButton } from "./RoundsSelectionButton";
 
 export interface RoundsSelectionProps {
 	rounds: string[];
@@ -14,9 +15,9 @@ export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 	return (
 		<div>
 			{rounds.map((round, id) => (
-				<button key={id} onClick={() => toggleRound(id)}>
+				<RoundsSelectionButton key={id} id={id} onClick={() => toggleRound(id)}>
 					{round + (selectedRounds[id] ? "*" : "")}
-				</button>
+				</RoundsSelectionButton>
 			))}
 		</div>
 	);

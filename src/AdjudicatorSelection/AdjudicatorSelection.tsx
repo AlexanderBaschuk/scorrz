@@ -1,3 +1,4 @@
+import { AdjudicatorSelectionButton } from "./AdjudicatorSelectionButton";
 import React from "react";
 
 export interface AdjudicatorSelectionProps {
@@ -14,9 +15,13 @@ export const AdjudicatorSelection: React.FC<AdjudicatorSelectionProps> = ({
 	return (
 		<div>
 			{adjudicators.map((adj, id) => (
-				<button key={id} onClick={() => toggleAdjudicator(id)}>
+				<AdjudicatorSelectionButton
+					key={id}
+					id={id}
+					onClick={toggleAdjudicator}
+				>
 					{adj + (selectedAdjudicators[id] ? "*" : "")}
-				</button>
+				</AdjudicatorSelectionButton>
 			))}
 		</div>
 	);
