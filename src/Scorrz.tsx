@@ -14,6 +14,7 @@ import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelectio
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { FinalTable } from "./FinalTable/FinalTable";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
+import { ScorrzStyled } from "./Scorrz.styles";
 
 export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
@@ -44,7 +45,7 @@ export const Scorrz: React.FC = () => {
 	);
 
 	return (
-		<>
+		<ScorrzStyled>
 			<AdjudicatorSelection
 				adjudicators={adjudicators}
 				selectedAdjudicators={selectedAdjudicators}
@@ -68,6 +69,6 @@ export const Scorrz: React.FC = () => {
 					),
 			)}
 			{finalTable && <FinalTable results={finalTable.results} />}
-		</>
+		</ScorrzStyled>
 	);
 };
