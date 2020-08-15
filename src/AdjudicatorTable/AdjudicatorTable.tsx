@@ -27,6 +27,11 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 		[selectedRounds],
 	);
 
+	const shouldShowGrids = useMemo(
+		() => selectedRounds.filter((isSelected) => isSelected).length > 0,
+		[selectedRounds],
+	);
+
 	return (
 		<TableWrapperStyled>
 			<TableTitleStyled>{adjudicatorName}</TableTitleStyled>
@@ -36,18 +41,21 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 						selectedRounds={selectedRounds}
 						rounds={rounds}
 						shouldShowSums={shouldShowSums}
+						shouldShowGrids={shouldShowGrids}
 					/>
 				</thead>
 				<tbody>
 					{resultRows.map((row) => (
 						<AdjudicatorTableRow
 							key={row.id}
+							id={row.id}
 							name={row.name}
 							selectedRounds={selectedRounds}
 							scores={row.scores}
 							sum={row.sum}
 							gridScore={row.gridScore}
 							shouldShowSums={shouldShowSums}
+							shouldShowGrids={shouldShowGrids}
 						/>
 					))}
 				</tbody>
