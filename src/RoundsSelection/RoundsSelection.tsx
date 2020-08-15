@@ -27,7 +27,7 @@ export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 						key={id}
 						id={id}
 						isSelected={selectedRounds[id] === true}
-						onClick={() => toggleRound(id)}
+						onClick={toggleRound}
 					>
 						{round}
 					</RoundsSelectionButton>
