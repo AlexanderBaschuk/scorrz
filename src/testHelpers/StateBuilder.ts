@@ -1,21 +1,22 @@
 import {
 	AdjudicatorResults,
+	AdjudicatorTableView,
 	Competitor,
+	FinalTableView,
 	Round,
 	State,
 	initialState,
 } from "@/model/types";
 
-import { AdjudicatorTableProps } from "@/AdjudicatorTable/AdjudicatorTable";
-import { FinalTableProps } from "@/FinalTable/FinalTable";
-
 export class StateBuilder implements State {
 	rounds: Round[] = [];
 	competitors: Competitor[] = [];
 	results: AdjudicatorResults[] = [];
+	selectedAdjudicators: boolean[];
+	selectedRounds: boolean[];
 
-	adjudicatorTables: AdjudicatorTableProps[];
-	finalTable: FinalTableProps;
+	adjudicatorTables: AdjudicatorTableView[];
+	finalTable: FinalTableView;
 
 	constructor() {
 		Object.assign(this, JSON.parse(JSON.stringify(initialState)));
@@ -23,11 +24,13 @@ export class StateBuilder implements State {
 
 	withRound = (value: Round) => {
 		this.rounds.push(value);
+		this.selectedRounds.push(true);
 		return this;
 	};
 
 	withRounds = (values: Round[]) => {
 		this.rounds.push(...values);
+		this.selectedRounds.push(...values.map((_) => true));
 		return this;
 	};
 
@@ -43,6 +46,21 @@ export class StateBuilder implements State {
 
 	withResults = (adjudicatorId: number, results: AdjudicatorResults) => {
 		this.results[adjudicatorId] = results;
+		this.selectedAdjudicators[adjudicatorId] = true;
+		return this;
+	};
+
+	withSelectedAdjudicators = (values: boolean[]) => {
+		this.selectedAdjudicators = values;
+		return this;
+	};
+
+	withSelectedRounds = (values: boolean[]) => {
+		this.selectedRounds = values;
 		return this;
 	};
 }
+
+export const HEAVY: Round = { name: "Heavy", shortName: "H" };
+export const LIGHT: Round = { name: "Light", shortName: "L" };
+export const SET: Round = { name: "Set", shortName: "S" };

@@ -1,6 +1,3 @@
-import { AdjudicatorTableProps } from "@/AdjudicatorTable/AdjudicatorTable";
-import { FinalTableProps } from "@/FinalTable/FinalTable";
-
 export type CompetitorId = string;
 
 export type Score = number | undefined;
@@ -30,18 +27,47 @@ export interface AdjudicatorResults {
 	resultLines: ResultLine[];
 }
 
+export interface AdjudicatorTableView {
+	adjudicatorName: string;
+	rounds: string[];
+	resultRows: AdjudicatorTableRowView[];
+}
+
+export interface AdjudicatorTableRowView {
+	id: CompetitorId;
+	name: string;
+	scores: Score[];
+	sum: Score;
+	gridScore: Score;
+}
+
+export interface FinalTableView {
+	results: FinalTableRowView[];
+}
+
+export interface FinalTableRowView {
+	place: number;
+	id: CompetitorId;
+	name: string;
+	gridSum: Score;
+}
+
 export interface State {
 	rounds: Round[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
-	adjudicatorTables: AdjudicatorTableProps[];
-	finalTable: FinalTableProps;
+	selectedAdjudicators: boolean[];
+	selectedRounds: boolean[];
+	adjudicatorTables: AdjudicatorTableView[];
+	finalTable: FinalTableView;
 }
 
 export const initialState: State = {
 	rounds: [],
 	competitors: [],
 	results: [],
+	selectedAdjudicators: [],
+	selectedRounds: [],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };
@@ -92,7 +118,7 @@ export const testInitialState: State = {
 			],
 		},
 		{
-			adjudicatorName: "Mary MacElroy",
+			adjudicatorName: "Mary McElroy",
 			resultLines: [
 				{
 					competitorId: "10",
@@ -116,7 +142,30 @@ export const testInitialState: State = {
 				},
 			],
 		},
+		{
+			adjudicatorName: "John Cullinane",
+			resultLines: [
+				{
+					competitorId: "10",
+					score: [74, 82, 77],
+				},
+				{
+					competitorId: "230",
+					score: [74, 77, 82],
+				},
+				{
+					competitorId: "670",
+					score: [82, 77, 75],
+				},
+				{
+					competitorId: "340",
+					score: [82, 77, 74],
+				},
+			],
+		},
 	],
+	selectedAdjudicators: [true, true, true],
+	selectedRounds: [true, true, true],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
 };
