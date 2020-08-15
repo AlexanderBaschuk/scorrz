@@ -1,12 +1,12 @@
 import React from "react";
+import { ThGrid } from "./FinalTable.styles";
 
 export const FinalTableHeader: React.FC = () => {
 	return (
 		<tr>
-			<th>Place</th>
-			<th>No.</th>
-			<th>Competitor</th>
-			<th>Grid score</th>
+			<th>#</th>
+			<th colSpan={2}>Competitor</th>
+			<ThGrid>Grid score</ThGrid>
 		</tr>
 	);
 };

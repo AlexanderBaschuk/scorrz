@@ -1,9 +1,13 @@
 import React, { useMemo } from "react";
+import {
+	ResultsTableStyled,
+	TableTitleStyled,
+	TableWrapperStyled,
+} from "@/Common/Table.styles";
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
 import { AdjudicatorTableRowView } from "@/model/types";
-import { AdjudicatorTableWrapperStyled } from "./AdjudicatorTable.styles";
 
 interface AdjudicatorTableProps {
 	adjudicatorName: string;
@@ -24,11 +28,11 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	);
 
 	return (
-		<AdjudicatorTableWrapperStyled>
-			<table>
+		<TableWrapperStyled>
+			<TableTitleStyled>{adjudicatorName}</TableTitleStyled>
+			<ResultsTableStyled>
 				<thead>
 					<AdjudicatorTableHeader
-						adjudicatorName={adjudicatorName}
 						selectedRounds={selectedRounds}
 						rounds={rounds}
 						shouldShowSums={shouldShowSums}
@@ -47,7 +51,7 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 						/>
 					))}
 				</tbody>
-			</table>
-		</AdjudicatorTableWrapperStyled>
+			</ResultsTableStyled>
+		</TableWrapperStyled>
 	);
 };

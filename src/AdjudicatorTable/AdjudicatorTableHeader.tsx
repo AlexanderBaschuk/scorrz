@@ -1,7 +1,8 @@
+import { ThGrid, ThSum } from "./AdjudicatorTable.styles";
+
 import React from "react";
 
 interface AdjudicatorTableHeaderProps {
-	adjudicatorName: string;
 	selectedRounds: boolean[];
 	rounds: string[];
 	shouldShowSums: boolean;
@@ -9,18 +10,17 @@ interface AdjudicatorTableHeaderProps {
 
 export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
 	selectedRounds,
-	adjudicatorName,
 	rounds,
 	shouldShowSums,
 }) => {
 	return (
 		<tr>
-			<th>{adjudicatorName}</th>
+			<th colSpan={2}>Competitor</th>
 			{rounds.map(
 				(roundName, i) => selectedRounds[i] && <th key={i}>{roundName}</th>,
 			)}
-			{shouldShowSums && <th>Sum</th>}
-			<th>Grid</th>
+			{shouldShowSums && <ThSum>Sum</ThSum>}
+			<ThGrid>Grid</ThGrid>
 		</tr>
 	);
 };
