@@ -6,6 +6,7 @@ import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { FinalTable } from "./FinalTable/FinalTable";
 import React from "react";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
+import { ScorrzStyled } from "./Scorrz.styles";
 import { action } from "@storybook/addon-actions";
 
 export default {
@@ -16,22 +17,30 @@ export default {
 export const AdjudicationSelectionStory: React.FC = () => {
 	const adjudicators = ["Mary McElroy", "Brendan O'Brien", "John Cullinane"];
 	return (
-		<AdjudicatorSelection
-			adjudicators={adjudicators}
-			selectedAdjudicators={object("selectedAdjudicators", [true, false, true])}
-			toggleAdjudicator={action("toggleAdjudicator")}
-		/>
+		<ScorrzStyled>
+			<AdjudicatorSelection
+				adjudicators={adjudicators}
+				selectedAdjudicators={object("selectedAdjudicators", [
+					true,
+					false,
+					true,
+				])}
+				toggleAdjudicator={action("toggleAdjudicator")}
+			/>
+		</ScorrzStyled>
 	);
 };
 
 export const RoundsSelectionStory: React.FC = () => {
 	const rounds = ["heavy", "Light", "Set"];
 	return (
-		<RoundsSelection
-			rounds={rounds}
-			selectedRounds={object("selectedRounds", [false, true, false])}
-			toggleRound={action("toggleRound")}
-		/>
+		<ScorrzStyled>
+			<RoundsSelection
+				rounds={rounds}
+				selectedRounds={object("selectedRounds", [false, true, false])}
+				toggleRound={action("toggleRound")}
+			/>
+		</ScorrzStyled>
 	);
 };
 
@@ -50,12 +59,14 @@ export const AdjudicatorTableStory: React.FC = () => {
 	);
 
 	return (
-		<AdjudicatorTable
-			adjudicatorName={text("adjudicatorName", "Adjudicator 1")}
-			selectedRounds={object("selectedRounds", [true, false, true])}
-			rounds={rounds}
-			resultRows={rows}
-		/>
+		<ScorrzStyled>
+			<AdjudicatorTable
+				adjudicatorName={text("adjudicatorName", "Adjudicator 1")}
+				selectedRounds={object("selectedRounds", [true, false, true])}
+				rounds={rounds}
+				resultRows={rows}
+			/>
+		</ScorrzStyled>
 	);
 };
 
@@ -71,5 +82,9 @@ export const FinalTableStory: React.FC = () => {
 		}),
 	);
 
-	return <FinalTable results={rows} />;
+	return (
+		<ScorrzStyled>
+			<FinalTable results={rows} />
+		</ScorrzStyled>
+	);
 };

@@ -53,6 +53,8 @@ export interface FinalTableRowView {
 }
 
 export interface State {
+	eventTitle: string,
+	competitionTitle: string,
 	rounds: Round[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
@@ -63,6 +65,8 @@ export interface State {
 }
 
 export const initialState: State = {
+	eventTitle: "",
+	competitionTitle: "",
 	rounds: [],
 	competitors: [],
 	results: [],
@@ -73,6 +77,8 @@ export const initialState: State = {
 };
 
 export const testInitialState: State = {
+	eventTitle: "Moscow Feis 2020",
+	competitionTitle: "Preliminary championship 20-25",
 	rounds: [
 		{ name: "Heavy", shortName: "H" },
 		{ name: "Light", shortName: "L" },

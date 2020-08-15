@@ -9,6 +9,8 @@ import {
 } from "@/model/types";
 
 export class StateBuilder implements State {
+	eventTitle: string = "";
+	competitionTitle: string = "";
 	rounds: Round[] = [];
 	competitors: Competitor[] = [];
 	results: AdjudicatorResults[] = [];
