@@ -10,11 +10,11 @@ export const Button = styled.button`
 		outline: 0 !important;
 	}
 
-	&:first-child {
+	&:first-of-type {
 		border-radius: 3px 0 0 3px;
 	}
 
-	&:last-child {
+	&:last-of-type {
 		border-right-width: 1px;
 		border-right-style: solid;
 		border-radius: 0 3px 3px 0;

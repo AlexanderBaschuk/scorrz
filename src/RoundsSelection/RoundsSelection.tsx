@@ -21,7 +21,7 @@ export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 	return (
 		<ControlPanelStyled>
 			<ControlPanelTitleStyled>Rounds: </ControlPanelTitleStyled>
-			<ButtonGroupStyled>
+			<ButtonGroupStyled data-testid="rounds-selection">
 				{rounds.map((round, id) => (
 					<RoundsSelectionButton
 						key={id}

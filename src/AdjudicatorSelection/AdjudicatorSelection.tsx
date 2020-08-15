@@ -21,7 +21,7 @@ export const AdjudicatorSelection: React.FC<AdjudicatorSelectionProps> = ({
 	return (
 		<ControlPanelStyled>
 			<ControlPanelTitleStyled>Adjudicators: </ControlPanelTitleStyled>
-			<ButtonGroupStyled>
+			<ButtonGroupStyled data-testid="adjudicators-selection">
 				{adjudicators.map((adj, id) => (
 					<AdjudicatorSelectionButton
 						key={id}
