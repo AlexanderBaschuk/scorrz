@@ -15,7 +15,7 @@ export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 	return (
 		<div>
 			{rounds.map((round, id) => (
-				<RoundsSelectionButton key={id} id={id} onClick={() => toggleRound(id)}>
+				<RoundsSelectionButton key={id} id={id} onClick={toggleRound}>
 					{round + (selectedRounds[id] ? "*" : "")}
 				</RoundsSelectionButton>
 			))}
