@@ -18,6 +18,7 @@ const getTableRowCells = (table, row: number) =>
 		.map((td) => td.text());
 
 const rounds = ["H", "L", "S"];
+const adjudicatorName = "Brendan O'Brien";
 
 const competitorResults1: AdjudicatorTableRowView = {
 	id: "123",
@@ -36,6 +37,19 @@ const competitorResults2: AdjudicatorTableRowView = {
 };
 
 describe("AdjudicatorTable", () => {
+	test("Displays adjudicator name", () => {
+		const table = mount(
+			<AdjudicatorTable
+				adjudicatorName={adjudicatorName}
+				rounds={rounds}
+				selectedRounds={[true, false, true]}
+				resultRows={[competitorResults1, competitorResults2]}
+			/>,
+		);
+
+		expect(table.text()).toContain(adjudicatorName);
+	});
+
 	test.each`
 		description                  | selectedRounds
 		${"All rounds selected"}     | ${[true, true, true]}
@@ -44,7 +58,7 @@ describe("AdjudicatorTable", () => {
 	`("Displays results of all competitors", ({ selectedRounds }) => {
 		const table = mount(
 			<AdjudicatorTable
-				adjudicatorName=""
+				adjudicatorName={adjudicatorName}
 				rounds={rounds}
 				selectedRounds={selectedRounds}
 				resultRows={[competitorResults1, competitorResults2]}
@@ -69,7 +83,7 @@ describe("AdjudicatorTable", () => {
 		({ selectedRounds, expectedHeaderCells, expectedCells }) => {
 			const table = mount(
 				<AdjudicatorTable
-					adjudicatorName=""
+					adjudicatorName={adjudicatorName}
 					rounds={rounds}
 					selectedRounds={selectedRounds}
 					resultRows={[competitorResults1]}
