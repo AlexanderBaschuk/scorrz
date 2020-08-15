@@ -12,4 +12,5 @@ export const AdjudicatorSelectionButtonStyled = styled(Button)<ButtonProps>`
 	background-color: ${(props) => (props.isSelected ? BUTTON_COLOR : "white")};
 	color: ${(props) => (props.isSelected ? "white" : BUTTON_COLOR)};
 	border-color: ${BORDER_COLOR};
+	font-size: 1.2em;
 `;
