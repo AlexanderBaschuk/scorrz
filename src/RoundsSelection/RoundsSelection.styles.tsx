@@ -5,8 +5,8 @@ interface ButtonProps {
 	isSelected: boolean;
 }
 
-const BUTTON_COLOR = "#ed7937";
-const BORDER_COLOR = "#b55f2d";
+const BUTTON_COLOR = "#f3ad63";
+const BORDER_COLOR = "#ea884f";
 
 export const RoundsSelectionButtonStyled = styled(Button)<ButtonProps>`
 	background-color: ${(props) => (props.isSelected ? BUTTON_COLOR : "white")};

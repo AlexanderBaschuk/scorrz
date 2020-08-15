@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Button = styled.button`
 	border: 1px solid;
 	border-right: none;
-	padding: 10px 20px;
+	padding: 6px 20px;
 	cursor: pointer;
 
 	&:focus {
