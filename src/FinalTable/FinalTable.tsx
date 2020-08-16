@@ -15,7 +15,7 @@ interface FinalTableProps {
 
 export const FinalTable: React.FC<FinalTableProps> = ({ results }) => {
 	return (
-		<TableWrapperStyled>
+		<TableWrapperStyled data-testid="final-table">
 			<TableTitleStyled>Total</TableTitleStyled>
 			<ResultsTableStyled>
 				<thead>

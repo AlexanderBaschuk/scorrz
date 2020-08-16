@@ -33,7 +33,7 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	);
 
 	return (
-		<TableWrapperStyled>
+		<TableWrapperStyled data-testid="adjudicator-table">
 			<TableTitleStyled>{adjudicatorName}</TableTitleStyled>
 			<ResultsTableStyled>
 				<thead>

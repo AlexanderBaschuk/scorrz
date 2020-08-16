@@ -1,19 +1,20 @@
 import { HEAVY, LIGHT, SET } from "./testHelpers/StateBuilder";
-import { toggleAdjudicator, toggleRound } from "./actions";
+import { calculate, toggleAdjudicator, toggleRound } from "./actions";
 
 import { Create } from "./testHelpers/dsl";
 import { MockStore } from "redux-mock-store";
 import { Provider } from "react-redux";
 import React from "react";
 import { Scorrz } from "./Scorrz";
-import { Store } from "@reduxjs/toolkit";
+import { State } from "./model/types";
 import { mount } from "enzyme";
+import { rootReducer } from "./rootReducer";
 
 const adjudicator1 = "Brendan O'Brian";
 const adjudicator2 = "Mary McElroy";
 
-const prepareStore = (): MockStore => {
-	const state = Create.state()
+const getTestState = () =>
+	Create.state()
 		.withRounds([HEAVY, LIGHT, SET])
 		.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 		.withResults(
@@ -27,8 +28,14 @@ const prepareStore = (): MockStore => {
 			Create.adjudicator()
 				.withName(adjudicator2)
 				.withResult("123", [62, 61, 60]),
-		);
-	return Create.store(state);
+		)
+		.withSelectedAdjudicators([true, true]);
+
+const prepareStore = (state?: State): MockStore => {
+	state = state ?? getTestState();
+	const calculatedState = rootReducer(state, calculate());
+
+	return Create.store(calculatedState);
 };
 
 const mountScorrz = (store: MockStore) => {
@@ -68,4 +75,50 @@ describe("Scorrz", () => {
 		const actions = store.getActions();
 		expect(actions).toContainEqual(toggleRound(1));
 	});
+
+	test.each`
+		selectedAdjudicators | expectedTablesCount
+		${[true, true]}      | ${2}
+		${[false, true]}     | ${1}
+		${[true, false]}     | ${1}
+		${[false, false]}    | ${0}
+	`(
+		"Displaying results of selected adjudicators: $selectedAdjudicators",
+		({ selectedAdjudicators, expectedTablesCount }) => {
+			const state = getTestState().withSelectedAdjudicators(
+				selectedAdjudicators,
+			);
+			const store = prepareStore(state);
+
+			const scorrz = mountScorrz(store);
+
+			const adjudicatorTables = scorrz.find(
+				'div[data-testid="adjudicator-table"]',
+			);
+
+			expect(adjudicatorTables.length).toBe(expectedTablesCount);
+		},
+	);
+
+	test.each`
+		selectedAdjudicators | shouldDisplayFinalResults
+		${[true, true]}      | ${true}
+		${[false, true]}     | ${false}
+		${[true, false]}     | ${false}
+		${[false, false]}    | ${false}
+	`(
+		"Displaying of final results for selected adjudicators: $selectedAdjudicators",
+		({ selectedAdjudicators, shouldDisplayFinalResults }) => {
+			const state = getTestState().withSelectedAdjudicators(
+				selectedAdjudicators,
+			);
+			const store = prepareStore(state);
+
+			const scorrz = mountScorrz(store);
+
+			const finalTables = scorrz.find('div[data-testid="final-table"]');
+
+			expect(finalTables.length).toBe(shouldDisplayFinalResults ? 1 : 0);
+		},
+	);
 });
