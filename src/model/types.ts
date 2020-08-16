@@ -78,7 +78,7 @@ export const initialState: State = {
 
 export const testInitialState: State = {
 	eventTitle: "Moscow Feis 2020",
-	competitionTitle: "Preliminary championship 20-25",
+	competitionTitle: "Preliminary championship, 15-20 yeas",
 	rounds: [
 		{ name: "Heavy", shortName: "H" },
 		{ name: "Light", shortName: "L" },

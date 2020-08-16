@@ -74,7 +74,7 @@ const calculateFinalTable = (
 	if (state.selectedAdjudicators.filter((a) => a === true).length <= 1)
 		return null;
 
-	if (state.selectedRounds.filter((a) => a === true).length <= 0)
+	if (state.selectedRounds.filter((a) => a === true).length === 0)
 		return null;
 
 	const allRequiredGrids = sumsAndGrids
