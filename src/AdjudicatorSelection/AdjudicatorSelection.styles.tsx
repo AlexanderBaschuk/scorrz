@@ -5,17 +5,23 @@ interface ButtonProps {
 	isSelected: boolean;
 }
 
-const BUTTON_COLOR = "#00a3d8";
-const HOVER_COLOR_SELECTED = "#0097c7";
-const HOVER_COLOR_UNSELECTED = "#ebf5f9";
+enum AdjudicatorSelectionButtonColor {
+	Main = "#00a3d8",
+	HoverSelected = "#0097c7",
+	HoverUnselected = "#ebf5f9",
+}
 
 export const AdjudicatorSelectionButtonStyled = styled(Button)<ButtonProps>`
-	background-color: ${(props) => (props.isSelected ? BUTTON_COLOR : "white")};
-	color: ${(props) => (props.isSelected ? "white" : BUTTON_COLOR)};
+	background-color: ${(props) =>
+		props.isSelected ? AdjudicatorSelectionButtonColor.Main : "white"};
+	color: ${(props) =>
+		props.isSelected ? "white" : AdjudicatorSelectionButtonColor.Main};
 	font-size: 1.2em;
 
 	&:hover {
 		background-color: ${(props) =>
-			props.isSelected ? HOVER_COLOR_SELECTED : HOVER_COLOR_UNSELECTED};
+			props.isSelected
+				? AdjudicatorSelectionButtonColor.HoverSelected
+				: AdjudicatorSelectionButtonColor.HoverUnselected};
 	}
 `;

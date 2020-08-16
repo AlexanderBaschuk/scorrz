@@ -5,17 +5,23 @@ interface ButtonProps {
 	isSelected: boolean;
 }
 
-const BUTTON_COLOR = "#f3ad63";
-const HOVER_COLOR_SELECTED = "#f1a250;";
-const HOVER_COLOR_UNSELECTED = "#fff6ed";
+enum RoundSelectionButtonColor {
+	Main = "#f3ad63",
+	HoverSelected = "#f1a250",
+	HoverUnselected = "#fff6ed",
+}
 
 export const RoundsSelectionButtonStyled = styled(Button)<ButtonProps>`
-	background-color: ${(props) => (props.isSelected ? BUTTON_COLOR : "white")};
-	color: ${(props) => (props.isSelected ? "white" : BUTTON_COLOR)};
+	background-color: ${(props) =>
+		props.isSelected ? RoundSelectionButtonColor.Main : "white"};
+	color: ${(props) =>
+		props.isSelected ? "white" : RoundSelectionButtonColor.Main};
 	font-size: 1.2em;
 
 	&:hover {
 		background-color: ${(props) =>
-			props.isSelected ? HOVER_COLOR_SELECTED : HOVER_COLOR_UNSELECTED};
+			props.isSelected
+				? RoundSelectionButtonColor.HoverSelected
+				: RoundSelectionButtonColor.HoverUnselected};
 	}
 `;
