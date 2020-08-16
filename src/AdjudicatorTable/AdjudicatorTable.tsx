@@ -28,7 +28,7 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	);
 
 	const shouldShowGrids = useMemo(
-		() => selectedRounds.filter((isSelected) => isSelected).length > 0,
+		() => selectedRounds.some((isSelected) => isSelected),
 		[selectedRounds],
 	);
 
