@@ -6,11 +6,16 @@ interface ButtonProps {
 }
 
 const BUTTON_COLOR = "#f3ad63";
-const BORDER_COLOR = "#ea884f";
+const HOVER_COLOR_SELECTED = "#f1a250;";
+const HOVER_COLOR_UNSELECTED = "#fff6ed";
 
 export const RoundsSelectionButtonStyled = styled(Button)<ButtonProps>`
 	background-color: ${(props) => (props.isSelected ? BUTTON_COLOR : "white")};
 	color: ${(props) => (props.isSelected ? "white" : BUTTON_COLOR)};
-	border-color: ${BORDER_COLOR};
 	font-size: 1.2em;
+
+	&:hover {
+		background-color: ${(props) =>
+			props.isSelected ? HOVER_COLOR_SELECTED : HOVER_COLOR_UNSELECTED};
+	}
 `;

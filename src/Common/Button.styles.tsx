@@ -1,23 +1,13 @@
 import styled from "@emotion/styled";
 
 export const Button = styled.button`
-	border: 1px solid;
-	border-right: none;
-	padding: 6px 20px;
+	border: none;
+	padding: 4px 12px;
 	cursor: pointer;
+	margin-right: 1px;
 
 	&:focus {
 		outline: 0 !important;
-	}
-
-	&:first-of-type {
-		border-radius: 3px 0 0 3px;
-	}
-
-	&:last-of-type {
-		border-right-width: 1px;
-		border-right-style: solid;
-		border-radius: 0 3px 3px 0;
 	}
 `;
 
