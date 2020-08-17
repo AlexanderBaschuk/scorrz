@@ -2,6 +2,7 @@ import {
 	AdjudicatorResults,
 	AdjudicatorTableView,
 	Competitor,
+	CompetitorId,
 	FinalTableView,
 	Round,
 	State,
@@ -19,6 +20,7 @@ export class StateBuilder implements State {
 
 	adjudicatorTables: AdjudicatorTableView[];
 	finalTable: FinalTableView;
+	selectedCompetitors: CompetitorId[];
 
 	constructor() {
 		Object.assign(this, JSON.parse(JSON.stringify(initialState)));
@@ -59,6 +61,11 @@ export class StateBuilder implements State {
 
 	withSelectedRounds = (values: boolean[]) => {
 		this.selectedRounds = values;
+		return this;
+	};
+
+	withSelectedCompetitors = (values: CompetitorId[]) => {
+		this.selectedCompetitors = values;
 		return this;
 	};
 }
