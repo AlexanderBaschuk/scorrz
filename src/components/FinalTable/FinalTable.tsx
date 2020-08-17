@@ -2,7 +2,7 @@ import {
 	ResultsTableStyled,
 	TableTitleStyled,
 	TableWrapperStyled,
-} from "@/common/Table.styles";
+} from "@/components/common/Table.styles";
 
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";

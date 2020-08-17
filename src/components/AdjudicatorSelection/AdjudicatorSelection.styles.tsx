@@ -1,4 +1,4 @@
-import { Button } from "@/common/Button.styles";
+import { Button } from "@/components/common/Button.styles";
 import styled from "@emotion/styled";
 
 interface ButtonProps {

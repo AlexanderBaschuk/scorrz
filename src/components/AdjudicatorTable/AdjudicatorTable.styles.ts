@@ -1,4 +1,7 @@
-import { GRID_SCORE_BG_COLOR, SCORE_SUM_BG_COLOR } from "@/common/Table.styles";
+import {
+	GRID_SCORE_BG_COLOR,
+	SCORE_SUM_BG_COLOR,
+} from "@/components/common/Table.styles";
 
 import styled from "@emotion/styled";
 

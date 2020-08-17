@@ -1,10 +1,10 @@
 import {
 	ControlPanelStyled,
 	ControlPanelTitleStyled,
-} from "@/common/ControlPanel.styles";
+} from "@/components/common/ControlPanel.styles";
 
 import { AdjudicatorSelectionButton } from "./AdjudicatorSelectionButton";
-import { ButtonGroupStyled } from "@/common/Button.styles";
+import { ButtonGroupStyled } from "@/components/common/Button.styles";
 import React from "react";
 
 export interface AdjudicatorSelectionProps {

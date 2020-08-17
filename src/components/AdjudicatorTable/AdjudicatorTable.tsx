@@ -3,7 +3,7 @@ import {
 	ResultsTableStyled,
 	TableTitleStyled,
 	TableWrapperStyled,
-} from "@/common/Table.styles";
+} from "@/components/common/Table.styles";
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
