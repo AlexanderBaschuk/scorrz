@@ -2,6 +2,8 @@ export type CompetitorId = string;
 
 export type Score = number | undefined;
 
+export type CompetitorSelectionIndex = number | null;
+
 export interface Competitor {
 	id: CompetitorId;
 	name: string;
@@ -75,7 +77,7 @@ export const initialState: State = {
 	selectedRounds: [],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
-	selectedCompetitors: [],
+	selectedCompetitors: [null, null, null, null, null],
 };
 
 export const testInitialState: State = {
@@ -176,5 +178,5 @@ export const testInitialState: State = {
 	selectedRounds: [true, true, true],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
-	selectedCompetitors: [],
+	selectedCompetitors: ["230", null, "560", null, "10"],
 };

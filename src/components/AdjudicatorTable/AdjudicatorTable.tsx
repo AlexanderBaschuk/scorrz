@@ -1,3 +1,8 @@
+import {
+	AdjudicatorTableRowView,
+	CompetitorId,
+	CompetitorSelectionIndex,
+} from "@/types";
 import React, { useMemo } from "react";
 import {
 	ResultsTableStyled,
@@ -7,13 +12,14 @@ import {
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
-import { AdjudicatorTableRowView } from "@/types";
 
 interface AdjudicatorTableProps {
 	adjudicatorName: string;
 	selectedRounds: boolean[];
 	rounds: string[];
 	resultRows: AdjudicatorTableRowView[];
+	getCompetitorSelectionIndex?: (id: CompetitorId) => CompetitorSelectionIndex;
+	clickCompetitorRow?: (CompetitorId) => void;
 }
 
 export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
@@ -21,6 +27,8 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	selectedRounds,
 	rounds,
 	resultRows,
+	getCompetitorSelectionIndex,
+	clickCompetitorRow,
 }) => {
 	const shouldShowSums = useMemo(
 		() => selectedRounds.filter((isSelected) => isSelected).length > 1,
@@ -56,6 +64,8 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 							gridScore={row.gridScore}
 							shouldShowSums={shouldShowSums}
 							shouldShowGrids={shouldShowGrids}
+							selectionIndex={getCompetitorSelectionIndex?.(row.id) ?? null}
+							clickCompetitorRow={clickCompetitorRow}
 						/>
 					))}
 				</tbody>
