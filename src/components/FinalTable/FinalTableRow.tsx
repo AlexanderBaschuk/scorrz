@@ -1,4 +1,4 @@
-import { CompetitorId, Score } from "@/redux/types";
+import { CompetitorId, Score } from "@/types";
 import { TdGrid, TdPlace } from "./FinalTable.styles";
 
 import React from "react";

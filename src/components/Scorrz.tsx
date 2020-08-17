@@ -8,8 +8,8 @@ import {
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
 	selectedRoundsSelector,
-} from "../redux/selectors";
-import { calculate, toggleAdjudicator, toggleRound } from "../redux/actions";
+} from "@/selectors";
+import { calculate, toggleAdjudicator, toggleRound } from "@/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";

@@ -1,5 +1,5 @@
 import { AdjudicatorTable } from "./AdjudicatorTable";
-import { AdjudicatorTableRowView } from "@/redux/types";
+import { AdjudicatorTableRowView } from "@/types";
 import React from "react";
 import { mount } from "enzyme";
 

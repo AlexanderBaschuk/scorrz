@@ -1,7 +1,7 @@
 import { mount, shallow } from "enzyme";
 
 import { FinalTable } from "./FinalTable";
-import { FinalTableRowView } from "@/redux/types";
+import { FinalTableRowView } from "@/types";
 import React from "react";
 
 const getTableRowCells = (table, row: number) =>

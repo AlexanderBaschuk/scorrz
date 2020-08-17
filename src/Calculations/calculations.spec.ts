@@ -1,4 +1,4 @@
-import { CompetitorId, ResultLine } from "@/redux/types";
+import { CompetitorId, ResultLine } from "@/types";
 import {
 	GridSumAndPlace,
 	SumAndGrid,

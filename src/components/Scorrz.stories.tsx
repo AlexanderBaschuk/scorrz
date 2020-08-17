@@ -1,11 +1,11 @@
-import { AdjudicatorTableRowView, FinalTableRowView } from "./redux/types";
+import { AdjudicatorTableRowView, FinalTableRowView } from "@/types";
 import { number, object, text, withKnobs } from "@storybook/addon-knobs";
 
-import { AdjudicatorSelection } from "./components/AdjudicatorSelection/AdjudicatorSelection";
-import { AdjudicatorTable } from "./components/AdjudicatorTable/AdjudicatorTable";
-import { FinalTable } from "./components/FinalTable/FinalTable";
+import { AdjudicatorSelection } from "@/components/AdjudicatorSelection/AdjudicatorSelection";
+import { AdjudicatorTable } from "@/components/AdjudicatorTable/AdjudicatorTable";
+import { FinalTable } from "@/components/FinalTable/FinalTable";
 import React from "react";
-import { RoundsSelection } from "./components/RoundsSelection/RoundsSelection";
+import { RoundsSelection } from "@/components/RoundsSelection/RoundsSelection";
 import { ScorrzStyled } from "./Scorrz.styles";
 import { action } from "@storybook/addon-actions";
 

@@ -1,4 +1,4 @@
-import { State, initialState } from "@/redux/types";
+import { State, initialState } from "@/types";
 
 import { AdjudicatorResultsBuilder } from "./AdjudicatorResultsBuilder";
 import { StateBuilder } from "./StateBuilder";
@@ -18,6 +18,5 @@ export class Create {
 
 	public static state = () => new StateBuilder();
 
-	public static adjudicator = () =>
-		new AdjudicatorResultsBuilder();
+	public static adjudicator = () => new AdjudicatorResultsBuilder();
 }

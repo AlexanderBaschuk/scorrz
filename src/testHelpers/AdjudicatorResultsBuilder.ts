@@ -1,4 +1,4 @@
-import { AdjudicatorResults, CompetitorId, ResultLine } from "@/redux/types";
+import { AdjudicatorResults, CompetitorId, ResultLine } from "@/types";
 
 export class AdjudicatorResultsBuilder implements AdjudicatorResults {
 	adjudicatorName: string = "Adjudicator";

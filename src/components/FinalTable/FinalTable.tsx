@@ -6,7 +6,7 @@ import {
 
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";
-import { FinalTableRowView } from "@/redux/types";
+import { FinalTableRowView } from "@/types";
 import React from "react";
 
 interface FinalTableProps {

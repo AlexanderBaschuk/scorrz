@@ -1,14 +1,14 @@
-import { HEAVY, LIGHT, SET } from "./testHelpers/StateBuilder";
-import { calculate, toggleAdjudicator, toggleRound } from "./redux/actions";
+import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
+import { calculate, toggleAdjudicator, toggleRound } from "@/actions";
 
-import { Create } from "./testHelpers/dsl";
+import { Create } from "@/testHelpers/dsl";
 import { MockStore } from "redux-mock-store";
 import { Provider } from "react-redux";
 import React from "react";
 import { Scorrz } from "./Scorrz";
-import { State } from "./redux/types";
+import { State } from "@/types";
 import { mount } from "enzyme";
-import { reducer } from "./redux/reducer";
+import { reducer } from "@/reducer";
 
 const adjudicator1 = "Brendan O'Brian";
 const adjudicator2 = "Mary McElroy";

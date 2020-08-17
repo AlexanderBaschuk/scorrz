@@ -7,7 +7,7 @@ import {
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
-import { AdjudicatorTableRowView } from "@/redux/types";
+import { AdjudicatorTableRowView } from "@/types";
 
 interface AdjudicatorTableProps {
 	adjudicatorName: string;
