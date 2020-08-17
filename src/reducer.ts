@@ -1,6 +1,7 @@
 import {
 	calculate as calculateAction,
 	toggleAdjudicator,
+	toggleCompetitor,
 	toggleRound,
 } from "./actions";
 
@@ -25,6 +26,23 @@ export const reducer = createReducer(testInitialState, {
 			action.payload
 		];
 		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
+		return state;
+	},
+	[toggleCompetitor.type]: (state, action) => {
+		const competitorIndex = state.selectedCompetitors.findIndex(
+			(value) => value === action.payload,
+		);
+		if (competitorIndex >= 0) {
+			state.selectedCompetitors[competitorIndex] = null;
+			return state;
+		}
+
+		const firstEmptyIndex = state.selectedCompetitors.findIndex(
+			(value) => value === null,
+		);
+		if (firstEmptyIndex >= 0)
+			state.selectedCompetitors[firstEmptyIndex] = action.payload;
+
 		return state;
 	},
 });

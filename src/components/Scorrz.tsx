@@ -13,8 +13,8 @@ import {
 } from "@/selectors";
 import {
 	calculate,
-	selectCompetitor,
 	toggleAdjudicator,
+	toggleCompetitor,
 	toggleRound,
 } from "@/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +67,7 @@ export const Scorrz: React.FC = () => {
 
 	const clickCompetitorRow = useCallback(
 		(id: CompetitorId) => {
-			dispatch(selectCompetitor(id));
+			dispatch(toggleCompetitor(id));
 		},
 		[dispatch],
 	);
