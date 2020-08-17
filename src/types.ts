@@ -53,8 +53,8 @@ export interface FinalTableRowView {
 }
 
 export interface State {
-	eventTitle: string,
-	competitionTitle: string,
+	eventTitle: string;
+	competitionTitle: string;
 	rounds: Round[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];

@@ -10,7 +10,7 @@ import {
 	SumAndGrid,
 	calculateFinalResults,
 	calculateGridScores,
-} from "../../calculations/calculations";
+} from "../calculations/calculations";
 
 export const calculateResultTables = (
 	state: State,
