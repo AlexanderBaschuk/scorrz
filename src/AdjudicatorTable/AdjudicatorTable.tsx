@@ -3,11 +3,11 @@ import {
 	ResultsTableStyled,
 	TableTitleStyled,
 	TableWrapperStyled,
-} from "@/Common/Table.styles";
+} from "@/common/Table.styles";
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
-import { AdjudicatorTableRowView } from "@/model/types";
+import { AdjudicatorTableRowView } from "@/redux/types";
 
 interface AdjudicatorTableProps {
 	adjudicatorName: string;

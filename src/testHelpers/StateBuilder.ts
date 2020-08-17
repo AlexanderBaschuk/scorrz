@@ -6,7 +6,7 @@ import {
 	Round,
 	State,
 	initialState,
-} from "@/model/types";
+} from "@/redux/types";
 
 export class StateBuilder implements State {
 	eventTitle: string = "";

@@ -4,11 +4,11 @@ import {
 	toggleRound,
 } from "./actions";
 
-import { calculateResultTables } from "./calculateState";
+import { calculateResultTables } from "./helpers/calculateState";
 import { createReducer } from "@reduxjs/toolkit";
-import { testInitialState } from "./model/types";
+import { testInitialState } from "./types";
 
-export const rootReducer = createReducer(testInitialState, {
+export const reducer = createReducer(testInitialState, {
 	[calculateAction.type]: (state) => {
 		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
 		return state;

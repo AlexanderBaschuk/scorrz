@@ -1,4 +1,4 @@
-import { CompetitorId, ResultLine } from "@/model/types";
+import { CompetitorId, ResultLine } from "@/redux/types";
 
 import { getSharedGridScore } from "./gridScores";
 

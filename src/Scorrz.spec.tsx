@@ -1,14 +1,14 @@
 import { HEAVY, LIGHT, SET } from "./testHelpers/StateBuilder";
-import { calculate, toggleAdjudicator, toggleRound } from "./actions";
+import { calculate, toggleAdjudicator, toggleRound } from "./redux/actions";
 
 import { Create } from "./testHelpers/dsl";
 import { MockStore } from "redux-mock-store";
 import { Provider } from "react-redux";
 import React from "react";
 import { Scorrz } from "./Scorrz";
-import { State } from "./model/types";
+import { State } from "./redux/types";
 import { mount } from "enzyme";
-import { rootReducer } from "./rootReducer";
+import { reducer } from "./redux/reducer";
 
 const adjudicator1 = "Brendan O'Brian";
 const adjudicator2 = "Mary McElroy";
@@ -33,7 +33,7 @@ const getTestState = () =>
 
 const prepareStore = (state?: State): MockStore => {
 	state = state ?? getTestState();
-	const calculatedState = rootReducer(state, calculate());
+	const calculatedState = reducer(state, calculate());
 
 	return Create.store(calculatedState);
 };

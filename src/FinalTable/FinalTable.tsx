@@ -2,11 +2,11 @@ import {
 	ResultsTableStyled,
 	TableTitleStyled,
 	TableWrapperStyled,
-} from "@/Common/Table.styles";
+} from "@/common/Table.styles";
 
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";
-import { FinalTableRowView } from "@/model/types";
+import { FinalTableRowView } from "@/redux/types";
 import React from "react";
 
 interface FinalTableProps {

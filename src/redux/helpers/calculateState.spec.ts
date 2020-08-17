@@ -1,6 +1,6 @@
-import { HEAVY, LIGHT, SET } from "./testHelpers/StateBuilder";
+import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
 
-import { Create } from "./testHelpers/dsl";
+import { Create } from "@/testHelpers/dsl";
 import { calculateResultTables } from "./calculateState";
 
 describe("1 adjudicator, 1 competitor", () => {

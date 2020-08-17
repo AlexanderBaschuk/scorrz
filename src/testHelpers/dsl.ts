@@ -1,4 +1,4 @@
-import { State, initialState } from "@/model/types";
+import { State, initialState } from "@/redux/types";
 
 import { AdjudicatorResultsBuilder } from "./AdjudicatorResultsBuilder";
 import { StateBuilder } from "./StateBuilder";

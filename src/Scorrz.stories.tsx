@@ -1,4 +1,4 @@
-import { AdjudicatorTableRowView, FinalTableRowView } from "./model/types";
+import { AdjudicatorTableRowView, FinalTableRowView } from "./redux/types";
 import { number, object, text, withKnobs } from "@storybook/addon-knobs";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";

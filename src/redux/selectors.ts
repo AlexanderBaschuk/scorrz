@@ -1,4 +1,4 @@
-import { State } from "./model/types";
+import { State } from "./types";
 
 export const eventTitleSelector = (state: State) => state.eventTitle;
 

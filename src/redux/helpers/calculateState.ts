@@ -5,12 +5,12 @@ import {
 	CompetitorId,
 	FinalTableView,
 	State,
-} from "./model/types";
+} from "../types";
 import {
 	SumAndGrid,
 	calculateFinalResults,
 	calculateGridScores,
-} from "./Calculations/calculations";
+} from "../../calculations/calculations";
 
 export const calculateResultTables = (
 	state: State,
@@ -74,8 +74,7 @@ const calculateFinalTable = (
 	if (state.selectedAdjudicators.filter((a) => a === true).length <= 1)
 		return null;
 
-	if (state.selectedRounds.filter((a) => a === true).length === 0)
-		return null;
+	if (state.selectedRounds.filter((a) => a === true).length === 0) return null;
 
 	const allRequiredGrids = sumsAndGrids
 		.filter((_sg, i) => state.selectedAdjudicators[i] === true)

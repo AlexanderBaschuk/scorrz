@@ -8,8 +8,8 @@ import {
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
 	selectedRoundsSelector,
-} from "./Scorrz.selectors";
-import { calculate, toggleAdjudicator, toggleRound } from "./actions";
+} from "./redux/selectors";
+import { calculate, toggleAdjudicator, toggleRound } from "./redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";

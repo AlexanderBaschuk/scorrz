@@ -1,4 +1,4 @@
-import { GRID_SCORE_BG_COLOR } from "@/Common/Table.styles";
+import { GRID_SCORE_BG_COLOR } from "@/common/Table.styles";
 import styled from "@emotion/styled";
 
 export const FinalTableWrapperStyled = styled.div``;

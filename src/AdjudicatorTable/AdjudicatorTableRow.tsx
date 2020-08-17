@@ -1,4 +1,4 @@
-import { CompetitorId, Score } from "@/model/types";
+import { CompetitorId, Score } from "@/redux/types";
 import { TdGrid, TdSum } from "./AdjudicatorTable.styles";
 
 import React from "react";
