@@ -2,6 +2,8 @@ import React, { useCallback, useEffect } from "react";
 import {
 	adjudicatorTablesSelector,
 	adjudicatorsSelector,
+	competitionTitleSelector,
+	eventTitleSelector,
 	finalTableSelector,
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
@@ -12,8 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
+import { CompetitionPageTitle } from "./CompetitionTitle/CompetitionPageTitle";
 import { FinalTable } from "./FinalTable/FinalTable";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
+import { ScorrzStyled } from "./Scorrz.styles";
 
 export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
@@ -21,6 +25,8 @@ export const Scorrz: React.FC = () => {
 		dispatch(calculate());
 	}, [dispatch]);
 
+	const eventTitle = useSelector(eventTitleSelector);
+	const competitionTitle = useSelector(competitionTitleSelector);
 	const adjudicators = useSelector(adjudicatorsSelector);
 	const rounds = useSelector(roundsNamesSelector);
 	const selectedAdjudicators = useSelector(selectedAdjudicatorsSelector);
@@ -44,7 +50,11 @@ export const Scorrz: React.FC = () => {
 	);
 
 	return (
-		<>
+		<ScorrzStyled>
+			<CompetitionPageTitle
+				eventTitle={eventTitle}
+				competitionTitle={competitionTitle}
+			/>
 			<AdjudicatorSelection
 				adjudicators={adjudicators}
 				selectedAdjudicators={selectedAdjudicators}
@@ -68,6 +78,6 @@ export const Scorrz: React.FC = () => {
 					),
 			)}
 			{finalTable && <FinalTable results={finalTable.results} />}
-		</>
+		</ScorrzStyled>
 	);
 };

@@ -1,4 +1,5 @@
 import { CompetitorId, Score } from "@/model/types";
+import { TdGrid, TdPlace } from "./FinalTable.styles";
 
 import React from "react";
 
@@ -17,10 +18,10 @@ export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 }) => {
 	return (
 		<tr>
-			<td>{place}</td>
+			<TdPlace>{place}</TdPlace>
 			<td>{id}</td>
 			<td>{name}</td>
-			<td>{Math.round(gridSum * 100) / 100}</td>
+			<TdGrid>{Math.round(gridSum * 100) / 100}</TdGrid>
 		</tr>
 	);
 };

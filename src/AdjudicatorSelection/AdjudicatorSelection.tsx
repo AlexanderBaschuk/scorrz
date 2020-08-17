@@ -1,4 +1,10 @@
+import {
+	ControlPanelStyled,
+	ControlPanelTitleStyled,
+} from "@/Common/ControlPanel.styles";
+
 import { AdjudicatorSelectionButton } from "./AdjudicatorSelectionButton";
+import { ButtonGroupStyled } from "@/Common/Button.styles";
 import React from "react";
 
 export interface AdjudicatorSelectionProps {
@@ -13,16 +19,20 @@ export const AdjudicatorSelection: React.FC<AdjudicatorSelectionProps> = ({
 	toggleAdjudicator,
 }) => {
 	return (
-		<div>
-			{adjudicators.map((adj, id) => (
-				<AdjudicatorSelectionButton
-					key={id}
-					id={id}
-					onClick={toggleAdjudicator}
-				>
-					{adj + (selectedAdjudicators[id] ? "*" : "")}
-				</AdjudicatorSelectionButton>
-			))}
-		</div>
+		<ControlPanelStyled>
+			<ControlPanelTitleStyled>Adjudicators: </ControlPanelTitleStyled>
+			<ButtonGroupStyled data-testid="adjudicators-selection">
+				{adjudicators.map((adj, id) => (
+					<AdjudicatorSelectionButton
+						key={id}
+						id={id}
+						isSelected={selectedAdjudicators[id] === true}
+						onClick={toggleAdjudicator}
+					>
+						{adj}
+					</AdjudicatorSelectionButton>
+				))}
+			</ButtonGroupStyled>
+		</ControlPanelStyled>
 	);
 };

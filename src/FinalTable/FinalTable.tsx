@@ -1,7 +1,12 @@
+import {
+	ResultsTableStyled,
+	TableTitleStyled,
+	TableWrapperStyled,
+} from "@/Common/Table.styles";
+
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";
 import { FinalTableRowView } from "@/model/types";
-import { FinalTableWrapperStyled } from "./FinalTable.styles";
 import React from "react";
 
 interface FinalTableProps {
@@ -10,8 +15,9 @@ interface FinalTableProps {
 
 export const FinalTable: React.FC<FinalTableProps> = ({ results }) => {
 	return (
-		<FinalTableWrapperStyled>
-			<table>
+		<TableWrapperStyled data-testid="final-table">
+			<TableTitleStyled>Total</TableTitleStyled>
+			<ResultsTableStyled>
 				<thead>
 					<FinalTableHeader />
 				</thead>
@@ -20,7 +26,7 @@ export const FinalTable: React.FC<FinalTableProps> = ({ results }) => {
 						<FinalTableRow key={resultRow.id} {...resultRow} />
 					))}
 				</tbody>
-			</table>
-		</FinalTableWrapperStyled>
+			</ResultsTableStyled>
+		</TableWrapperStyled>
 	);
 };

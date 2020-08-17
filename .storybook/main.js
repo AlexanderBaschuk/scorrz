@@ -27,6 +27,7 @@ module.exports = {
 		return {
 			...config,
 			resolve: {
+				alias: { "@": ".." },
 				extensions: custom.resolve.extensions,
 			},
 			module: {

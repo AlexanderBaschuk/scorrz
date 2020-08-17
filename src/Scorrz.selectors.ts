@@ -1,5 +1,9 @@
 import { State } from "./model/types";
 
+export const eventTitleSelector = (state: State) => state.eventTitle;
+
+export const competitionTitleSelector = (state: State) => state.competitionTitle;
+
 export const adjudicatorsSelector = (state: State) => state.results.map(results => results.adjudicatorName);
 
 export const roundsNamesSelector = (state: State) => state.rounds.map(round => round.name);

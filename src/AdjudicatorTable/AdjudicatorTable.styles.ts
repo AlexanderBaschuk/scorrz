@@ -1,7 +1,19 @@
+import { GRID_SCORE_BG_COLOR, SCORE_SUM_BG_COLOR } from "@/Common/Table.styles";
+
 import styled from "@emotion/styled";
 
-export const AdjudicatorTableWrapperStyled = styled.div`
-	display: inline-block;
-	margin-right: 20px;
-	vertical-align: top;
+export const ThSum = styled.th`
+	background-color: ${SCORE_SUM_BG_COLOR};
+`;
+
+export const TdSum = styled.td`
+	background-color: ${SCORE_SUM_BG_COLOR};
+`;
+
+export const ThGrid = styled.th`
+	background-color: ${GRID_SCORE_BG_COLOR};
+`;
+
+export const TdGrid = styled.td`
+	background-color: ${GRID_SCORE_BG_COLOR};
 `;

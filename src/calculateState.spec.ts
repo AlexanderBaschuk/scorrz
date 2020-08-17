@@ -611,3 +611,95 @@ describe("2 of 3 rounds selected", () => {
 		]);
 	});
 });
+
+describe("No rounds selected", () => {
+	const prepareState = () =>
+		Create.state()
+			.withRounds([HEAVY, LIGHT, SET])
+			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
+			.withCompetitor({ id: "234", name: "Natasha", school: "Avalon" })
+			.withResults(
+				0,
+				Create.adjudicator()
+					.withResult("234", [60, 70, 50])
+					.withResult("123", [70, 50, 60]),
+			)
+			.withResults(
+				1,
+				Create.adjudicator()
+					.withResult("123", [50, 60, 70])
+					.withResult("234", [60, 60, 60.5]),
+			)
+			.withSelectedRounds([false, false, false]);
+
+	test("Has results by both adjudicators", () => {
+		const state = prepareState();
+		const [adjudicatorTables] = calculateResultTables(state);
+		expect(adjudicatorTables).toHaveLength(2);
+		expect(adjudicatorTables[0]).not.toBeNull();
+		expect(adjudicatorTables[1]).not.toBeNull();
+	});
+
+	test("Has no rounds in adjudicator results", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		expect(adjudicatorTables[0].rounds).toEqual([null, null, null]);
+		expect(adjudicatorTables[1].rounds).toEqual([null, null, null]);
+	});
+
+	test("Results by adjudicator1", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		const resultRows = adjudicatorTables[0].resultRows;
+		expect(resultRows).toEqual([
+			{
+				id: "123",
+				name: "Sasha",
+				scores: [null, null, null],
+				sum: 0,
+				gridScore: 87.5,
+			},
+			{
+				id: "234",
+				name: "Natasha",
+				scores: [null, null, null],
+				sum: 0,
+				gridScore: 87.5,
+			},
+		]);
+	});
+
+	test("Results by adjudicator2", () => {
+		const state = prepareState();
+
+		const [adjudicatorTables] = calculateResultTables(state);
+
+		const resultRows = adjudicatorTables[1].resultRows;
+		expect(resultRows).toEqual([
+			{
+				id: "123",
+				name: "Sasha",
+				scores: [null, null, null],
+				sum: 0,
+				gridScore: 87.5,
+			},
+			{
+				id: "234",
+				name: "Natasha",
+				scores: [null, null, null],
+				sum: 0,
+				gridScore: 87.5,
+			},
+		]);
+	});
+
+	test("Final results should be null", () => {
+		const state = prepareState();
+		const [_, finalTable] = calculateResultTables(state);
+		expect(finalTable).toBeNull();
+	});
+});
