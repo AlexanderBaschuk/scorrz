@@ -178,5 +178,5 @@ export const testInitialState: State = {
 	selectedRounds: [true, true, true],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
-	selectedCompetitors: ["230", null, "560", null, "10"],
+	selectedCompetitors: [null, null, null, null, null],
 };

@@ -102,7 +102,13 @@ export const Scorrz: React.FC = () => {
 						/>
 					),
 			)}
-			{finalTable && <FinalTable results={finalTable.results} />}
+			{finalTable && (
+				<FinalTable
+					results={finalTable.results}
+					getCompetitorSelectionIndex={getCompetitorSelectionIndex}
+					clickCompetitorRow={clickCompetitorRow}
+				/>
+			)}
 		</ScorrzStyled>
 	);
 };

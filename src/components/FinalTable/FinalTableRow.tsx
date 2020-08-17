@@ -1,13 +1,14 @@
-import { CompetitorId, Score } from "@/types";
-import { TdGrid, TdPlace } from "./FinalTable.styles";
-
-import React from "react";
+import { CellDecoration, TdStyled, TrClickable } from "../common/Table.styles";
+import { CompetitorId, CompetitorSelectionIndex, Score } from "@/types";
+import React, { useCallback } from "react";
 
 export interface FinalTableRowProps {
 	place: number;
 	id: CompetitorId;
 	name: string;
 	gridSum: Score;
+	selectionIndex: CompetitorSelectionIndex;
+	clickCompetitorRow?: (id: CompetitorId) => void;
 }
 
 export const FinalTableRow: React.FC<FinalTableRowProps> = ({
@@ -15,13 +16,30 @@ export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 	id,
 	name,
 	gridSum,
+	selectionIndex,
+	clickCompetitorRow,
 }) => {
+	const onClick = useCallback(() => {
+		clickCompetitorRow?.(id);
+	}, [clickCompetitorRow, id]);
+
 	return (
-		<tr>
-			<TdPlace>{place}</TdPlace>
-			<td>{id}</td>
-			<td>{name}</td>
-			<TdGrid>{Math.round(gridSum * 100) / 100}</TdGrid>
-		</tr>
+		<TrClickable onClick={onClick}>
+			<TdStyled selection={selectionIndex} decoration={CellDecoration.Place}>
+				{place}
+			</TdStyled>
+			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
+				{id}
+			</TdStyled>
+			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
+				{name}
+			</TdStyled>
+			<TdStyled
+				selection={selectionIndex}
+				decoration={CellDecoration.GridScore}
+			>
+				{Math.round(gridSum * 100) / 100}
+			</TdStyled>
+		</TrClickable>
 	);
 };

@@ -1,4 +1,9 @@
 import {
+	CompetitorId,
+	CompetitorSelectionIndex,
+	FinalTableRowView,
+} from "@/types";
+import {
 	ResultsTableStyled,
 	TableTitleStyled,
 	TableWrapperStyled,
@@ -6,14 +11,19 @@ import {
 
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";
-import { FinalTableRowView } from "@/types";
 import React from "react";
 
 interface FinalTableProps {
 	results: FinalTableRowView[];
+	getCompetitorSelectionIndex?: (id: CompetitorId) => CompetitorSelectionIndex;
+	clickCompetitorRow?: (CompetitorId) => void;
 }
 
-export const FinalTable: React.FC<FinalTableProps> = ({ results }) => {
+export const FinalTable: React.FC<FinalTableProps> = ({
+	results,
+	getCompetitorSelectionIndex,
+	clickCompetitorRow,
+}) => {
 	return (
 		<TableWrapperStyled data-testid="final-table">
 			<TableTitleStyled>Total</TableTitleStyled>
@@ -23,7 +33,15 @@ export const FinalTable: React.FC<FinalTableProps> = ({ results }) => {
 				</thead>
 				<tbody>
 					{results.map((resultRow) => (
-						<FinalTableRow key={resultRow.id} {...resultRow} />
+						<FinalTableRow
+							key={resultRow.id}
+							place={resultRow.place}
+							id={resultRow.id}
+							name={resultRow.name}
+							gridSum={resultRow.gridSum}
+							selectionIndex={getCompetitorSelectionIndex?.(resultRow.id) ?? null}
+							clickCompetitorRow={clickCompetitorRow}
+						/>
 					))}
 				</tbody>
 			</ResultsTableStyled>

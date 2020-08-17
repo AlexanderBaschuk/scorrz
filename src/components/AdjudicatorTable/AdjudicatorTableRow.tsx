@@ -30,6 +30,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 	const onClick = useCallback(() => {
 		clickCompetitorRow?.(id);
 	}, [clickCompetitorRow, id]);
+	
 	return (
 		<TrClickable onClick={onClick}>
 			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
