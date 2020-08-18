@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const custom = require("../webpack.config.js");
+const path = require("path");
 
 module.exports = {
 	stories: ["../src/**/*.stories.tsx"],
@@ -27,7 +28,7 @@ module.exports = {
 		return {
 			...config,
 			resolve: {
-				alias: { "@": ".." },
+				alias: { "@": path.resolve(__dirname, "../src")},
 				extensions: custom.resolve.extensions,
 			},
 			module: {
