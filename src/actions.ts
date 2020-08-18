@@ -1,5 +1,8 @@
+import { CompetitionResultsDto } from "./contracts";
 import { CompetitorId } from "./types";
 import { createAction } from "@reduxjs/toolkit";
+
+export const loadState = createAction<CompetitionResultsDto>("LOAD");
 
 export const calculate = createAction("CALCULATE");
 

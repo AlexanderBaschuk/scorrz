@@ -1,5 +1,7 @@
+import { State, initialState } from "./types";
 import {
-	calculate as calculateAction,
+	calculate,
+	loadState,
 	toggleAdjudicator,
 	toggleCompetitor,
 	toggleRound,
@@ -8,28 +10,26 @@ import {
 import { calculateResultTables } from "./helpers/calculateState";
 import { createReducer } from "@reduxjs/toolkit";
 import { loadStateFromDto } from "./helpers/loadState";
-import { testResultsDto } from "./testResultsDto";
 
-const testInitialState = loadStateFromDto(testResultsDto);
-
-export const reducer = createReducer(testInitialState, {
-	[calculateAction.type]: (state) => {
-		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
-		return state;
+export const reducer = createReducer(initialState, {
+	[loadState.type]: (_, action) => {
+		const state = loadStateFromDto(action.payload);
+		return calculateState(state);
+	},
+	[calculate.type]: (state) => {
+		return calculateState(state);
 	},
 	[toggleAdjudicator.type]: (state, action) => {
 		state.selectedAdjudicators[action.payload] = !state.selectedAdjudicators[
 			action.payload
 		];
-		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
-		return state;
+		return calculateState(state);
 	},
 	[toggleRound.type]: (state, action) => {
 		state.selectedRounds[action.payload] = !state.selectedRounds[
 			action.payload
 		];
-		[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
-		return state;
+		return calculateState(state);
 	},
 	[toggleCompetitor.type]: (state, action) => {
 		const competitorIndex = state.selectedCompetitors.findIndex(
@@ -49,3 +49,8 @@ export const reducer = createReducer(testInitialState, {
 		return state;
 	},
 });
+
+const calculateState = (state: State) => {
+	[state.adjudicatorTables, state.finalTable] = calculateResultTables(state);
+	return state;
+};

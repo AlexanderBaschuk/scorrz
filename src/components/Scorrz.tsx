@@ -12,7 +12,7 @@ import {
 	selectedRoundsSelector,
 } from "@/selectors";
 import {
-	calculate,
+	loadState,
 	toggleAdjudicator,
 	toggleCompetitor,
 	toggleRound,
@@ -25,11 +25,12 @@ import { CompetitionPageTitle } from "./CompetitionTitle/CompetitionPageTitle";
 import { FinalTable } from "./FinalTable/FinalTable";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
 import { ScorrzStyled } from "./Scorrz.styles";
+import { testResultsDto } from "@/testResultsDto";
 
 export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(calculate());
+		dispatch(loadState(testResultsDto));
 	}, [dispatch]);
 
 	const eventTitle = useSelector(eventTitleSelector);
