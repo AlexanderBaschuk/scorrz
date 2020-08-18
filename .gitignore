@@ -3,3 +3,6 @@ node_modules
 dist
 storybook-static
 yarn-error.log
+
+# stryker temp files
+.stryker-tmp
