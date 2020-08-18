@@ -1,7 +1,5 @@
-import { CompetitorId, State } from "./types";
-import { HEAVY, LIGHT, SET } from "./testHelpers/StateBuilder";
-
 import { Create } from "./testHelpers/dsl";
+import { State } from "./types";
 import { reducer } from "./reducer";
 import { toggleCompetitor } from "./actions";
 
