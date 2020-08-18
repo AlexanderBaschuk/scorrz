@@ -1,5 +1,7 @@
 import { CompetitorId, State } from "./types";
 
+export const loadingSelector = (state: State) => state.isLoading;
+
 export const eventTitleSelector = (state: State) => state.eventTitle;
 
 export const competitionTitleSelector = (state: State) => state.competitionTitle;

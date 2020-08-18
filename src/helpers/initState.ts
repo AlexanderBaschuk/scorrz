@@ -8,7 +8,8 @@ import {
 
 import { CompetitionResultsDto } from "@/contracts";
 
-export const loadStateFromDto = (dto: CompetitionResultsDto): State => ({
+export const initStateFromDto = (dto: CompetitionResultsDto): State => ({
+	isLoading: false,
 	eventTitle: dto.eventTitle,
 	competitionTitle: dto.competitionTitle,
 	rounds: dto.rounds.map(

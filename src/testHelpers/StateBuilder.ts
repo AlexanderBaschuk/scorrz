@@ -10,11 +10,12 @@ import {
 } from "@/types";
 
 export class StateBuilder implements State {
-	eventTitle: string = "";
-	competitionTitle: string = "";
-	rounds: Round[] = [];
-	competitors: Competitor[] = [];
-	results: AdjudicatorResults[] = [];
+	isLoading: boolean;
+	eventTitle: string;
+	competitionTitle: string;
+	rounds: Round[];
+	competitors: Competitor[];
+	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
 	selectedRounds: boolean[];
 
@@ -24,6 +25,7 @@ export class StateBuilder implements State {
 
 	constructor() {
 		Object.assign(this, JSON.parse(JSON.stringify(initialState)));
+		this.isLoading = false;
 	}
 
 	withRound = (value: Round) => {

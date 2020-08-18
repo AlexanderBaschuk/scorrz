@@ -55,6 +55,7 @@ export interface FinalTableRowView {
 }
 
 export interface State {
+	isLoading: boolean;
 	eventTitle: string;
 	competitionTitle: string;
 	rounds: Round[];
@@ -68,6 +69,7 @@ export interface State {
 }
 
 export const initialState: State = {
+	isLoading: true,
 	eventTitle: "",
 	competitionTitle: "",
 	rounds: [],

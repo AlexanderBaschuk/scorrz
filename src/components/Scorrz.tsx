@@ -6,6 +6,7 @@ import {
 	competitionTitleSelector,
 	eventTitleSelector,
 	finalTableSelector,
+	loadingSelector,
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
 	selectedCompetitorsSelector,
@@ -24,6 +25,7 @@ import { ScorrzStyled } from "./Scorrz.styles";
 export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
 
+	const isLoading = useSelector(loadingSelector);
 	const eventTitle = useSelector(eventTitleSelector);
 	const competitionTitle = useSelector(competitionTitleSelector);
 	const adjudicators = useSelector(adjudicatorsSelector);
@@ -64,7 +66,9 @@ export const Scorrz: React.FC = () => {
 		[dispatch],
 	);
 
-	return (
+	return isLoading ? (
+		<>Loading...</>
+	) : (
 		<ScorrzStyled>
 			<CompetitionPageTitle
 				eventTitle={eventTitle}
