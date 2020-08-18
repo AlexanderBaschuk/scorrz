@@ -1,5 +1,10 @@
 import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
-import { calculate, toggleAdjudicator, toggleRound } from "@/actions";
+import {
+	calculate,
+	toggleAdjudicator,
+	toggleCompetitor,
+	toggleRound,
+} from "@/actions";
 
 import { Create } from "@/testHelpers/dsl";
 import { MockStore } from "redux-mock-store";
@@ -121,4 +126,49 @@ describe("Scorrz", () => {
 			expect(finalTables.length).toBe(shouldDisplayFinalResults ? 1 : 0);
 		},
 	);
+
+	test.each`
+		cellIndex
+		${0}
+		${1}
+		${2}
+		${3}
+		${4}
+		${5}
+		${6}
+	`(
+		"Should select competitor in Adjudicator table by clicking on cell $cellIndex",
+		({ cellIndex }) => {
+			const state = getTestState();
+			const store = prepareStore(state);
+			const scorrz = mountScorrz(store);
+
+			const adjudicatorTable = scorrz.find('div[data-testid="adjudicator-table"]');
+			const tableCells = adjudicatorTable.find("td");
+			tableCells.at(cellIndex).simulate("click");
+
+			expect(store.getActions()).toEqual([toggleCompetitor("123")]);
+		},
+	);
+
+	test.each`
+	cellIndex
+	${0}
+	${1}
+	${2}
+	${3}
+`(
+	"Should select competitor in Final table by clicking on cell $cellIndex",
+	({ cellIndex }) => {
+		const state = getTestState();
+		const store = prepareStore(state);
+		const scorrz = mountScorrz(store);
+
+		const adjudicatorTable = scorrz.find('div[data-testid="final-table"]');
+		const tableCells = adjudicatorTable.find("td");
+		tableCells.at(cellIndex).simulate("click");
+
+		expect(store.getActions()).toEqual([toggleCompetitor("123")]);
+	},
+);
 });
