@@ -4,7 +4,7 @@ import { initResults } from "./actions";
 import { testResultsDto } from "./testResultsDto";
 
 function* loadResults() {
-	yield delay(1000);
+	yield delay(1000); // Just for presentation purposes
 	yield put(initResults(testResultsDto));
 }
 
