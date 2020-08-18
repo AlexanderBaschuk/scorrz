@@ -7,7 +7,10 @@ import {
 
 import { calculateResultTables } from "./helpers/calculateState";
 import { createReducer } from "@reduxjs/toolkit";
-import { testInitialState } from "./types";
+import { loadStateFromDto } from "./helpers/loadState";
+import { testResultsDto } from "./testResultsDto";
+
+const testInitialState = loadStateFromDto(testResultsDto);
 
 export const reducer = createReducer(testInitialState, {
 	[calculateAction.type]: (state) => {
