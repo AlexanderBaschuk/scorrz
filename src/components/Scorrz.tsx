@@ -1,5 +1,5 @@
 import { CompetitorId, CompetitorSelectionIndex } from "@/types";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import {
 	adjudicatorTablesSelector,
 	adjudicatorsSelector,
@@ -11,12 +11,7 @@ import {
 	selectedCompetitorsSelector,
 	selectedRoundsSelector,
 } from "@/selectors";
-import {
-	loadState,
-	toggleAdjudicator,
-	toggleCompetitor,
-	toggleRound,
-} from "@/actions";
+import { toggleAdjudicator, toggleCompetitor, toggleRound } from "@/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
@@ -25,13 +20,9 @@ import { CompetitionPageTitle } from "./CompetitionTitle/CompetitionPageTitle";
 import { FinalTable } from "./FinalTable/FinalTable";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
 import { ScorrzStyled } from "./Scorrz.styles";
-import { testResultsDto } from "@/testResultsDto";
 
 export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(loadState(testResultsDto));
-	}, [dispatch]);
 
 	const eventTitle = useSelector(eventTitleSelector);
 	const competitionTitle = useSelector(competitionTitleSelector);
