@@ -1,15 +1,18 @@
-import React, { useCallback, useEffect } from "react";
+import { CompetitorId, CompetitorSelectionIndex } from "@/types";
+import React, { useCallback } from "react";
 import {
 	adjudicatorTablesSelector,
 	adjudicatorsSelector,
 	competitionTitleSelector,
 	eventTitleSelector,
 	finalTableSelector,
+	loadingSelector,
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
+	selectedCompetitorsSelector,
 	selectedRoundsSelector,
 } from "@/selectors";
-import { calculate, toggleAdjudicator, toggleRound } from "@/actions";
+import { toggleAdjudicator, toggleCompetitor, toggleRound } from "@/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
@@ -21,10 +24,8 @@ import { ScorrzStyled } from "./Scorrz.styles";
 
 export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(calculate());
-	}, [dispatch]);
 
+	const isLoading = useSelector(loadingSelector);
 	const eventTitle = useSelector(eventTitleSelector);
 	const competitionTitle = useSelector(competitionTitleSelector);
 	const adjudicators = useSelector(adjudicatorsSelector);
@@ -34,6 +35,7 @@ export const Scorrz: React.FC = () => {
 
 	const adjudicatorTables = useSelector(adjudicatorTablesSelector);
 	const finalTable = useSelector(finalTableSelector);
+	const selectedCompetitors = useSelector(selectedCompetitorsSelector);
 
 	const toggleAdjudicatorInternal = useCallback(
 		(id: number | null) => {
@@ -49,7 +51,24 @@ export const Scorrz: React.FC = () => {
 		[dispatch],
 	);
 
-	return (
+	const getCompetitorSelectionIndex = useCallback(
+		(id: CompetitorId): CompetitorSelectionIndex => {
+			const index = selectedCompetitors.findIndex((value) => value === id);
+			return index >= 0 ? index : null;
+		},
+		[selectedCompetitors],
+	);
+
+	const clickCompetitorRow = useCallback(
+		(id: CompetitorId) => {
+			dispatch(toggleCompetitor(id));
+		},
+		[dispatch],
+	);
+
+	return isLoading ? (
+		<>Loading...</>
+	) : (
 		<ScorrzStyled>
 			<CompetitionPageTitle
 				eventTitle={eventTitle}
@@ -74,10 +93,18 @@ export const Scorrz: React.FC = () => {
 							selectedRounds={selectedRounds}
 							rounds={adjResults.rounds}
 							resultRows={adjResults.resultRows}
+							getCompetitorSelectionIndex={getCompetitorSelectionIndex}
+							clickCompetitorRow={clickCompetitorRow}
 						/>
 					),
 			)}
-			{finalTable && <FinalTable results={finalTable.results} />}
+			{finalTable && (
+				<FinalTable
+					results={finalTable.results}
+					getCompetitorSelectionIndex={getCompetitorSelectionIndex}
+					clickCompetitorRow={clickCompetitorRow}
+				/>
+			)}
 		</ScorrzStyled>
 	);
 };

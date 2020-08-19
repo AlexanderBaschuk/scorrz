@@ -1,4 +1,6 @@
-import { State } from "./types";
+import { CompetitorId, State } from "./types";
+
+export const loadingSelector = (state: State) => state.isLoading;
 
 export const eventTitleSelector = (state: State) => state.eventTitle;
 
@@ -19,3 +21,5 @@ export const selectedRoundsSelector = (state: State) => state.selectedRounds;
 export const adjudicatorTablesSelector = (state: State) => state.adjudicatorTables;
 
 export const finalTableSelector = (state: State) => state.finalTable;
+
+export const selectedCompetitorsSelector = (state: State) => state.selectedCompetitors;

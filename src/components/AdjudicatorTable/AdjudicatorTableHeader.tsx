@@ -1,5 +1,3 @@
-import { ThGrid, ThSum } from "./AdjudicatorTable.styles";
-
 import React from "react";
 
 interface AdjudicatorTableHeaderProps {
@@ -21,8 +19,8 @@ export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
 			{rounds.map(
 				(roundName, i) => selectedRounds[i] && <th key={i}>{roundName}</th>,
 			)}
-			{shouldShowSums && <ThSum>Sum</ThSum>}
-			{shouldShowGrids && <ThGrid>Grid</ThGrid>}
+			{shouldShowSums && <th>Sum</th>}
+			{shouldShowGrids && <th>Grid</th>}
 		</tr>
 	);
 };

@@ -1,7 +1,10 @@
-import { CompetitorId, Score } from "@/types";
-import { TdGrid, TdSum } from "./AdjudicatorTable.styles";
-
-import React from "react";
+import {
+	CellDecoration,
+	TdStyled,
+	TrClickable,
+} from "@/components/common/Table.styles";
+import { CompetitorId, CompetitorSelectionIndex, Score } from "@/types";
+import React, { useCallback } from "react";
 
 interface AdjudicatorTableRowProps {
 	id: CompetitorId;
@@ -12,6 +15,8 @@ interface AdjudicatorTableRowProps {
 	gridScore: Score;
 	shouldShowSums: boolean;
 	shouldShowGrids: boolean;
+	selectionIndex: CompetitorSelectionIndex;
+	clickCompetitorRow?: (id: CompetitorId) => void;
 }
 
 export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
@@ -23,14 +28,49 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 	gridScore,
 	shouldShowSums,
 	shouldShowGrids,
+	selectionIndex,
+	clickCompetitorRow,
 }) => {
+	const onClick = useCallback(() => {
+		clickCompetitorRow?.(id);
+	}, [clickCompetitorRow, id]);
+	
 	return (
-		<tr>
-			<td>{id}</td>
-			<td>{name}</td>
-			{scores.map((score, i) => selectedRounds[i] && <td key={i}>{score}</td>)}
-			{shouldShowSums && <TdSum>{sum}</TdSum>}
-			{shouldShowGrids && <TdGrid>{Math.round(gridScore * 100) / 100}</TdGrid>}
-		</tr>
+		<TrClickable onClick={onClick}>
+			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
+				{id}
+			</TdStyled>
+			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
+				{name}
+			</TdStyled>
+			{scores.map(
+				(score, i) =>
+					selectedRounds[i] && (
+						<TdStyled
+							selection={selectionIndex}
+							decoration={CellDecoration.None}
+							key={i}
+						>
+							{score}
+						</TdStyled>
+					),
+			)}
+			{shouldShowSums && (
+				<TdStyled
+					selection={selectionIndex}
+					decoration={CellDecoration.ScoreSum}
+				>
+					{sum}
+				</TdStyled>
+			)}
+			{shouldShowGrids && (
+				<TdStyled
+					selection={selectionIndex}
+					decoration={CellDecoration.GridScore}
+				>
+					{Math.round(gridScore * 100) / 100}
+				</TdStyled>
+			)}
+		</TrClickable>
 	);
 };

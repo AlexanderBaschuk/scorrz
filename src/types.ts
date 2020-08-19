@@ -2,6 +2,8 @@ export type CompetitorId = string;
 
 export type Score = number | undefined;
 
+export type CompetitorSelectionIndex = number | null;
+
 export interface Competitor {
 	id: CompetitorId;
 	name: string;
@@ -53,6 +55,7 @@ export interface FinalTableRowView {
 }
 
 export interface State {
+	isLoading: boolean;
 	eventTitle: string;
 	competitionTitle: string;
 	rounds: Round[];
@@ -62,9 +65,11 @@ export interface State {
 	selectedRounds: boolean[];
 	adjudicatorTables: AdjudicatorTableView[];
 	finalTable: FinalTableView;
+	selectedCompetitors: CompetitorId[];
 }
 
 export const initialState: State = {
+	isLoading: true,
 	eventTitle: "",
 	competitionTitle: "",
 	rounds: [],
@@ -74,104 +79,5 @@ export const initialState: State = {
 	selectedRounds: [],
 	adjudicatorTables: [],
 	finalTable: { results: [] },
-};
-
-export const testInitialState: State = {
-	eventTitle: "Moscow Feis 2020",
-	competitionTitle: "Preliminary championship, 15-20 yeas",
-	rounds: [
-		{ name: "Heavy", shortName: "H" },
-		{ name: "Light", shortName: "L" },
-		{ name: "Set", shortName: "S" },
-	],
-	competitors: [
-		{ id: "10", name: "Sasha", school: "SchoolName" },
-		{ id: "120", name: "John", school: "SchoolName" },
-		{ id: "230", name: "Paul", school: "SchoolName" },
-		{ id: "340", name: "Mike", school: "SchoolName" },
-		{ id: "450", name: "Sandra", school: "SchoolName" },
-		{ id: "560", name: "Laura", school: "SchoolName" },
-		{ id: "670", name: "Alex", school: "SchoolName" },
-	],
-	results: [
-		{
-			adjudicatorName: "Brendan O'Brian",
-			resultLines: [
-				{
-					competitorId: "10",
-					score: [74, 82, 77],
-				},
-				{
-					competitorId: "120",
-					score: [82, 75, 77],
-				},
-				{
-					competitorId: "560",
-					score: [77, 82, 74],
-				},
-				{
-					competitorId: "340",
-					score: [74, 77, 82],
-				},
-				{
-					competitorId: "670",
-					score: [82, 77, 75],
-				},
-				{
-					competitorId: "230",
-					score: [77, 75, 82],
-				},
-			],
-		},
-		{
-			adjudicatorName: "Mary McElroy",
-			resultLines: [
-				{
-					competitorId: "10",
-					score: [74, 82, 77],
-				},
-				{
-					competitorId: "120",
-					score: [82, 74, 77],
-				},
-				{
-					competitorId: "560",
-					score: [77, 82, 74],
-				},
-				{
-					competitorId: "230",
-					score: [74, 77, 82],
-				},
-				{
-					competitorId: "340",
-					score: [82, 77, 74],
-				},
-			],
-		},
-		{
-			adjudicatorName: "John Cullinane",
-			resultLines: [
-				{
-					competitorId: "10",
-					score: [74, 82, 77],
-				},
-				{
-					competitorId: "230",
-					score: [74, 77, 82],
-				},
-				{
-					competitorId: "670",
-					score: [82, 77, 75],
-				},
-				{
-					competitorId: "340",
-					score: [82, 77, 74],
-				},
-			],
-		},
-	],
-	selectedAdjudicators: [true, true, true],
-	selectedRounds: [true, true, true],
-	adjudicatorTables: [],
-	finalTable: { results: [] },
+	selectedCompetitors: [null, null, null, null, null],
 };
