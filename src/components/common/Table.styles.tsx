@@ -1,9 +1,6 @@
 import { CompetitorSelectionIndex } from "@/types";
 import styled from "@emotion/styled";
 
-export const SCORE_SUM_BG_COLOR = "#faffa0";
-export const GRID_SCORE_BG_COLOR = "#d0feff";
-
 enum CellFontColor {
 	ScoreSum = "#00a524",
 	GridScore = "#035cff",
@@ -74,11 +71,14 @@ export const TdStyled = styled.td<TdStyledProps>`
 `;
 
 const getFontColorStyle = (decoration: CellDecoration) => {
-	return decoration === CellDecoration.GridScore
-		? `color: ${CellFontColor.GridScore};`
-		: decoration === CellDecoration.ScoreSum
-		? `color: ${CellFontColor.ScoreSum};`
-		: undefined;
+	switch (decoration) {
+		case CellDecoration.ScoreSum:
+			return `color: ${CellFontColor.ScoreSum};`;
+		case CellDecoration.GridScore:
+			return `color: ${CellFontColor.GridScore};`;
+		default:
+			return undefined;
+	}
 };
 
 const getFontWeightStyle = (decoration: CellDecoration) => {
