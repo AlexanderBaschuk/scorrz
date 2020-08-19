@@ -7,11 +7,11 @@ enum CellFontColor {
 }
 
 export const SelectionColors = [
-	"#f6fd78", // yellow
-	"#bafeff", // cyan
-	"#ffe18d", // orange
-	"#a2f3a2", // green
-	"#fbcaf9", // pink
+	"#f6fd78",
+	"#bafeff",
+	"#ffe18d",
+	"#a2f3a2",
+	"#fbcaf9",
 ];
 
 export enum CellDecoration {
