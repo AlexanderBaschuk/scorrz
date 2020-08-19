@@ -1,4 +1,8 @@
-import { CellDecoration, TdStyled, TrClickable } from "../common/Table.styles";
+import {
+	CellDecoration,
+	TdStyled,
+	TrClickable,
+} from "@/components/common/Table.styles";
 import { CompetitorId, CompetitorSelectionIndex, Score } from "@/types";
 import React, { useCallback } from "react";
 
