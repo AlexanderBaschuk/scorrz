@@ -1,31 +1,32 @@
 name: Deploy to github pages
-  on:
-    push:
 
-  jobs:
-    build:
-      name: Build
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout branch
-          uses: actions/checkout@v2
+on:
+  push:
 
-        - name: Git branch
-          run: |
-            git config user.name "a.baschuk" && git config user.email "a.baschuk@dodopizza.com"
-            git checkout --orphan gh-pages
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
 
-        - name: Install modules
-          run: yarn
+      - name: Git branch
+        run: |
+          git config user.name "a.baschuk" && git config user.email "a.baschuk@dodopizza.com"
+          git checkout --orphan gh-pages
 
-        - name: Build bundle
-          run: yarn build-prod
+      - name: Install modules
+        run: yarn
 
-        - name: Git commit
-          run: |
-            git --work-tree dist add --all
-            git --work-tree dist commit -m gh-pages
-            git push origin HEAD:gh-pages --force
-            rm -r dist
-            git checkout -f master
-            git branch -D gh-pages
+      - name: Build bundle
+        run: yarn build-prod
+
+      - name: Git commit
+        run: |
+          git --work-tree dist add --all
+          git --work-tree dist commit -m gh-pages
+          git push origin HEAD:gh-pages --force
+          rm -r dist
+          git checkout -f master
+          git branch -D gh-pages
