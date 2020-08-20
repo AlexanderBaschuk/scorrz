@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
+      
+      - name: ls
+        uses: ls
 
       - name: Git branch
         run: |
@@ -20,7 +23,7 @@ jobs:
         run: yarn
 
       - name: Build bundle
-        run: yarn build-prod
+        run: yarn build
 
       - name: Git commit
         run: |
