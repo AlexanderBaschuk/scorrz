@@ -6,7 +6,7 @@
 	"license": "UNLICENSED",
 	"main": "index.js",
 	"scripts": {
-		"build": "yarn lint && webpack --mode development",
+		"build": "yarn lint && webpack --mode development --verbose",
 		"build-prod": "yarn lint && webpack --mode production",
 		"build-storybook": "build-storybook",
 		"lint": "eslint --ext .ts,.tsx --fix src/",
