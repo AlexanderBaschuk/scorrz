@@ -8,8 +8,8 @@ import {
 } from "@/types";
 import {
 	SumAndGrid,
-	calculateFinalResults,
 	calculateGridScores,
+	calculateFinalResults,
 } from "@/calc/calculations";
 
 export const calculateResultTables = (
