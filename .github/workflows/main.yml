@@ -8,18 +8,22 @@ jobs:
     name: Checkout
     runs-on: ubuntu-latest
     steps:
+
+  build:
+    name: Build & deploy
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout branch
         uses: actions/checkout@v2
 
       - name: Install modules
         run: yarn
 
-  build:
-    name: Build & deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build
+      - name: Build-prod
         run: yarn build-prod
+
+      - name: Test
+        run: yarn test
 
       - name: Commit (publish to gh-pages)
         run: |
@@ -32,11 +36,3 @@ jobs:
           # rm -r dist
           # git checkout -f master
           # git branch -D gh-pages
-
-  test:
-    name: Run tests
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
-      - name: Test
-        run: yarn test
