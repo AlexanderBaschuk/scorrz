@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
+import { AdjudicatorTableWrapper } from "./AdjudicatorTable/AdjudicatorTableWrapper";
 import { CompetitionPageTitle } from "./CompetitionTitle/CompetitionPageTitle";
 import { FinalTable } from "./FinalTable/FinalTable";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
@@ -75,7 +76,7 @@ export const Scorrz: React.FC = () => {
 	if (errorMessage !== undefined) {
 		return <>{errorMessage}</>;
 	}
-	
+
 	return (
 		<ScorrzStyled>
 			<CompetitionPageTitle
@@ -95,15 +96,7 @@ export const Scorrz: React.FC = () => {
 			{adjudicatorTables.map(
 				(adjResults, i) =>
 					adjResults && (
-						<AdjudicatorTable
-							key={i}
-							adjudicatorName={adjResults.adjudicatorName}
-							selectedRounds={selectedRounds}
-							rounds={adjResults.rounds}
-							resultRows={adjResults.resultRows}
-							getCompetitorSelectionIndex={getCompetitorSelectionIndex}
-							clickCompetitorRow={clickCompetitorRow}
-						/>
+						<AdjudicatorTableWrapper key={i} tableView={adjResults} />
 					),
 			)}
 			{finalTable && (
