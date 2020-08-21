@@ -1,7 +1,10 @@
 import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
+import {
+	adjudicatorTablesSelector,
+	finalTableSelector,
+} from "@/resultsSelectors";
 
 import { Create } from "@/testHelpers/dsl";
-import { calculateResultTables } from "./calculateState";
 
 describe("1 adjudicator, 1 competitor", () => {
 	const prepareState = () =>
@@ -12,14 +15,14 @@ describe("1 adjudicator, 1 competitor", () => {
 
 	test("Returns result for 1 adjudicator", () => {
 		const state = prepareState();
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 		expect(adjudicatorTables).toHaveLength(1);
 	});
 
 	test("Adjudicator results", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables[0].resultRows).toHaveLength(1);
 		expect(adjudicatorTables[0].resultRows[0]).toEqual({
@@ -33,7 +36,7 @@ describe("1 adjudicator, 1 competitor", () => {
 
 	test("Final results should be empty", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable).toBeNull();
 	});
 });
@@ -55,14 +58,14 @@ describe("1 adjudicator, 3 competitors", () => {
 
 	test("Returns result for 1 adjudicator", () => {
 		const state = prepareState();
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 		expect(adjudicatorTables).toHaveLength(1);
 	});
 
 	test("Adjudicator results", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows = adjudicatorTables[0].resultRows;
 		expect(resultRows).toHaveLength(3);
@@ -93,7 +96,7 @@ describe("1 adjudicator, 3 competitors", () => {
 
 	test("Final results should be empty", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable).toBeNull();
 	});
 });
@@ -119,14 +122,14 @@ describe("2 adjudicators, 2 competitors", () => {
 
 	test("Has results by both adjudicators", () => {
 		const state = prepareState();
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 		expect(adjudicatorTables).toHaveLength(2);
 	});
 
 	test("Results by adjudicator1", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 		const resultRows1 = adjudicatorTables[0].resultRows;
 
 		expect(resultRows1).toHaveLength(2);
@@ -151,7 +154,7 @@ describe("2 adjudicators, 2 competitors", () => {
 	test("Results by adjudicator2", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows2 = adjudicatorTables[1].resultRows;
 		expect(resultRows2).toHaveLength(2);
@@ -175,7 +178,7 @@ describe("2 adjudicators, 2 competitors", () => {
 
 	test("Final results", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable.results).toHaveLength(2);
 		expect(finalTable.results).toEqual([
 			{
@@ -207,7 +210,7 @@ test("Adjudicator names", () => {
 			Create.adjudicator().withName("Mary").withResult("123", [50, 60, 70]),
 		);
 
-	const [adjudicatorTables] = calculateResultTables(state);
+	const adjudicatorTables = adjudicatorTablesSelector(state);
 
 	expect(adjudicatorTables).toHaveLength(2);
 	expect(adjudicatorTables[0].adjudicatorName).toBe("Brian");
@@ -225,7 +228,7 @@ test("Non-existent competitor - calculates successfully with empty info fields",
 				.withResult("123", [70, 80, 60]),
 		);
 
-	const [adjudicatorTables] = calculateResultTables(state);
+	const adjudicatorTables = adjudicatorTablesSelector(state);
 	const resultRows = adjudicatorTables[0].resultRows;
 	expect(resultRows[0].name).toEqual("Sasha");
 	expect(resultRows[1].name).toEqual("");
@@ -244,7 +247,7 @@ describe("Only 1 adjudicator selected", () => {
 	test("Should return initial count of tables", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables).toHaveLength(3);
 		expect(adjudicatorTables[0]).toBeNull();
@@ -255,7 +258,7 @@ describe("Only 1 adjudicator selected", () => {
 	test("Results of selected adjudicator", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables[1].resultRows).toEqual([
 			{
@@ -270,7 +273,7 @@ describe("Only 1 adjudicator selected", () => {
 
 	test("Final results should be empty", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable).toBeNull();
 	});
 });
@@ -304,7 +307,7 @@ describe("2 of 3 adjudicators selected", () => {
 	test("Should return initial count of tables", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables).toHaveLength(3);
 		expect(adjudicatorTables[0]).not.toBeNull();
@@ -315,7 +318,7 @@ describe("2 of 3 adjudicators selected", () => {
 	test("Results of adjudicator 1", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables[0].resultRows).toEqual([
 			{
@@ -338,7 +341,7 @@ describe("2 of 3 adjudicators selected", () => {
 	test("Results of adjudicator 3", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables[2].resultRows).toEqual([
 			{
@@ -360,7 +363,7 @@ describe("2 of 3 adjudicators selected", () => {
 
 	test("Final results", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable.results).toEqual([
 			{
 				id: "123",
@@ -390,7 +393,7 @@ describe("No adjudicators selected", () => {
 	test("Should return initial count of empty tables", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables).toHaveLength(2);
 		expect(adjudicatorTables[0]).toBeNull();
@@ -399,7 +402,7 @@ describe("No adjudicators selected", () => {
 
 	test("Final results should be empty", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable).toBeNull();
 	});
 });
@@ -426,7 +429,7 @@ describe("Only 1 round selected", () => {
 
 	test("Has results by both adjudicators", () => {
 		const state = prepareState();
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 		expect(adjudicatorTables).toHaveLength(2);
 		expect(adjudicatorTables[0]).not.toBeNull();
 		expect(adjudicatorTables[1]).not.toBeNull();
@@ -435,7 +438,7 @@ describe("Only 1 round selected", () => {
 	test("Has only selected round in adjudicator results", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables[0].rounds).toEqual([null, "L", null]);
 	});
@@ -443,7 +446,7 @@ describe("Only 1 round selected", () => {
 	test("Results by adjudicator1", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows = adjudicatorTables[0].resultRows;
 		expect(resultRows).toEqual([
@@ -467,7 +470,7 @@ describe("Only 1 round selected", () => {
 	test("Results by adjudicator2", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows = adjudicatorTables[1].resultRows;
 		expect(resultRows).toEqual([
@@ -490,7 +493,7 @@ describe("Only 1 round selected", () => {
 
 	test("Final results", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable.results).toEqual([
 			{
 				id: "234",
@@ -530,7 +533,7 @@ describe("2 of 3 rounds selected", () => {
 
 	test("Has results by both adjudicators", () => {
 		const state = prepareState();
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 		expect(adjudicatorTables).toHaveLength(2);
 		expect(adjudicatorTables[0]).not.toBeNull();
 		expect(adjudicatorTables[1]).not.toBeNull();
@@ -539,7 +542,7 @@ describe("2 of 3 rounds selected", () => {
 	test("Has only selected rounds in adjudicator results", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables[0].rounds).toEqual(["H", null, "S"]);
 	});
@@ -547,7 +550,7 @@ describe("2 of 3 rounds selected", () => {
 	test("Results by adjudicator1", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows = adjudicatorTables[0].resultRows;
 		expect(resultRows).toEqual([
@@ -571,7 +574,7 @@ describe("2 of 3 rounds selected", () => {
 	test("Results by adjudicator2", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows = adjudicatorTables[1].resultRows;
 		expect(resultRows).toEqual([
@@ -594,7 +597,7 @@ describe("2 of 3 rounds selected", () => {
 
 	test("Final results", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable.results).toEqual([
 			{
 				id: "123",
@@ -634,7 +637,7 @@ describe("No rounds selected", () => {
 
 	test("Has results by both adjudicators", () => {
 		const state = prepareState();
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 		expect(adjudicatorTables).toHaveLength(2);
 		expect(adjudicatorTables[0]).not.toBeNull();
 		expect(adjudicatorTables[1]).not.toBeNull();
@@ -643,7 +646,7 @@ describe("No rounds selected", () => {
 	test("Has no rounds in adjudicator results", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		expect(adjudicatorTables[0].rounds).toEqual([null, null, null]);
 		expect(adjudicatorTables[1].rounds).toEqual([null, null, null]);
@@ -652,7 +655,7 @@ describe("No rounds selected", () => {
 	test("Results by adjudicator1", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows = adjudicatorTables[0].resultRows;
 		expect(resultRows).toEqual([
@@ -676,7 +679,7 @@ describe("No rounds selected", () => {
 	test("Results by adjudicator2", () => {
 		const state = prepareState();
 
-		const [adjudicatorTables] = calculateResultTables(state);
+		const adjudicatorTables = adjudicatorTablesSelector(state);
 
 		const resultRows = adjudicatorTables[1].resultRows;
 		expect(resultRows).toEqual([
@@ -699,7 +702,7 @@ describe("No rounds selected", () => {
 
 	test("Final results should be null", () => {
 		const state = prepareState();
-		const [_, finalTable] = calculateResultTables(state);
+		const finalTable = finalTableSelector(state);
 		expect(finalTable).toBeNull();
 	});
 });

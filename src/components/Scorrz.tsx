@@ -1,11 +1,13 @@
 import React, { useCallback } from "react";
 import {
 	adjudicatorTablesSelector,
+	finalTableSelector,
+} from "@/resultsSelectors";
+import {
 	adjudicatorsSelector,
 	competitionTitleSelector,
 	errorMessageSelector,
 	eventTitleSelector,
-	finalTableSelector,
 	loadingSelector,
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
