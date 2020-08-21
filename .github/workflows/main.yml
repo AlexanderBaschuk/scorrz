@@ -10,11 +10,8 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
-      
-      - name: ls
-        run: ls
 
-      - name: Git branch
+      - name: Git branch (gh-pages)
         run: |
           git config user.name "a.baschuk" && git config user.email "a.baschuk@dodopizza.com"
           git checkout --orphan gh-pages
@@ -22,10 +19,10 @@ jobs:
       - name: Install modules
         run: yarn
 
-      - name: Build bundle
+      - name: Build
         run: yarn build
 
-      - name: Git commit
+      - name: Commit (publish to gh-pages)
         run: |
           git --work-tree dist add --all
           git --work-tree dist commit -m gh-pages
