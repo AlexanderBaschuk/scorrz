@@ -5,17 +5,11 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build & deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
-
-      - name: Git branch (gh-pages)
-        run: |
-          git config user.name "a.baschuk" && git config user.email "a.baschuk@dodopizza.com"
-          git fetch
-          git checkout --orphan gh-pages
 
       - name: Install modules
         run: yarn
@@ -25,9 +19,19 @@ jobs:
 
       - name: Commit (publish to gh-pages)
         run: |
+          git config user.name "actions"
+          git fetch
+          git checkout --orphan gh-pages
           git --work-tree dist add --all
           git --work-tree dist commit -m gh-pages
           git push origin HEAD:gh-pages --force
-          rm -r dist
-          git checkout -f master
-          git branch -D gh-pages
+          # rm -r dist
+          # git checkout -f master
+          # git branch -D gh-pages
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        run: yarn test
