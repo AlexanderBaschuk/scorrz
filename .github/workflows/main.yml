@@ -4,13 +4,8 @@ on:
   push:
 
 jobs:
-  checkout:
-    name: Checkout
-    runs-on: ubuntu-latest
-    steps:
-
   build:
-    name: Build & deploy
+    name: Build, Test and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
