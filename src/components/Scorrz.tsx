@@ -1,4 +1,3 @@
-import { CompetitorId, CompetitorSelectionIndex } from "@/types";
 import React, { useCallback } from "react";
 import {
 	adjudicatorTablesSelector,
@@ -10,17 +9,15 @@ import {
 	loadingSelector,
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
-	selectedCompetitorsSelector,
 	selectedRoundsSelector,
 } from "@/selectors";
-import { toggleAdjudicator, toggleCompetitor, toggleRound } from "@/actions";
+import { toggleAdjudicator, toggleRound } from "@/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
-import { AdjudicatorTable } from "./AdjudicatorTable/AdjudicatorTable";
 import { AdjudicatorTableWrapper } from "./AdjudicatorTable/AdjudicatorTableWrapper";
 import { CompetitionPageTitle } from "./CompetitionTitle/CompetitionPageTitle";
-import { FinalTable } from "./FinalTable/FinalTable";
+import { FinalTableWrapper } from "./FinalTable/FinalTableWrapper";
 import { RoundsSelection } from "./RoundsSelection/RoundsSelection";
 import { ScorrzStyled } from "./Scorrz.styles";
 
@@ -38,7 +35,6 @@ export const Scorrz: React.FC = () => {
 
 	const adjudicatorTables = useSelector(adjudicatorTablesSelector);
 	const finalTable = useSelector(finalTableSelector);
-	const selectedCompetitors = useSelector(selectedCompetitorsSelector);
 
 	const toggleAdjudicatorInternal = useCallback(
 		(id: number | null) => {
@@ -50,21 +46,6 @@ export const Scorrz: React.FC = () => {
 	const toggleRoundInternal = useCallback(
 		(id: number | null) => {
 			dispatch(toggleRound(id));
-		},
-		[dispatch],
-	);
-
-	const getCompetitorSelectionIndex = useCallback(
-		(id: CompetitorId): CompetitorSelectionIndex => {
-			const index = selectedCompetitors.findIndex((value) => value === id);
-			return index >= 0 ? index : null;
-		},
-		[selectedCompetitors],
-	);
-
-	const clickCompetitorRow = useCallback(
-		(id: CompetitorId) => {
-			dispatch(toggleCompetitor(id));
 		},
 		[dispatch],
 	);
@@ -99,13 +80,7 @@ export const Scorrz: React.FC = () => {
 						<AdjudicatorTableWrapper key={i} tableView={adjResults} />
 					),
 			)}
-			{finalTable && (
-				<FinalTable
-					results={finalTable.results}
-					getCompetitorSelectionIndex={getCompetitorSelectionIndex}
-					clickCompetitorRow={clickCompetitorRow}
-				/>
-			)}
+			{finalTable && <FinalTableWrapper tableView={finalTable} />}
 		</ScorrzStyled>
 	);
 };
