@@ -1,6 +1,8 @@
-import { CompetitorId, State } from "./types";
+import { State } from "./types";
 
 export const loadingSelector = (state: State) => state.isLoading;
+
+export const errorMessageSelector = (state: State) => state.errorMessage;
 
 export const eventTitleSelector = (state: State) => state.eventTitle;
 

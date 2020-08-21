@@ -4,6 +4,7 @@ import {
 	adjudicatorTablesSelector,
 	adjudicatorsSelector,
 	competitionTitleSelector,
+	errorMessageSelector,
 	eventTitleSelector,
 	finalTableSelector,
 	loadingSelector,
@@ -26,6 +27,7 @@ export const Scorrz: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const isLoading = useSelector(loadingSelector);
+	const errorMessage = useSelector(errorMessageSelector);
 	const eventTitle = useSelector(eventTitleSelector);
 	const competitionTitle = useSelector(competitionTitleSelector);
 	const adjudicators = useSelector(adjudicatorsSelector);
@@ -66,9 +68,15 @@ export const Scorrz: React.FC = () => {
 		[dispatch],
 	);
 
-	return isLoading ? (
-		<>Loading...</>
-	) : (
+	if (isLoading) {
+		return <>Loading...</>;
+	}
+
+	if (errorMessage !== undefined) {
+		return <>{errorMessage}</>;
+	}
+	
+	return (
 		<ScorrzStyled>
 			<CompetitionPageTitle
 				eventTitle={eventTitle}

@@ -56,6 +56,7 @@ export interface FinalTableRowView {
 
 export interface State {
 	isLoading: boolean;
+	errorMessage?: string;
 	eventTitle: string;
 	competitionTitle: string;
 	rounds: Round[];
