@@ -7,7 +7,7 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "yarn lint && webpack --mode development",
-		"build-prod": "yarn lint && webpack --mode production",
+		"build-prod": "yarn lint && webpack --mode production --verbose",
 		"build-storybook": "build-storybook",
 		"lint": "eslint --ext .ts,.tsx --fix src/",
 		"start": "webpack-dev-server --mode=development --hot --open",

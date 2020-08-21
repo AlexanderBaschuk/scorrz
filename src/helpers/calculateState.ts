@@ -8,9 +8,9 @@ import {
 } from "@/types";
 import {
 	SumAndGrid,
-	calculateFinalResults,
 	calculateGridScores,
-} from "@/calculations/calculations";
+	calculateFinalResults,
+} from "@/calc/calculations";
 
 export const calculateResultTables = (
 	state: State,
