@@ -1,16 +1,16 @@
-import { AdjudicatorTableView, CompetitorId, CompetitorSelectionIndex } from "@/types";
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import {
 	ResultsTableStyled,
 	TableTitleStyled,
 	TableWrapperStyled,
 } from "@/components/common/Table.styles";
-import { roundsNamesSelector, selectedCompetitorsSelector, selectedRoundsSelector } from "@/selectors";
-import { useDispatch, useSelector } from "react-redux";
+import { roundsNamesSelector, selectedRoundsSelector } from "@/selectors";
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
-import { toggleCompetitor } from "@/actions";
+import { AdjudicatorTableView } from "@/types";
+import { useCompetitorSelection } from "../common/useCompetitorSelection";
+import { useSelector } from "react-redux";
 
 interface AdjudicatorTableWrapperProps {
 	tableView: AdjudicatorTableView;
@@ -19,11 +19,8 @@ interface AdjudicatorTableWrapperProps {
 export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = ({
 	tableView,
 }) => {
-	const dispatch = useDispatch();
-
 	const selectedRounds = useSelector(selectedRoundsSelector);
 	const rounds = useSelector(roundsNamesSelector);
-	const selectedCompetitors = useSelector(selectedCompetitorsSelector);
 
 	const shouldShowSums = useMemo(
 		() => selectedRounds.filter((isSelected) => isSelected).length > 1,
@@ -35,20 +32,10 @@ export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = (
 		[selectedRounds],
 	);
 
-	const getCompetitorSelectionIndex = useCallback(
-		(id: CompetitorId): CompetitorSelectionIndex => {
-			const index = selectedCompetitors.findIndex((value) => value === id);
-			return index >= 0 ? index : null;
-		},
-		[selectedCompetitors],
-	);
-
-	const clickCompetitorRow = useCallback(
-		(id: CompetitorId) => {
-			dispatch(toggleCompetitor(id));
-		},
-		[dispatch],
-	);
+	const {
+		getCompetitorSelectionIndex,
+		selectCompetitor,
+	} = useCompetitorSelection();
 
 	return (
 		<TableWrapperStyled data-testid="adjudicator-table">
@@ -75,7 +62,7 @@ export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = (
 							shouldShowSums={shouldShowSums}
 							shouldShowGrids={shouldShowGrids}
 							selectionIndex={getCompetitorSelectionIndex?.(row.id) ?? null}
-							clickCompetitorRow={clickCompetitorRow}
+							clickCompetitorRow={selectCompetitor}
 						/>
 					))}
 				</tbody>

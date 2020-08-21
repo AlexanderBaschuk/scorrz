@@ -1,20 +1,14 @@
 import {
-	CompetitorId,
-	CompetitorSelectionIndex,
-	FinalTableView,
-} from "@/types";
-import React, { useCallback } from "react";
-import {
 	ResultsTableStyled,
 	TableTitleStyled,
 	TableWrapperStyled,
 } from "@/components/common/Table.styles";
-import { useDispatch, useSelector } from "react-redux";
 
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";
-import { selectedCompetitorsSelector } from "@/selectors";
-import { toggleCompetitor } from "@/actions";
+import { FinalTableView } from "@/types";
+import React from "react";
+import { useCompetitorSelection } from "../common/useCompetitorSelection";
 
 interface FinalTableWrapperProps {
 	tableView: FinalTableView;
@@ -23,24 +17,10 @@ interface FinalTableWrapperProps {
 export const FinalTableWrapper: React.FC<FinalTableWrapperProps> = ({
 	tableView,
 }) => {
-	const dispatch = useDispatch();
-
-	const selectedCompetitors = useSelector(selectedCompetitorsSelector);
-
-	const getCompetitorSelectionIndex = useCallback(
-		(id: CompetitorId): CompetitorSelectionIndex => {
-			const index = selectedCompetitors.findIndex((value) => value === id);
-			return index >= 0 ? index : null;
-		},
-		[selectedCompetitors],
-	);
-
-	const clickCompetitorRow = useCallback(
-		(id: CompetitorId) => {
-			dispatch(toggleCompetitor(id));
-		},
-		[dispatch],
-	);
+	const {
+		getCompetitorSelectionIndex,
+		selectCompetitor,
+	} = useCompetitorSelection();
 
 	return (
 		<TableWrapperStyled data-testid="final-table">
@@ -60,7 +40,7 @@ export const FinalTableWrapper: React.FC<FinalTableWrapperProps> = ({
 							selectionIndex={
 								getCompetitorSelectionIndex?.(resultRow.id) ?? null
 							}
-							clickCompetitorRow={clickCompetitorRow}
+							clickCompetitorRow={selectCompetitor}
 						/>
 					))}
 				</tbody>
