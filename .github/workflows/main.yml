@@ -20,7 +20,7 @@ jobs:
         run: yarn
 
       - name: Build
-        run: yarn build
+        run: yarn build-prod
 
       - name: Commit (publish to gh-pages)
         run: |
