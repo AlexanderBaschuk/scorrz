@@ -1,15 +1,14 @@
-import { mount, shallow } from "enzyme";
-
 import { FinalTable } from "./FinalTable";
 import { FinalTableRowView } from "@/types";
 import React from "react";
+import { mount } from "enzyme";
 
 const getTableRowCells = (table, row: number) =>
 	table
 		.find("tr")
 		.at(row + 1) // First row is table header.
 		.find("td")
-		.map((td) => td.text());
+		.map((td) => td.text().trim());
 
 const competitorResults1: FinalTableRowView = {
 	id: "123",

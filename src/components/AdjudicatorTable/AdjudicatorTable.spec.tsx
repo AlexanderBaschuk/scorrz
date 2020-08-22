@@ -8,14 +8,14 @@ const getTableHeaderCells = (table) =>
 		.find("tr")
 		.at(0)
 		.find("th")
-		.map((th) => th.text());
+		.map((th) => th.text().trim());
 
 const getTableRowCells = (table, row: number) =>
 	table
 		.find("tr")
 		.at(row + 1) // First row is table header.
 		.find("td")
-		.map((td) => td.text());
+		.map((td) => td.text().trim());
 
 const rounds = ["H", "L", "S"];
 const adjudicatorName = "Brendan O'Brien";

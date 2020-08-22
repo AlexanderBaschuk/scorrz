@@ -6,6 +6,8 @@ import {
 import { CompetitorId, CompetitorSelectionIndex, Score } from "@/types";
 import React, { useCallback } from "react";
 
+import { alignByDecimal } from "@/helpers/alignment";
+
 interface AdjudicatorTableRowProps {
 	id: CompetitorId;
 	name: string;
@@ -34,7 +36,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 	const onClick = useCallback(() => {
 		clickCompetitorRow?.(id);
 	}, [clickCompetitorRow, id]);
-	
+
 	return (
 		<TrClickable onClick={onClick}>
 			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
@@ -47,11 +49,11 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 				(score, i) =>
 					selectedRounds[i] && (
 						<TdStyled
+							key={i}
 							selection={selectionIndex}
 							decoration={CellDecoration.None}
-							key={i}
 						>
-							{score}
+							{alignByDecimal(score, 2)}
 						</TdStyled>
 					),
 			)}
@@ -60,7 +62,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 					selection={selectionIndex}
 					decoration={CellDecoration.ScoreSum}
 				>
-					{sum}
+					{alignByDecimal(sum, 3)}
 				</TdStyled>
 			)}
 			{shouldShowGrids && (
@@ -68,7 +70,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 					selection={selectionIndex}
 					decoration={CellDecoration.GridScore}
 				>
-					{Math.round(gridScore * 100) / 100}
+					{alignByDecimal(Math.round(gridScore * 100) / 100, 3)}
 				</TdStyled>
 			)}
 		</TrClickable>

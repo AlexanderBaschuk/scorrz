@@ -6,6 +6,8 @@ import {
 import { CompetitorId, CompetitorSelectionIndex, Score } from "@/types";
 import React, { useCallback } from "react";
 
+import { alignByDecimal } from "@/helpers/alignment";
+
 export interface FinalTableRowProps {
 	place: number;
 	id: CompetitorId;
@@ -30,7 +32,7 @@ export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 	return (
 		<TrClickable onClick={onClick}>
 			<TdStyled selection={selectionIndex} decoration={CellDecoration.Place}>
-				{place}
+				{alignByDecimal(place, 2)}
 			</TdStyled>
 			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
 				{id}
@@ -42,7 +44,7 @@ export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 				selection={selectionIndex}
 				decoration={CellDecoration.GridScore}
 			>
-				{Math.round(gridSum * 100) / 100}
+				{alignByDecimal(Math.round(gridSum * 100) / 100, 3)}
 			</TdStyled>
 		</TrClickable>
 	);

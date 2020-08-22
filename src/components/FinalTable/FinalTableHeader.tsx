@@ -5,7 +5,7 @@ export const FinalTableHeader: React.FC = () => {
 		<tr>
 			<th>#</th>
 			<th colSpan={2}>Competitor</th>
-			<th>Grid score</th>
+			<th>Score</th>
 		</tr>
 	);
 };
