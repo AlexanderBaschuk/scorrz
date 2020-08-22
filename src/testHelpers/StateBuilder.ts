@@ -66,7 +66,7 @@ export class StateBuilder implements State {
 		return this;
 	};
 
-	please = () => ({ ...this });
+	please = (): State => ({ ...this });
 }
 
 export const HEAVY: Round = { name: "Heavy", shortName: "H" };
