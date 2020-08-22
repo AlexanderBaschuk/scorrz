@@ -4,6 +4,7 @@ export interface CompetitionResultsDto {
 	eventTitle: string;
 	competitionTitle: string;
 	rounds: RoundDto[];
+	roundGroups: RoundGroupDto[];
 	competitors: CompetitorDto[];
 	results: AdjudicatorResultsDto[];
 }
@@ -11,6 +12,11 @@ export interface CompetitionResultsDto {
 export interface RoundDto {
 	name: string;
 	shortName: string;
+}
+
+export interface RoundGroupDto {
+	name: string;
+	rounds: number[];
 }
 
 export interface CompetitorDto {
