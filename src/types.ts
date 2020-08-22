@@ -56,6 +56,7 @@ export interface FinalTableRowView {
 	place: number;
 	id: CompetitorId;
 	name: string;
+	school: string;
 	gridSum: Score;
 }
 

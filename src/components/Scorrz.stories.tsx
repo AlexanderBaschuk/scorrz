@@ -107,6 +107,7 @@ export const FinalTableStory: React.FC = () => {
 			place: i,
 			id: (100 + i).toString(),
 			name: "Competitor Name",
+			school: "Irish Dance School",
 			gridSum: 100 - i,
 		}),
 	);

@@ -15,7 +15,7 @@ import { FinalTableRow } from "./FinalTableRow";
 
 interface FinalTableProps {
 	results: FinalTableRowView[];
-	focusedCompetitor: CompetitorId;
+	focusedCompetitor?: CompetitorId;
 	getCompetitorSelectionIndex?: (id: CompetitorId) => CompetitorSelectionIndex;
 	clickCompetitorRow?: (CompetitorId) => void;
 	hoverCompetitorRow?: (CompetitorId) => void;
@@ -51,6 +51,7 @@ export const FinalTable: React.FC<FinalTableProps> = ({
 							place={resultRow.place}
 							id={resultRow.id}
 							name={resultRow.name}
+							school={resultRow.school}
 							gridSum={resultRow.gridSum}
 							selectionIndex={
 								getCompetitorSelectionIndex?.(resultRow.id) ?? null

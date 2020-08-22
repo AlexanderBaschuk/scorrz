@@ -184,12 +184,14 @@ describe("2 adjudicators, 2 competitors", () => {
 			{
 				id: "234",
 				name: "Natasha",
+				school: "Avalon",
 				gridSum: 87.5 + 100,
 				place: 1,
 			},
 			{
 				id: "123",
 				name: "Sasha",
+				school: "Trinity",
 				gridSum: 87.5 + 75,
 				place: 2,
 			},
@@ -368,12 +370,14 @@ describe("2 of 3 adjudicators selected", () => {
 			{
 				id: "123",
 				name: "Sasha",
+				school: "Trinity",
 				gridSum: 87.5 + 100,
 				place: 1,
 			},
 			{
 				id: "234",
 				name: "Natasha",
+				school: "Avalon",
 				gridSum: 87.5 + 75,
 				place: 2,
 			},
@@ -500,12 +504,14 @@ describe("Only 1 round selected", () => {
 			{
 				id: "234",
 				name: "Natasha",
+				school: "Avalon",
 				gridSum: 100 + 87.5,
 				place: 1,
 			},
 			{
 				id: "123",
 				name: "Sasha",
+				school: "Trinity",
 				gridSum: 75 + 87.5,
 				place: 2,
 			},
@@ -605,12 +611,14 @@ describe("Recall rounds selected", () => {
 			{
 				id: "234",
 				name: "Natasha",
+				school: "Avalon",
 				gridSum: 100 + 100,
 				place: 1,
 			},
 			{
 				id: "123",
 				name: "Sasha",
+				school: "Trinity",
 				gridSum: 75 + 75,
 				place: 2,
 			},

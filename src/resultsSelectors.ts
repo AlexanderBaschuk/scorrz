@@ -113,6 +113,7 @@ export const finalTableSelector = createSelector(
 			place: value.place,
 			id,
 			name: getCompetitorName(competitors, id),
+			school: getCompetitorSchool(competitors, id),
 			gridSum: value.gridSum,
 		})).sort((result1, result2) => {
 			const diff = result1.place - result2.place;
@@ -127,6 +128,9 @@ export const finalTableSelector = createSelector(
 
 const getCompetitorName = (competitors: Competitor[], id: CompetitorId) =>
 	getCompetitor(competitors, id)?.name ?? "";
+
+const getCompetitorSchool = (competitors: Competitor[], id: CompetitorId) =>
+	getCompetitor(competitors, id)?.school ?? "";
 
 const getCompetitor = (
 	competitors: Competitor[],

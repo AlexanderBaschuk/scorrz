@@ -13,6 +13,7 @@ const getTableRowCells = (table, row: number) =>
 const competitorResults1: FinalTableRowView = {
 	id: "123",
 	name: "Sasha",
+	school: "Trinity",
 	gridSum: 180,
 	place: 1,
 };
@@ -20,6 +21,7 @@ const competitorResults1: FinalTableRowView = {
 const competitorResults2: FinalTableRowView = {
 	id: "234",
 	name: "Natasha",
+	school: "Avalon",
 	gridSum: 150.5,
 	place: 2,
 };

@@ -12,6 +12,7 @@ export interface FinalTableRowProps {
 	place: number;
 	id: CompetitorId;
 	name: string;
+	school: string;
 	gridSum: Score;
 	selectionIndex: CompetitorSelectionIndex;
 	isFocused: boolean;
@@ -23,6 +24,7 @@ export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 	place,
 	id,
 	name,
+	school,
 	gridSum,
 	selectionIndex,
 	isFocused,
@@ -59,6 +61,13 @@ export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 				isFocused={isFocused}
 			>
 				{name}
+			</TdStyled>
+			<TdStyled
+				selection={selectionIndex}
+				decoration={CellDecoration.None}
+				isFocused={isFocused}
+			>
+				{school}
 			</TdStyled>
 			<TdStyled
 				selection={selectionIndex}
