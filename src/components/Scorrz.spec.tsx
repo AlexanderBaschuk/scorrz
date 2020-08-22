@@ -1,10 +1,5 @@
 import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
-import {
-	calculate,
-	toggleAdjudicator,
-	toggleCompetitor,
-	toggleRound,
-} from "@/actions";
+import { toggleAdjudicator, toggleCompetitor, toggleRound } from "@/actions";
 
 import { Create } from "@/testHelpers/dsl";
 import { MockStore } from "redux-mock-store";
@@ -37,10 +32,7 @@ const getTestState = () =>
 		.withSelectedAdjudicators([true, true]);
 
 const prepareStore = (state?: State): MockStore => {
-	state = state ?? getTestState();
-	const calculatedState = reducer(state, calculate());
-
-	return Create.store(calculatedState);
+	return Create.store(state ?? getTestState());
 };
 
 const mountScorrz = (store: MockStore) => {
@@ -143,7 +135,9 @@ describe("Scorrz", () => {
 			const store = prepareStore(state);
 			const scorrz = mountScorrz(store);
 
-			const adjudicatorTable = scorrz.find('div[data-testid="adjudicator-table"]');
+			const adjudicatorTable = scorrz.find(
+				'div[data-testid="adjudicator-table"]',
+			);
 			const tableCells = adjudicatorTable.find("td");
 			tableCells.at(cellIndex).simulate("click");
 
@@ -152,23 +146,23 @@ describe("Scorrz", () => {
 	);
 
 	test.each`
-	cellIndex
-	${0}
-	${1}
-	${2}
-	${3}
-`(
-	"Should select competitor in Final table by clicking on cell $cellIndex",
-	({ cellIndex }) => {
-		const state = getTestState();
-		const store = prepareStore(state);
-		const scorrz = mountScorrz(store);
+		cellIndex
+		${0}
+		${1}
+		${2}
+		${3}
+	`(
+		"Should select competitor in Final table by clicking on cell $cellIndex",
+		({ cellIndex }) => {
+			const state = getTestState();
+			const store = prepareStore(state);
+			const scorrz = mountScorrz(store);
 
-		const adjudicatorTable = scorrz.find('div[data-testid="final-table"]');
-		const tableCells = adjudicatorTable.find("td");
-		tableCells.at(cellIndex).simulate("click");
+			const adjudicatorTable = scorrz.find('div[data-testid="final-table"]');
+			const tableCells = adjudicatorTable.find("td");
+			tableCells.at(cellIndex).simulate("click");
 
-		expect(store.getActions()).toEqual([toggleCompetitor("123")]);
-	},
-);
+			expect(store.getActions()).toEqual([toggleCompetitor("123")]);
+		},
+	);
 });

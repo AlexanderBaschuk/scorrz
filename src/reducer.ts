@@ -1,6 +1,4 @@
-import { State, initialState } from "./types";
 import {
-	calculate,
 	initResultsFailure,
 	initResultsRequest,
 	initResultsSuccess,
@@ -11,6 +9,7 @@ import {
 
 import { createReducer } from "@reduxjs/toolkit";
 import { initStateFromDto } from "./helpers/initState";
+import { initialState } from "./types";
 
 export const reducer = createReducer(initialState, {
 	[initResultsRequest.type]: (state) => {
@@ -24,9 +23,6 @@ export const reducer = createReducer(initialState, {
 	[initResultsFailure.type]: (state, action) => {
 		state.isLoading = false;
 		state.errorMessage = action.payload;
-		return state;
-	},
-	[calculate.type]: (state) => {
 		return state;
 	},
 	[toggleAdjudicator.type]: (state, action) => {
