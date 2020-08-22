@@ -65,6 +65,8 @@ export class StateBuilder implements State {
 		this.selectedCompetitors = values;
 		return this;
 	};
+
+	please = () => ({ ...this });
 }
 
 export const HEAVY: Round = { name: "Heavy", shortName: "H" };

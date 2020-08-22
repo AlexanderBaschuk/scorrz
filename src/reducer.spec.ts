@@ -18,11 +18,11 @@ describe("toggleCompetitor", () => {
 	`(
 		"toggleCompetitor(). Given $initialSelection. When select competitor 999. Should get $expectedResult.",
 		({ initialSelection, expectedResult }) => {
-			let state: State = Create.state().withSelectedCompetitors(
-				initialSelection,
-			);
+			let state: State = Create.state()
+				.withSelectedCompetitors(initialSelection)
+				.please();
 
-			state = reducer(state, toggleCompetitor("999")) || state;
+			state = reducer(state, toggleCompetitor("999"));
 
 			expect(state.selectedCompetitors).toEqual(expectedResult);
 		},
