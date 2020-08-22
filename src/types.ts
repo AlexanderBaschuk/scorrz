@@ -72,6 +72,7 @@ export interface State {
 	selectedRound?: number;
 	selectedRoundGroup?: number;
 	selectedCompetitors: CompetitorId[];
+	focusedCompetitor?: CompetitorId;
 }
 
 export const initialState: State = {

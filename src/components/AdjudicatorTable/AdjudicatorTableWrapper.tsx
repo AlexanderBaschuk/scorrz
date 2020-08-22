@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
 	ResultsTableStyled,
 	TableTitleStyled,
@@ -34,13 +34,19 @@ export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = (
 
 	const {
 		getCompetitorSelectionIndex,
+		isFocused,
 		selectCompetitor,
+		hoverCompetitor,
 	} = useCompetitorSelection();
+
+	const unfocusCompetitor = useCallback(() => {
+		hoverCompetitor(undefined);
+	}, [hoverCompetitor]);
 
 	return (
 		<TableWrapperStyled data-testid="adjudicator-table">
 			<TableTitleStyled>{tableView.adjudicatorName}</TableTitleStyled>
-			<ResultsTableStyled>
+			<ResultsTableStyled onMouseLeave={unfocusCompetitor}>
 				<thead>
 					<AdjudicatorTableHeader
 						selectedRounds={selectedRounds}
@@ -62,7 +68,9 @@ export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = (
 							shouldShowSums={shouldShowSums}
 							shouldShowGrids={shouldShowGrids}
 							selectionIndex={getCompetitorSelectionIndex?.(row.id) ?? null}
+							isFocused={isFocused(row.id)}
 							clickCompetitorRow={selectCompetitor}
+							hoverCompetitorRow={hoverCompetitor}
 						/>
 					))}
 				</tbody>

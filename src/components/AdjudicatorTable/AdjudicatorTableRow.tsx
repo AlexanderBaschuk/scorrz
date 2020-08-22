@@ -18,7 +18,9 @@ interface AdjudicatorTableRowProps {
 	shouldShowSums: boolean;
 	shouldShowGrids: boolean;
 	selectionIndex: CompetitorSelectionIndex;
+	isFocused: boolean;
 	clickCompetitorRow?: (id: CompetitorId) => void;
+	hoverCompetitorRow?: (id: CompetitorId) => void;
 }
 
 export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
@@ -31,18 +33,24 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 	shouldShowSums,
 	shouldShowGrids,
 	selectionIndex,
+	isFocused,
 	clickCompetitorRow,
+	hoverCompetitorRow,
 }) => {
 	const onClick = useCallback(() => {
 		clickCompetitorRow?.(id);
 	}, [clickCompetitorRow, id]);
 
+	const onMouseMove = useCallback(() => {
+		hoverCompetitorRow?.(id);
+	}, [hoverCompetitorRow, id]);
+
 	return (
-		<TrClickable onClick={onClick}>
-			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
+		<TrClickable onClick={onClick} onMouseEnter={onMouseMove}>
+			<TdStyled selection={selectionIndex} decoration={CellDecoration.None} isFocused={isFocused}>
 				{id}
 			</TdStyled>
-			<TdStyled selection={selectionIndex} decoration={CellDecoration.None}>
+			<TdStyled selection={selectionIndex} decoration={CellDecoration.None} isFocused={isFocused}>
 				{name}
 			</TdStyled>
 			{scores.map(
@@ -52,6 +60,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 							key={i}
 							selection={selectionIndex}
 							decoration={CellDecoration.None}
+							isFocused={isFocused}
 						>
 							{alignByDecimal(score, 2)}
 						</TdStyled>
@@ -61,6 +70,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 				<TdStyled
 					selection={selectionIndex}
 					decoration={CellDecoration.ScoreSum}
+					isFocused={isFocused}
 				>
 					{alignByDecimal(sum, 3)}
 				</TdStyled>
@@ -69,6 +79,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 				<TdStyled
 					selection={selectionIndex}
 					decoration={CellDecoration.GridScore}
+					isFocused={isFocused}
 				>
 					{alignByDecimal(Math.round(gridScore * 100) / 100, 3)}
 				</TdStyled>

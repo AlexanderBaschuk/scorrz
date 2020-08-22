@@ -1,4 +1,5 @@
 import {
+	focusCompetitor,
 	initResultsFailure,
 	initResultsRequest,
 	initResultsSuccess,
@@ -49,5 +50,8 @@ export const reducer = createReducer(initialState, {
 			if (firstEmptyIndex >= 0)
 				state.selectedCompetitors[firstEmptyIndex] = action.payload;
 		}
+	},
+	[focusCompetitor.type]: (state, action) => {
+		state.focusedCompetitor = action.payload;
 	},
 });

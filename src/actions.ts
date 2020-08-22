@@ -15,3 +15,7 @@ export const selectRound = createAction<number>("SELECT_ROUND");
 export const selectRoundGroup = createAction<number>("SELECT_ROUND_GROUP");
 
 export const toggleCompetitor = createAction<CompetitorId>("TOGGLE_COMPETITOR");
+
+export const focusCompetitor = createAction<CompetitorId | undefined>(
+	"FOCUS_COMPETITOR",
+);

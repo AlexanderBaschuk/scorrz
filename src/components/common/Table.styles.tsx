@@ -14,6 +14,8 @@ export const SelectionColors = [
 	"#fbcaf9",
 ];
 
+export const FOCUS_COLOR = "#f0f0f0";
+
 export enum CellDecoration {
 	None = 0,
 	Place,
@@ -28,6 +30,7 @@ export interface TrProps {
 export interface TdStyledProps {
 	selection: CompetitorSelectionIndex;
 	decoration: CellDecoration;
+	isFocused?: boolean;
 }
 
 export const TableWrapperStyled = styled.div`
@@ -65,10 +68,19 @@ export const TrClickable = styled.tr`
 `;
 
 export const TdStyled = styled.td<TdStyledProps>`
-	background-color: ${(p) => SelectionColors[p.selection] ?? "none"};
+	background-color: ${(p) => getBackgroundColor(p.selection, p.isFocused)};
 	${(p) => getFontWeightStyle(p.decoration)}
 	${(p) => getFontColorStyle(p.decoration)}
 `;
+
+const getBackgroundColor = (
+	selection: CompetitorSelectionIndex,
+	isFocused?: boolean,
+): string => {
+	// TODO. Also change color of selected cells when focused;
+	if (SelectionColors[selection]) return SelectionColors[selection];
+	return isFocused ? FOCUS_COLOR : "none";
+};
 
 const getFontColorStyle = (decoration: CellDecoration) => {
 	switch (decoration) {
