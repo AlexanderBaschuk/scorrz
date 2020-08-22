@@ -41,16 +41,24 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 		clickCompetitorRow?.(id);
 	}, [clickCompetitorRow, id]);
 
-	const onMouseMove = useCallback(() => {
+	const onMouseEnter = useCallback(() => {
 		hoverCompetitorRow?.(id);
 	}, [hoverCompetitorRow, id]);
 
 	return (
-		<TrClickable onClick={onClick} onMouseEnter={onMouseMove}>
-			<TdStyled selection={selectionIndex} decoration={CellDecoration.None} isFocused={isFocused}>
+		<TrClickable onClick={onClick} onMouseEnter={onMouseEnter}>
+			<TdStyled
+				selection={selectionIndex}
+				decoration={CellDecoration.None}
+				isFocused={isFocused}
+			>
 				{id}
 			</TdStyled>
-			<TdStyled selection={selectionIndex} decoration={CellDecoration.None} isFocused={isFocused}>
+			<TdStyled
+				selection={selectionIndex}
+				decoration={CellDecoration.None}
+				isFocused={isFocused}
+			>
 				{name}
 			</TdStyled>
 			{scores.map(

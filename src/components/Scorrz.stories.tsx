@@ -1,10 +1,14 @@
-import { AdjudicatorTableRowView, FinalTableRowView } from "@/types";
+import {
+	AdjudicatorTableRowView,
+	CompetitorId,
+	FinalTableRowView,
+} from "@/types";
+import React, { useCallback } from "react";
 import { number, object, text, withKnobs } from "@storybook/addon-knobs";
 
 import { AdjudicatorSelection } from "@/components/AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "@/components/AdjudicatorTable/AdjudicatorTable";
 import { FinalTable } from "@/components/FinalTable/FinalTable";
-import React from "react";
 import { RoundsSelection } from "@/components/RoundsSelection/RoundsSelection";
 import { ScorrzStyled } from "./Scorrz.styles";
 import { action } from "@storybook/addon-actions";
@@ -33,12 +37,16 @@ export const AdjudicationSelectionStory: React.FC = () => {
 
 export const RoundsSelectionStory: React.FC = () => {
 	const rounds = ["heavy", "Light", "Set"];
+	const roundGroups = ["Recall", "Total"];
 	return (
 		<ScorrzStyled>
 			<RoundsSelection
 				rounds={rounds}
-				selectedRounds={object("selectedRounds", [false, true, false])}
-				selectRound={action("toggleRound")}
+				roundGroups={roundGroups}
+				selectedRound={number("selectedRound", 1)}
+				selectedRoundGroup={number("selectedRound", undefined)}
+				selectRound={action("selectRound")}
+				selectRoundGroup={action("selectRoundGroup")}
 			/>
 		</ScorrzStyled>
 	);
@@ -58,6 +66,23 @@ export const AdjudicatorTableStory: React.FC = () => {
 		}),
 	);
 
+	const getCompetitorSelectionIndex = useCallback((id: CompetitorId) => {
+		switch (id) {
+			case "100":
+				return 0;
+			case "102":
+				return 1;
+			case "103":
+				return 2;
+			case "105":
+				return 3;
+			case "106":
+				return 4;
+			default:
+				return null;
+		}
+	}, []);
+
 	return (
 		<ScorrzStyled>
 			<AdjudicatorTable
@@ -65,6 +90,10 @@ export const AdjudicatorTableStory: React.FC = () => {
 				selectedRounds={object("selectedRounds", [true, false, true])}
 				rounds={rounds}
 				resultRows={rows}
+				getCompetitorSelectionIndex={getCompetitorSelectionIndex}
+				focusedCompetitor={"109"}
+				clickCompetitorRow={action("clickCompetitorRow")}
+				hoverCompetitorRow={action("hoverCompetitorRow")}
 			/>
 		</ScorrzStyled>
 	);

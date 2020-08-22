@@ -10,6 +10,7 @@ import { useCallback } from "react";
 
 interface UseCompetitorSelectionResult {
 	getCompetitorSelectionIndex: (CompetitorId) => CompetitorSelectionIndex;
+	focusedCompetitor?: CompetitorId;
 	isFocused: (CompetitorId) => boolean;
 	selectCompetitor: (CompetitorId) => void;
 	hoverCompetitor: (CompetitorId?) => void;
@@ -49,5 +50,5 @@ export const useCompetitorSelection = (): UseCompetitorSelectionResult => {
 	);
 
 
-	return { getCompetitorSelectionIndex, isFocused, selectCompetitor, hoverCompetitor };
+	return { getCompetitorSelectionIndex, focusedCompetitor, isFocused, selectCompetitor, hoverCompetitor };
 };

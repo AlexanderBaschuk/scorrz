@@ -1,3 +1,4 @@
+import React, { useCallback } from "react";
 import {
 	ResultsTableStyled,
 	TableTitleStyled,
@@ -7,7 +8,6 @@ import {
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";
 import { FinalTableView } from "@/types";
-import React from "react";
 import { useCompetitorSelection } from "../common/useCompetitorSelection";
 
 interface FinalTableWrapperProps {
@@ -19,13 +19,19 @@ export const FinalTableWrapper: React.FC<FinalTableWrapperProps> = ({
 }) => {
 	const {
 		getCompetitorSelectionIndex,
+		isFocused,
 		selectCompetitor,
+		hoverCompetitor,
 	} = useCompetitorSelection();
+
+	const unfocusCompetitor = useCallback(() => {
+		hoverCompetitor(undefined);
+	}, [hoverCompetitor]);
 
 	return (
 		<TableWrapperStyled data-testid="final-table">
 			<TableTitleStyled>Total</TableTitleStyled>
-			<ResultsTableStyled>
+			<ResultsTableStyled onMouseLeave={unfocusCompetitor}>
 				<thead>
 					<FinalTableHeader />
 				</thead>
@@ -40,7 +46,9 @@ export const FinalTableWrapper: React.FC<FinalTableWrapperProps> = ({
 							selectionIndex={
 								getCompetitorSelectionIndex?.(resultRow.id) ?? null
 							}
+							isFocused={isFocused(resultRow.id)}
 							clickCompetitorRow={selectCompetitor}
+							hoverCompetitorRow={hoverCompetitor}
 						/>
 					))}
 				</tbody>
