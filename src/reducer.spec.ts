@@ -22,7 +22,7 @@ describe("toggleCompetitor", () => {
 				initialSelection,
 			);
 
-			state = reducer(state, toggleCompetitor("999"));
+			state = reducer(state, toggleCompetitor("999")) || state;
 
 			expect(state.selectedCompetitors).toEqual(expectedResult);
 		},
