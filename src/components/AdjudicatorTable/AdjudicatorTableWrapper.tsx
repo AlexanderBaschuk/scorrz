@@ -4,7 +4,11 @@ import {
 	TableTitleStyled,
 	TableWrapperStyled,
 } from "@/components/common/Table.styles";
-import { roundsNamesSelector, selectedRoundsSelector } from "@/selectors";
+import {
+	roundShortNamesSelector,
+	roundsNamesSelector,
+	selectedRoundsSelector,
+} from "@/selectors";
 
 import { AdjudicatorTableHeader } from "./AdjudicatorTableHeader";
 import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
@@ -20,7 +24,7 @@ export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = (
 	tableView,
 }) => {
 	const selectedRounds = useSelector(selectedRoundsSelector);
-	const rounds = useSelector(roundsNamesSelector);
+	const rounds = useSelector(roundShortNamesSelector);
 
 	const shouldShowSums = useMemo(
 		() => selectedRounds.filter((isSelected) => isSelected).length > 1,

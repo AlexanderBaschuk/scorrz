@@ -22,6 +22,10 @@ export const roundsNamesSelector = createSelector(roundsSelector, (rounds) =>
 	rounds.map((round) => round.name),
 );
 
+export const roundShortNamesSelector = createSelector(roundsSelector, (rounds) =>
+	rounds.map((round) => round.shortName),
+);
+
 export const roundGroupsSelector = (state: State) => state.roundGroups;
 
 export const roundGroupNamesSelector = createSelector(
