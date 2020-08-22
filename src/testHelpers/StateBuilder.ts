@@ -3,6 +3,7 @@ import {
 	Competitor,
 	CompetitorId,
 	Round,
+	RoundGroup,
 	State,
 	initialState,
 } from "@/types";
@@ -12,6 +13,7 @@ export class StateBuilder implements State {
 	eventTitle: string;
 	competitionTitle: string;
 	rounds: Round[];
+	roundGroups: RoundGroup[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];

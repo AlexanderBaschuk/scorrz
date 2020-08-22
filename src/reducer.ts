@@ -2,6 +2,7 @@ import {
 	initResultsFailure,
 	initResultsRequest,
 	initResultsSuccess,
+	selectRounds,
 	toggleAdjudicator,
 	toggleCompetitor,
 	toggleRound,
@@ -31,6 +32,12 @@ export const reducer = createReducer(initialState, {
 		state.selectedRounds[action.payload] = !state.selectedRounds[
 			action.payload
 		];
+	},
+	[selectRounds.type]: (state, action) => {
+		state.selectedRounds.fill(false);
+		action.payload.forEach(
+			(index) => (state.selectedRounds[index] = true),
+		);
 	},
 	[toggleCompetitor.type]: (state, action) => {
 		const competitorIndex = state.selectedCompetitors.findIndex(

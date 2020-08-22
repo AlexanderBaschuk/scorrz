@@ -12,4 +12,6 @@ export const toggleAdjudicator = createAction<number>("TOGGLE_ADJUDICATOR");
 
 export const toggleRound = createAction<number>("TOGGLE_ROUND");
 
+export const selectRounds = createAction<number[]>("SELECT_ROUNDS");
+
 export const toggleCompetitor = createAction<CompetitorId>("TOGGLE_COMPETITOR");

@@ -18,6 +18,8 @@ export const adjudicatorsSelector = createSelector(resultsSelector, (results) =>
 
 export const roundsSelector = (state: State) => state.rounds;
 
+export const roundGroupsSelector = (state: State) => state.roundGroups;
+
 export const roundsNamesSelector = createSelector(roundsSelector, (rounds) =>
 	rounds.map((round) => round.name),
 );
