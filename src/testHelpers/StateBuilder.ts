@@ -1,9 +1,7 @@
 import {
 	AdjudicatorResults,
-	AdjudicatorTableView,
 	Competitor,
 	CompetitorId,
-	FinalTableView,
 	Round,
 	State,
 	initialState,
@@ -18,9 +16,6 @@ export class StateBuilder implements State {
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
 	selectedRounds: boolean[];
-
-	adjudicatorTables: AdjudicatorTableView[];
-	finalTable: FinalTableView;
 	selectedCompetitors: CompetitorId[];
 
 	constructor() {
@@ -70,6 +65,8 @@ export class StateBuilder implements State {
 		this.selectedCompetitors = values;
 		return this;
 	};
+
+	please = (): State => ({ ...this });
 }
 
 export const HEAVY: Round = { name: "Heavy", shortName: "H" };

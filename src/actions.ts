@@ -8,8 +8,6 @@ export const initResultsSuccess = createAction<CompetitionResultsDto>(
 );
 export const initResultsFailure = createAction<string>("INIT_RESULTS_FAILURE");
 
-export const calculate = createAction("CALCULATE");
-
 export const toggleAdjudicator = createAction<number>("TOGGLE_ADJUDICATOR");
 
 export const toggleRound = createAction<number>("TOGGLE_ROUND");

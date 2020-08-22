@@ -64,8 +64,6 @@ export interface State {
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
 	selectedRounds: boolean[];
-	adjudicatorTables: AdjudicatorTableView[];
-	finalTable: FinalTableView;
 	selectedCompetitors: CompetitorId[];
 }
 
@@ -78,7 +76,5 @@ export const initialState: State = {
 	results: [],
 	selectedAdjudicators: [],
 	selectedRounds: [],
-	adjudicatorTables: [],
-	finalTable: { results: [] },
 	selectedCompetitors: [null, null, null, null, null],
 };
