@@ -9,15 +9,20 @@ import { RoundsSelectionButton } from "./RoundsSelectionButton";
 
 export interface RoundsSelectionProps {
 	rounds: string[];
+	roundGroups: string[];
 	selectedRound?: number;
 	selectedRoundGroup?: number;
-	toggleRound: (id: number) => void;
+	selectRound: (id: number) => void;
+	selectRoundGroup: (id: number) => void;
 }
 
 export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 	rounds,
+	roundGroups,
 	selectedRound,
-	toggleRound,
+	selectedRoundGroup,
+	selectRound,
+	selectRoundGroup,
 }) => {
 	return (
 		<ControlPanelStyled>
@@ -28,9 +33,19 @@ export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 						key={id}
 						id={id}
 						isSelected={selectedRound === id}
-						onClick={toggleRound}
+						onClick={selectRound}
 					>
 						{round}
+					</RoundsSelectionButton>
+				))}
+				{roundGroups.map((group, id) => (
+					<RoundsSelectionButton
+						key={id}
+						id={id}
+						isSelected={selectedRoundGroup === id}
+						onClick={selectRoundGroup}
+					>
+						{group}
 					</RoundsSelectionButton>
 				))}
 			</ButtonGroupStyled>

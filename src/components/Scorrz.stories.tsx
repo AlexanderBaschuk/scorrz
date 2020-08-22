@@ -38,7 +38,7 @@ export const RoundsSelectionStory: React.FC = () => {
 			<RoundsSelection
 				rounds={rounds}
 				selectedRounds={object("selectedRounds", [false, true, false])}
-				toggleRound={action("toggleRound")}
+				selectRound={action("toggleRound")}
 			/>
 		</ScorrzStyled>
 	);
