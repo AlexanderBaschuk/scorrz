@@ -33,9 +33,9 @@ describe("AdjudicatorTable", () => {
 		);
 
 		const competitorRow1 = getTableRowCells(table, 0);
-		expect(competitorRow1).toEqual(["1", "123", "Sasha", "180"]);
+		expect(competitorRow1).toEqual(["1", "123", "Sasha", "Trinity", "180"]);
 
 		const competitorRow2 = getTableRowCells(table, 1);
-		expect(competitorRow2).toEqual(["2", "234", "Natasha", "150.5"]);
+		expect(competitorRow2).toEqual(["2", "234", "Natasha", "Avalon", "150.5"]);
 	});
 });
