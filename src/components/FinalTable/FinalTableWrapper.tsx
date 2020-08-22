@@ -5,6 +5,7 @@ import {
 	TableWrapperStyled,
 } from "@/components/common/Table.styles";
 
+import { FinalTable } from "./FinalTable";
 import { FinalTableHeader } from "./FinalTableHeader";
 import { FinalTableRow } from "./FinalTableRow";
 import { FinalTableView } from "@/types";
@@ -19,40 +20,18 @@ export const FinalTableWrapper: React.FC<FinalTableWrapperProps> = ({
 }) => {
 	const {
 		getCompetitorSelectionIndex,
-		isFocused,
+		focusedCompetitor,
 		selectCompetitor,
 		hoverCompetitor,
 	} = useCompetitorSelection();
 
-	const unfocusCompetitor = useCallback(() => {
-		hoverCompetitor(undefined);
-	}, [hoverCompetitor]);
-
 	return (
-		<TableWrapperStyled data-testid="final-table">
-			<TableTitleStyled>Total</TableTitleStyled>
-			<ResultsTableStyled onMouseLeave={unfocusCompetitor}>
-				<thead>
-					<FinalTableHeader />
-				</thead>
-				<tbody>
-					{tableView.results.map((resultRow) => (
-						<FinalTableRow
-							key={resultRow.id}
-							place={resultRow.place}
-							id={resultRow.id}
-							name={resultRow.name}
-							gridSum={resultRow.gridSum}
-							selectionIndex={
-								getCompetitorSelectionIndex?.(resultRow.id) ?? null
-							}
-							isFocused={isFocused(resultRow.id)}
-							clickCompetitorRow={selectCompetitor}
-							hoverCompetitorRow={hoverCompetitor}
-						/>
-					))}
-				</tbody>
-			</ResultsTableStyled>
-		</TableWrapperStyled>
+		<FinalTable
+			results={tableView.results}
+			focusedCompetitor={focusedCompetitor}
+			getCompetitorSelectionIndex={getCompetitorSelectionIndex}
+			clickCompetitorRow={selectCompetitor}
+			hoverCompetitorRow={hoverCompetitor}
+		/>
 	);
 };

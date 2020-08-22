@@ -3,12 +3,12 @@ import {
 	CompetitorId,
 	FinalTableRowView,
 } from "@/types";
-import React, { useCallback } from "react";
 import { number, object, text, withKnobs } from "@storybook/addon-knobs";
 
 import { AdjudicatorSelection } from "@/components/AdjudicatorSelection/AdjudicatorSelection";
 import { AdjudicatorTable } from "@/components/AdjudicatorTable/AdjudicatorTable";
 import { FinalTable } from "@/components/FinalTable/FinalTable";
+import React from "react";
 import { RoundsSelection } from "@/components/RoundsSelection/RoundsSelection";
 import { ScorrzStyled } from "./Scorrz.styles";
 import { action } from "@storybook/addon-actions";
@@ -16,6 +16,23 @@ import { action } from "@storybook/addon-actions";
 export default {
 	title: "Results table",
 	decorators: [withKnobs],
+};
+
+const getCompetitorSelectionIndex = (id: CompetitorId) => {
+	switch (id) {
+		case "100":
+			return 0;
+		case "102":
+			return 1;
+		case "103":
+			return 2;
+		case "105":
+			return 3;
+		case "106":
+			return 4;
+		default:
+			return null;
+	}
 };
 
 export const AdjudicationSelectionStory: React.FC = () => {
@@ -66,23 +83,6 @@ export const AdjudicatorTableStory: React.FC = () => {
 		}),
 	);
 
-	const getCompetitorSelectionIndex = useCallback((id: CompetitorId) => {
-		switch (id) {
-			case "100":
-				return 0;
-			case "102":
-				return 1;
-			case "103":
-				return 2;
-			case "105":
-				return 3;
-			case "106":
-				return 4;
-			default:
-				return null;
-		}
-	}, []);
-
 	return (
 		<ScorrzStyled>
 			<AdjudicatorTable
@@ -113,7 +113,13 @@ export const FinalTableStory: React.FC = () => {
 
 	return (
 		<ScorrzStyled>
-			<FinalTable results={rows} />
+			<FinalTable
+				results={rows}
+				getCompetitorSelectionIndex={getCompetitorSelectionIndex}
+				focusedCompetitor={"109"}
+				clickCompetitorRow={action("clickCompetitorRow")}
+				hoverCompetitorRow={action("hoverCompetitorRow")}
+			/>
 		</ScorrzStyled>
 	);
 };
