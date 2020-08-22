@@ -17,7 +17,8 @@ export class StateBuilder implements State {
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
-	selectedRounds: boolean[];
+	selectedRound?: number;
+	selectedRoundGroup?: number;
 	selectedCompetitors: CompetitorId[];
 
 	constructor() {
@@ -27,13 +28,16 @@ export class StateBuilder implements State {
 
 	withRound = (value: Round) => {
 		this.rounds.push(value);
-		this.selectedRounds.push(true);
 		return this;
 	};
 
 	withRounds = (values: Round[]) => {
 		this.rounds.push(...values);
-		this.selectedRounds.push(...values.map((_) => true));
+		return this;
+	};
+
+	withRoundGroups = (values: RoundGroup[]) => {
+		this.roundGroups.push(...values);
 		return this;
 	};
 
@@ -58,8 +62,13 @@ export class StateBuilder implements State {
 		return this;
 	};
 
-	withSelectedRounds = (values: boolean[]) => {
-		this.selectedRounds = values;
+	withSelectedRound = (value: number) => {
+		this.selectedRound = value;
+		return this;
+	};
+
+	withSelectedRoundGroup = (value: number) => {
+		this.selectedRoundGroup = value;
 		return this;
 	};
 
@@ -74,3 +83,6 @@ export class StateBuilder implements State {
 export const HEAVY: Round = { name: "Heavy", shortName: "H" };
 export const LIGHT: Round = { name: "Light", shortName: "L" };
 export const SET: Round = { name: "Set", shortName: "S" };
+
+export const RECALL: RoundGroup = { name: "Recall", rounds: [0, 1] };
+export const TOTAL: RoundGroup = { name: "total", rounds: [0, 1, 2] };

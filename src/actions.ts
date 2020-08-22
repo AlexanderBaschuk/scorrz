@@ -10,8 +10,8 @@ export const initResultsFailure = createAction<string>("INIT_RESULTS_FAILURE");
 
 export const toggleAdjudicator = createAction<number>("TOGGLE_ADJUDICATOR");
 
-export const toggleRound = createAction<number>("TOGGLE_ROUND");
+export const selectRound = createAction<number>("SELECT_ROUND");
 
-export const selectRounds = createAction<number[]>("SELECT_ROUNDS");
+export const selectRoundGroup = createAction<number[]>("SELECT_ROUND_GROUP");
 
 export const toggleCompetitor = createAction<CompetitorId>("TOGGLE_COMPETITOR");

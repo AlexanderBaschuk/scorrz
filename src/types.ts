@@ -69,7 +69,8 @@ export interface State {
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
-	selectedRounds: boolean[];
+	selectedRound?: number;
+	selectedRoundGroup?: number;
 	selectedCompetitors: CompetitorId[];
 }
 
@@ -85,6 +86,7 @@ export const initialState: State = {
 	competitors: [],
 	results: [],
 	selectedAdjudicators: [],
-	selectedRounds: [],
+	selectedRound: undefined,
+	selectedRoundGroup: 1,
 	selectedCompetitors: [null, null, null, null, null],
 };

@@ -11,9 +11,10 @@ import {
 	loadingSelector,
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
-	selectedRoundsSelector,
+	selectedRoundGroupSelector,
+	selectedRoundSelector,
 } from "@/selectors";
-import { toggleAdjudicator, toggleRound } from "@/actions";
+import { selectRound, toggleAdjudicator } from "@/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
@@ -33,7 +34,8 @@ export const Scorrz: React.FC = () => {
 	const adjudicators = useSelector(adjudicatorsSelector);
 	const rounds = useSelector(roundsNamesSelector);
 	const selectedAdjudicators = useSelector(selectedAdjudicatorsSelector);
-	const selectedRounds = useSelector(selectedRoundsSelector);
+	const selectedRoundGroup = useSelector(selectedRoundGroupSelector);
+	const selectedRound = useSelector(selectedRoundSelector);
 
 	const adjudicatorTables = useSelector(adjudicatorTablesSelector);
 	const finalTable = useSelector(finalTableSelector);
@@ -47,7 +49,7 @@ export const Scorrz: React.FC = () => {
 
 	const toggleRoundInternal = useCallback(
 		(id: number | null) => {
-			dispatch(toggleRound(id));
+			dispatch(selectRound(id));
 		},
 		[dispatch],
 	);
@@ -73,7 +75,8 @@ export const Scorrz: React.FC = () => {
 			/>
 			<RoundsSelection
 				rounds={rounds}
-				selectedRounds={selectedRounds}
+				selectedRound={selectedRound}
+				selectedRoundGroup={selectedRoundGroup}
 				toggleRound={toggleRoundInternal}
 			/>
 			{adjudicatorTables.map(

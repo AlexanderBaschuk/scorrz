@@ -29,7 +29,25 @@ export const competitorsSelector = (state: State) => state.competitors;
 export const selectedAdjudicatorsSelector = (state: State) =>
 	state.selectedAdjudicators;
 
-export const selectedRoundsSelector = (state: State) => state.selectedRounds;
+export const selectedRoundSelector = (state: State) => state.selectedRound;
+
+export const selectedRoundGroupSelector = (state: State) =>
+	state.selectedRoundGroup;
+
+export const selectedRoundsSelector = createSelector(
+		roundsSelector,
+		roundGroupsSelector,
+		selectedRoundSelector,
+		selectedRoundGroupSelector,
+		(rounds, roundGroups, selectedRound, selectedRoundGroup) => {
+			if (selectedRoundGroup !== undefined)
+				return rounds.map((_, i) =>
+					roundGroups[selectedRoundGroup].rounds.includes(i),
+				);
+
+			return rounds.map((_, i) => selectedRound === i);
+		},
+	);
 
 export const selectedCompetitorsSelector = (state: State) =>
 	state.selectedCompetitors;

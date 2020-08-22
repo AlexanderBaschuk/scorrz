@@ -9,13 +9,14 @@ import { RoundsSelectionButton } from "./RoundsSelectionButton";
 
 export interface RoundsSelectionProps {
 	rounds: string[];
-	selectedRounds: boolean[];
+	selectedRound?: number;
+	selectedRoundGroup?: number;
 	toggleRound: (id: number) => void;
 }
 
 export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 	rounds,
-	selectedRounds,
+	selectedRound,
 	toggleRound,
 }) => {
 	return (
@@ -26,7 +27,7 @@ export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
 					<RoundsSelectionButton
 						key={id}
 						id={id}
-						isSelected={selectedRounds[id] === true}
+						isSelected={selectedRound === id}
 						onClick={toggleRound}
 					>
 						{round}
