@@ -8,44 +8,32 @@ import React from "react";
 import { RoundsSelectionButton } from "./RoundsSelectionButton";
 
 export interface RoundsSelectionProps {
+	title: string;
+	isCumulative: boolean;
 	rounds: string[];
-	roundGroups: string[];
 	selectedRound?: number;
-	selectedRoundGroup?: number;
 	selectRound: (id: number) => void;
-	selectRoundGroup: (id: number) => void;
 }
 
 export const RoundsSelection: React.FC<RoundsSelectionProps> = ({
+	title,
+	isCumulative,
 	rounds,
-	roundGroups,
 	selectedRound,
-	selectedRoundGroup,
 	selectRound,
-	selectRoundGroup,
 }) => {
 	return (
 		<ControlPanelStyled>
-			<ControlPanelTitleStyled>Rounds: </ControlPanelTitleStyled>
+			<ControlPanelTitleStyled>{title}</ControlPanelTitleStyled>
 			<ButtonGroupStyled data-testid="rounds-selection">
 				{rounds.map((round, id) => (
 					<RoundsSelectionButton
 						key={id}
 						id={id}
-						isSelected={selectedRound === id}
+						isSelected={isCumulative ? id <= selectedRound : id === selectedRound}
 						onClick={selectRound}
 					>
 						{round}
-					</RoundsSelectionButton>
-				))}
-				{roundGroups.map((group, id) => (
-					<RoundsSelectionButton
-						key={id}
-						id={id}
-						isSelected={selectedRoundGroup === id}
-						onClick={selectRoundGroup}
-					>
-						{group}
 					</RoundsSelectionButton>
 				))}
 			</ButtonGroupStyled>

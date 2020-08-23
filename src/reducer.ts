@@ -3,8 +3,8 @@ import {
 	initResultsFailure,
 	initResultsRequest,
 	initResultsSuccess,
+	selectChampionshipRound,
 	selectRound,
-	selectRoundGroup,
 	toggleAdjudicator,
 	toggleCompetitor,
 } from "./actions";
@@ -31,10 +31,10 @@ export const reducer = createReducer(initialState, {
 	},
 	[selectRound.type]: (state, action) => {
 		state.selectedRound = action.payload;
-		state.selectedRoundGroup = undefined;
+		state.selectedChampionshipRound = undefined;
 	},
-	[selectRoundGroup.type]: (state, action) => {
-		state.selectedRoundGroup = action.payload;
+	[selectChampionshipRound.type]: (state, action) => {
+		state.selectedChampionshipRound = action.payload;
 		state.selectedRound = undefined;
 	},
 	[toggleCompetitor.type]: (state, action) => {

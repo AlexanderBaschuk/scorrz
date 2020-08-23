@@ -12,7 +12,9 @@ export const toggleAdjudicator = createAction<number>("TOGGLE_ADJUDICATOR");
 
 export const selectRound = createAction<number>("SELECT_ROUND");
 
-export const selectRoundGroup = createAction<number>("SELECT_ROUND_GROUP");
+export const selectChampionshipRound = createAction<number>(
+	"SELECT_CHAMPIONSHIP_ROUND",
+);
 
 export const toggleCompetitor = createAction<CompetitorId>("TOGGLE_COMPETITOR");
 

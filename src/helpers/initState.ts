@@ -3,7 +3,6 @@ import {
 	Competitor,
 	ResultLine,
 	Round,
-	RoundGroup,
 	State,
 } from "@/types";
 
@@ -16,9 +15,6 @@ export const initStateFromDto = (dto: CompetitionResultsDto): State => ({
 	rounds: dto.rounds?.map(
 		(r): Round => ({ name: r.name, shortName: r.shortName }),
 	) ?? [{ name: "", shortName: "" }],
-	roundGroups: dto.roundGroups?.map(
-		(rg): RoundGroup => ({ name: rg.name, rounds: rg.rounds }),
-	) ?? [{ name: "Total", rounds: dto.rounds?.map((_, i) => i) ?? [] }],
 	competitors:
 		dto.competitors?.map(
 			(c): Competitor => ({ id: c.id, name: c.name, school: c.school }),
@@ -36,6 +32,6 @@ export const initStateFromDto = (dto: CompetitionResultsDto): State => ({
 	),
 	selectedAdjudicators: dto.results?.map((_) => true),
 	selectedRound: undefined,
-	selectedRoundGroup: dto.roundGroups ? dto.roundGroups.length - 1 : 0,
+	selectedChampionshipRound: dto.roundGroups ? dto.roundGroups.length - 1 : 0,
 	selectedCompetitors: [null, null, null, null, null],
 });

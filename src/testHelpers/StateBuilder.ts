@@ -3,7 +3,6 @@ import {
 	Competitor,
 	CompetitorId,
 	Round,
-	RoundGroup,
 	State,
 	initialState,
 } from "@/types";
@@ -13,12 +12,11 @@ export class StateBuilder implements State {
 	eventTitle: string;
 	competitionTitle: string;
 	rounds: Round[];
-	roundGroups: RoundGroup[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
 	selectedRound?: number;
-	selectedRoundGroup?: number;
+	selectedChampionshipRound?: number;
 	selectedCompetitors: CompetitorId[];
 
 	constructor() {
@@ -33,11 +31,6 @@ export class StateBuilder implements State {
 
 	withRounds = (values: Round[]) => {
 		this.rounds.push(...values);
-		return this;
-	};
-
-	withRoundGroups = (values: RoundGroup[]) => {
-		this.roundGroups.push(...values);
 		return this;
 	};
 
@@ -64,11 +57,13 @@ export class StateBuilder implements State {
 
 	withSelectedRound = (value: number) => {
 		this.selectedRound = value;
+		this.selectedChampionshipRound = undefined;
 		return this;
 	};
 
-	withSelectedRoundGroup = (value: number) => {
-		this.selectedRoundGroup = value;
+	withSelectedChampionshipRound = (value: number) => {
+		this.selectedChampionshipRound = value;
+		this.selectedRound = undefined;
 		return this;
 	};
 
@@ -83,6 +78,3 @@ export class StateBuilder implements State {
 export const HEAVY: Round = { name: "Heavy", shortName: "H" };
 export const LIGHT: Round = { name: "Light", shortName: "L" };
 export const SET: Round = { name: "Set", shortName: "S" };
-
-export const RECALL: RoundGroup = { name: "Recall", rounds: [0, 1] };
-export const TOTAL: RoundGroup = { name: "total", rounds: [0, 1, 2] };

@@ -1,4 +1,4 @@
-import { HEAVY, LIGHT, RECALL, SET, TOTAL } from "@/testHelpers/StateBuilder";
+import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
 import {
 	adjudicatorTablesSelector,
 	finalTableSelector,
@@ -10,6 +10,7 @@ describe("1 adjudicator, 1 competitor", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
+			.withSelectedChampionshipRound(2)
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withResults(0, Create.adjudicator().withResult("123", [75, 80, 65]));
 
@@ -45,6 +46,7 @@ describe("1 adjudicator, 3 competitors", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
+			.withSelectedChampionshipRound(2)
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withCompetitor({ id: "234", name: "Natasha", school: "Avalon" })
 			.withCompetitor({ id: "345", name: "Boris", school: "Ceim Oir" })
@@ -105,6 +107,7 @@ describe("2 adjudicators, 2 competitors", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
+			.withSelectedChampionshipRound(2)
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withCompetitor({ id: "234", name: "Natasha", school: "Avalon" })
 			.withResults(
@@ -202,6 +205,7 @@ describe("2 adjudicators, 2 competitors", () => {
 test("Adjudicator names", () => {
 	const state = Create.state()
 		.withRounds([HEAVY, LIGHT, SET])
+		.withSelectedChampionshipRound(2)
 		.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 		.withResults(
 			0,
@@ -222,6 +226,7 @@ test("Adjudicator names", () => {
 test("Non-existent competitor - calculates successfully with empty info fields", () => {
 	const state = Create.state()
 		.withRounds([HEAVY, LIGHT, SET])
+		.withSelectedChampionshipRound(2)
 		.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 		.withResults(
 			0,
@@ -240,6 +245,7 @@ describe("Only 1 adjudicator selected", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
+			.withSelectedChampionshipRound(2)
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withResults(0, Create.adjudicator().withResult("123", [70, 50, 60]))
 			.withResults(1, Create.adjudicator().withResult("123", [50, 60, 70]))
@@ -284,6 +290,7 @@ describe("2 of 3 adjudicators selected", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
+			.withSelectedChampionshipRound(2)
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withCompetitor({ id: "234", name: "Natasha", school: "Avalon" })
 			.withResults(
@@ -389,6 +396,7 @@ describe("No adjudicators selected", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
+			.withSelectedChampionshipRound(2)
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withResults(0, Create.adjudicator().withResult("123", [70, 50, 60]))
 			.withResults(1, Create.adjudicator().withResult("123", [50, 60, 70]))
@@ -411,11 +419,10 @@ describe("No adjudicators selected", () => {
 	});
 });
 
-describe("Only 1 round selected", () => {
+describe("Single round selected", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
-			.withRoundGroups([RECALL, TOTAL])
 			.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 			.withCompetitor({ id: "234", name: "Natasha", school: "Avalon" })
 			.withResults(
@@ -430,8 +437,7 @@ describe("Only 1 round selected", () => {
 					.withResult("123", [50, 60, 70])
 					.withResult("234", [60, 60, 60.5]),
 			)
-			.withSelectedRound(1)
-			.withSelectedRoundGroup(undefined);
+			.withSelectedRound(1);
 
 	test("Has results by both adjudicators", () => {
 		const state = prepareState();
@@ -497,29 +503,14 @@ describe("Only 1 round selected", () => {
 		]);
 	});
 
-	test("Final results", () => {
+	test("Final results should be empty", () => {
 		const state = prepareState();
 		const finalTable = finalTableSelector(state);
-		expect(finalTable.results).toEqual([
-			{
-				id: "234",
-				name: "Natasha",
-				school: "Avalon",
-				gridSum: 100 + 87.5,
-				place: 1,
-			},
-			{
-				id: "123",
-				name: "Sasha",
-				school: "Trinity",
-				gridSum: 75 + 87.5,
-				place: 2,
-			},
-		]);
+		expect(finalTable).toBeNull();
 	});
 });
 
-describe("Recall rounds selected", () => {
+describe("Championship first round selected", () => {
 	const prepareState = () =>
 		Create.state()
 			.withRounds([HEAVY, LIGHT, SET])
@@ -538,7 +529,7 @@ describe("Recall rounds selected", () => {
 					.withResult("234", [60, 60, 60.5]),
 			)
 			.withSelectedRound(undefined)
-			.withSelectedRoundGroup(0);
+			.withSelectedChampionshipRound(1);
 
 	test("Has results by both adjudicators", () => {
 		const state = prepareState();
@@ -548,7 +539,7 @@ describe("Recall rounds selected", () => {
 		expect(adjudicatorTables[1]).not.toBeNull();
 	});
 
-	test("Has only selected rounds in adjudicator results", () => {
+	test("Has only selected round in adjudicator results", () => {
 		const state = prepareState();
 
 		const adjudicatorTables = adjudicatorTablesSelector(state);
@@ -645,7 +636,7 @@ describe("No rounds selected", () => {
 					.withResult("234", [60, 60, 60.5]),
 			)
 			.withSelectedRound(undefined)
-			.withSelectedRoundGroup(undefined);
+			.withSelectedChampionshipRound(undefined);
 
 	test("Has results by both adjudicators", () => {
 		const state = prepareState();

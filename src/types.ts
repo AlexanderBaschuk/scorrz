@@ -19,11 +19,6 @@ export interface Round {
 	shortName: string;
 }
 
-export interface RoundGroup {
-	name: string;
-	rounds: number[];
-}
-
 export interface ResultLine {
 	competitorId: CompetitorId;
 	score: number[];
@@ -66,12 +61,11 @@ export interface State {
 	eventTitle: string;
 	competitionTitle: string;
 	rounds: Round[];
-	roundGroups: RoundGroup[];
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
 	selectedRound?: number;
-	selectedRoundGroup?: number;
+	selectedChampionshipRound?: number;
 	selectedCompetitors: CompetitorId[];
 	focusedCompetitor?: CompetitorId;
 }
@@ -81,14 +75,10 @@ export const initialState: State = {
 	eventTitle: "",
 	competitionTitle: "",
 	rounds: [],
-	roundGroups: [
-		{ name: "Recall", rounds: [0, 1] },
-		{ name: "Total", rounds: [0, 1, 2] },
-	],
 	competitors: [],
 	results: [],
 	selectedAdjudicators: [],
 	selectedRound: undefined,
-	selectedRoundGroup: 1,
+	selectedChampionshipRound: 1,
 	selectedCompetitors: [null, null, null, null, null],
 };

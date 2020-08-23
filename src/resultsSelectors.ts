@@ -16,6 +16,7 @@ import {
 	resultsSelector,
 	roundsSelector,
 	selectedAdjudicatorsSelector,
+	selectedChampionshipRoundSelector,
 	selectedRoundsSelector,
 } from "./selectors";
 
@@ -86,18 +87,18 @@ export const adjudicatorTablesSelector = createSelector(
 
 export const finalTableSelector = createSelector(
 	selectedAdjudicatorsSelector,
-	selectedRoundsSelector,
+	selectedChampionshipRoundSelector,
 	competitorsSelector,
 	sumsAndGridsSelector,
 	(
 		selectedAdjudicators,
-		selectedRounds,
+		selectedChampionshipRound,
 		competitors,
 		sumsAndGrids,
 	): FinalTableView => {
 		if (selectedAdjudicators.filter((a) => a === true).length <= 1) return null;
 
-		if (selectedRounds.filter((a) => a === true).length === 0) return null;
+		if (selectedChampionshipRound === undefined) return null;
 
 		const allRequiredGrids = sumsAndGrids
 			.filter((_sg, i) => selectedAdjudicators[i] === true)

@@ -1,4 +1,4 @@
-import { HEAVY, LIGHT, RECALL, SET, TOTAL } from "@/testHelpers/StateBuilder";
+import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
 import { selectRound, toggleAdjudicator, toggleCompetitor } from "@/actions";
 
 import { Create } from "@/testHelpers/dsl";
@@ -15,7 +15,6 @@ const adjudicator2 = "Mary McElroy";
 const getTestState = () =>
 	Create.state()
 		.withRounds([HEAVY, LIGHT, SET])
-		.withRoundGroups([RECALL, TOTAL])
 		.withCompetitor({ id: "123", name: "Sasha", school: "Trinity" })
 		.withResults(
 			0,

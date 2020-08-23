@@ -22,15 +22,9 @@ export const roundsNamesSelector = createSelector(roundsSelector, (rounds) =>
 	rounds.map((round) => round.name),
 );
 
-export const roundShortNamesSelector = createSelector(roundsSelector, (rounds) =>
-	rounds.map((round) => round.shortName),
-);
-
-export const roundGroupsSelector = (state: State) => state.roundGroups;
-
-export const roundGroupNamesSelector = createSelector(
-	roundGroupsSelector,
-	(groups) => groups.map((group) => group.name),
+export const roundShortNamesSelector = createSelector(
+	roundsSelector,
+	(rounds) => rounds.map((round) => round.shortName),
 );
 
 export const competitorsSelector = (state: State) => state.competitors;
@@ -40,19 +34,16 @@ export const selectedAdjudicatorsSelector = (state: State) =>
 
 export const selectedRoundSelector = (state: State) => state.selectedRound;
 
-export const selectedRoundGroupSelector = (state: State) =>
-	state.selectedRoundGroup;
+export const selectedChampionshipRoundSelector = (state: State) =>
+	state.selectedChampionshipRound;
 
 export const selectedRoundsSelector = createSelector(
 	roundsSelector,
-	roundGroupsSelector,
 	selectedRoundSelector,
-	selectedRoundGroupSelector,
-	(rounds, roundGroups, selectedRound, selectedRoundGroup) => {
-		if (selectedRoundGroup !== undefined)
-			return rounds.map((_, i) =>
-				roundGroups[selectedRoundGroup].rounds.includes(i),
-			);
+	selectedChampionshipRoundSelector,
+	(rounds, selectedRound, selectedChampionshipRound) => {
+		if (selectedChampionshipRound !== undefined)
+			return rounds.map((_, i) => i <= selectedChampionshipRound);
 
 		return rounds.map((_, i) => selectedRound === i);
 	},
