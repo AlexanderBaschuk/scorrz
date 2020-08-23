@@ -15,10 +15,6 @@
 			"shortName": "S"
 		}
 	],
-	"roundGroups": [
-		{ "name": "Recall", "rounds": [0, 1] },
-		{ "name": "Total", "rounds": [0, 1, 2] }
-	],
 	"competitors": [
 		{
 			"id": "125",

@@ -32,6 +32,6 @@ export const initStateFromDto = (dto: CompetitionResultsDto): State => ({
 	),
 	selectedAdjudicators: dto.results?.map((_) => true),
 	selectedRound: undefined,
-	selectedChampionshipRound: dto.roundGroups ? dto.roundGroups.length - 1 : 0,
+	selectedChampionshipRound: dto.rounds ? (dto.rounds.length - 1) : 0,
 	selectedCompetitors: [null, null, null, null, null],
 });

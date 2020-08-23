@@ -54,16 +54,14 @@ export const AdjudicationSelectionStory: React.FC = () => {
 
 export const RoundsSelectionStory: React.FC = () => {
 	const rounds = ["heavy", "Light", "Set"];
-	const roundGroups = ["Recall", "Total"];
 	return (
 		<ScorrzStyled>
 			<RoundsSelection
+				title="Rounds: "
+				isCumulative={false}
 				rounds={rounds}
-				roundGroups={roundGroups}
 				selectedRound={number("selectedRound", 1)}
-				selectedRoundGroup={number("selectedRound", undefined)}
 				selectRound={action("selectRound")}
-				selectRoundGroup={action("selectRoundGroup")}
 			/>
 		</ScorrzStyled>
 	);
