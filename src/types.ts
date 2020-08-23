@@ -4,6 +4,11 @@ export type Score = number | undefined;
 
 export type CompetitorSelectionIndex = number | null;
 
+export enum DisplayMode {
+	SingleRounds,
+	Championship,
+}
+
 export interface Competitor {
 	id: CompetitorId;
 	name: string;

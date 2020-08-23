@@ -1,9 +1,10 @@
 import {} from "@/components/common/Table.styles";
 
+import { displayModeSelector, selectedRoundsSelector } from "@/selectors";
+
 import { AdjudicatorTable } from "./AdjudicatorTable";
 import { AdjudicatorTableView } from "@/types";
 import React from "react";
-import { selectedRoundsSelector } from "@/selectors";
 import { useCompetitorSelection } from "../common/useCompetitorSelection";
 import { useSelector } from "react-redux";
 
@@ -15,6 +16,7 @@ export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = (
 	tableView,
 }) => {
 	const selectedRounds = useSelector(selectedRoundsSelector);
+	const displayMode = useSelector(displayModeSelector);
 
 	const {
 		getCompetitorSelectionIndex,
@@ -26,6 +28,7 @@ export const AdjudicatorTableWrapper: React.FC<AdjudicatorTableWrapperProps> = (
 	return (
 		<AdjudicatorTable
 			adjudicatorName={tableView.adjudicatorName}
+			displayMode={displayMode}
 			selectedRounds={selectedRounds}
 			rounds={tableView.rounds}
 			resultRows={tableView.resultRows}

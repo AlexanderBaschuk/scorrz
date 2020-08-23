@@ -1,5 +1,6 @@
+import { AdjudicatorTableRowView, DisplayMode } from "@/types";
+
 import { AdjudicatorTable } from "./AdjudicatorTable";
-import { AdjudicatorTableRowView } from "@/types";
 import React from "react";
 import { mount } from "enzyme";
 
@@ -41,6 +42,7 @@ describe("AdjudicatorTable", () => {
 		const table = mount(
 			<AdjudicatorTable
 				adjudicatorName={adjudicatorName}
+				displayMode={DisplayMode.Championship}
 				rounds={rounds}
 				selectedRounds={[true, false, true]}
 				resultRows={[competitorResults1, competitorResults2]}
@@ -59,6 +61,7 @@ describe("AdjudicatorTable", () => {
 		const table = mount(
 			<AdjudicatorTable
 				adjudicatorName={adjudicatorName}
+				displayMode={DisplayMode.Championship}
 				rounds={rounds}
 				selectedRounds={selectedRounds}
 				resultRows={[competitorResults1, competitorResults2]}
@@ -73,17 +76,43 @@ describe("AdjudicatorTable", () => {
 	});
 
 	test.each`
-		description                                                       | selectedRounds           | expectedHeaderCells                             | expectedCells
-		${"All rounds selected - displays all results"}                   | ${[true, true, true]}    | ${["Competitor", "H", "L", "S", "Sum", "Grid"]} | ${["123", "Sasha", "50", "60", "70", "180", "75"]}
-		${"Not all rounds selected - hides results of unselected rounds"} | ${[true, false, true]}   | ${["Competitor", "H", "S", "Sum", "Grid"]}      | ${["123", "Sasha", "50", "70", "180", "75"]}
-		${"One round selected - shows that round, doesn't show Sum"}      | ${[false, true, false]}  | ${["Competitor", "L", "Grid"]}                  | ${["123", "Sasha", "60", "75"]}
-		${"No rounds selected - shows only competitor info"}              | ${[false, false, false]} | ${["Competitor"]}                               | ${["123", "Sasha"]}
+		description           | selectedRounds          | expectedHeaderCells    | expectedCells
+		${"Round 1 selected"} | ${[true, false, false]} | ${["Competitor", "H"]} | ${["123", "Sasha", "50"]}
+		${"Round 2 selected"} | ${[false, true, false]} | ${["Competitor", "L"]} | ${["123", "Sasha", "60"]}
+		${"Round 3 selected"} | ${[false, false, true]} | ${["Competitor", "S"]} | ${["123", "Sasha", "70"]}
 	`(
-		"$description",
+		"Single rounds mode. $description",
 		({ selectedRounds, expectedHeaderCells, expectedCells }) => {
 			const table = mount(
 				<AdjudicatorTable
 					adjudicatorName={adjudicatorName}
+					displayMode={DisplayMode.SingleRounds}
+					rounds={rounds}
+					selectedRounds={selectedRounds}
+					resultRows={[competitorResults1]}
+				/>,
+			);
+
+			const tableHeaderCells = getTableHeaderCells(table);
+			expect(tableHeaderCells).toEqual(expectedHeaderCells);
+
+			const tableRowCells = getTableRowCells(table, 0);
+			expect(tableRowCells).toEqual(expectedCells);
+		},
+	);
+
+	test.each`
+		description                                                       | selectedRounds          | expectedHeaderCells                             | expectedCells
+		${"All rounds selected - displays all results"}                   | ${[true, true, true]}   | ${["Competitor", "H", "L", "S", "Sum", "Grid"]} | ${["123", "Sasha", "50", "60", "70", "180", "75"]}
+		${"Not all rounds selected - hides results of unselected rounds"} | ${[true, true, false]}  | ${["Competitor", "H", "L", "Sum", "Grid"]}      | ${["123", "Sasha", "50", "60", "180", "75"]}
+		${"One round selected - shows that round"}                        | ${[true, false, false]} | ${["Competitor", "H", "Sum", "Grid"]}           | ${["123", "Sasha", "50", "180", "75"]}
+	`(
+		"Championship mode. $description",
+		({ selectedRounds, expectedHeaderCells, expectedCells }) => {
+			const table = mount(
+				<AdjudicatorTable
+					adjudicatorName={adjudicatorName}
+					displayMode={DisplayMode.Championship}
 					rounds={rounds}
 					selectedRounds={selectedRounds}
 					resultRows={[competitorResults1]}

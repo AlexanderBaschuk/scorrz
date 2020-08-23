@@ -1,17 +1,16 @@
+import { DisplayMode } from "@/types";
 import React from "react";
 
 interface AdjudicatorTableHeaderProps {
+	displayMode: DisplayMode;
 	selectedRounds: boolean[];
 	rounds: string[];
-	shouldShowSums: boolean;
-	shouldShowGrids: boolean;
 }
 
 export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
+	displayMode,
 	selectedRounds,
 	rounds,
-	shouldShowSums,
-	shouldShowGrids,
 }) => {
 	return (
 		<tr>
@@ -19,8 +18,8 @@ export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
 			{rounds.map(
 				(roundName, i) => selectedRounds[i] && <th key={i}>{roundName}</th>,
 			)}
-			{shouldShowSums && <th>Sum</th>}
-			{shouldShowGrids && <th>Grid</th>}
+			{displayMode === DisplayMode.Championship && <th>Sum</th>}
+			{displayMode === DisplayMode.Championship && <th>Grid</th>}
 		</tr>
 	);
 };

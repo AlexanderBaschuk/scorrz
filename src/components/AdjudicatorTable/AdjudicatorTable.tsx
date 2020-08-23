@@ -2,8 +2,9 @@ import {
 	AdjudicatorTableRowView,
 	CompetitorId,
 	CompetitorSelectionIndex,
+	DisplayMode,
 } from "@/types";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import {
 	ResultsTableStyled,
 	TableTitleStyled,
@@ -15,10 +16,11 @@ import { AdjudicatorTableRow } from "./AdjudicatorTableRow";
 
 interface AdjudicatorTableProps {
 	adjudicatorName: string;
+	displayMode: DisplayMode;
 	selectedRounds: boolean[];
 	rounds: string[];
 	resultRows: AdjudicatorTableRowView[];
-	focusedCompetitor: CompetitorId;
+	focusedCompetitor?: CompetitorId;
 	getCompetitorSelectionIndex?: (id: CompetitorId) => CompetitorSelectionIndex;
 	clickCompetitorRow?: (CompetitorId) => void;
 	hoverCompetitorRow?: (CompetitorId) => void;
@@ -26,6 +28,7 @@ interface AdjudicatorTableProps {
 
 export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	adjudicatorName,
+	displayMode,
 	selectedRounds,
 	rounds,
 	resultRows,
@@ -34,16 +37,6 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 	clickCompetitorRow,
 	hoverCompetitorRow,
 }) => {
-	const shouldShowSums = useMemo(
-		() => selectedRounds.filter((isSelected) => isSelected).length > 1,
-		[selectedRounds],
-	);
-
-	const shouldShowGrids = useMemo(
-		() => selectedRounds.some((isSelected) => isSelected),
-		[selectedRounds],
-	);
-
 	const isFocused = useCallback(
 		(id: CompetitorId): boolean => focusedCompetitor === id,
 		[focusedCompetitor],
@@ -59,10 +52,9 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 			<ResultsTableStyled onMouseLeave={unfocusCompetitor}>
 				<thead>
 					<AdjudicatorTableHeader
+						displayMode={displayMode}
 						selectedRounds={selectedRounds}
 						rounds={rounds}
-						shouldShowSums={shouldShowSums}
-						shouldShowGrids={shouldShowGrids}
 					/>
 				</thead>
 				<tbody>
@@ -71,12 +63,11 @@ export const AdjudicatorTable: React.FC<AdjudicatorTableProps> = ({
 							key={row.id}
 							id={row.id}
 							name={row.name}
+							displayMode={displayMode}
 							selectedRounds={selectedRounds}
 							scores={row.scores}
 							sum={row.sum}
 							gridScore={row.gridScore}
-							shouldShowSums={shouldShowSums}
-							shouldShowGrids={shouldShowGrids}
 							selectionIndex={getCompetitorSelectionIndex?.(row.id) ?? null}
 							isFocused={isFocused(row.id)}
 							clickCompetitorRow={clickCompetitorRow}

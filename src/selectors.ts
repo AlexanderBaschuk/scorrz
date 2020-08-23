@@ -1,4 +1,5 @@
-import { State } from "./types";
+import { DisplayMode, State } from "./types";
+
 import { createSelector } from "@reduxjs/toolkit";
 
 export const loadingSelector = (state: State) => state.isLoading;
@@ -36,6 +37,11 @@ export const selectedRoundSelector = (state: State) => state.selectedRound;
 
 export const selectedChampionshipRoundSelector = (state: State) =>
 	state.selectedChampionshipRound;
+
+export const displayModeSelector = (state: State): DisplayMode =>
+	state.selectedChampionshipRound !== undefined
+		? DisplayMode.Championship
+		: DisplayMode.SingleRounds;
 
 export const selectedRoundsSelector = createSelector(
 	roundsSelector,

@@ -3,7 +3,12 @@ import {
 	TdStyled,
 	TrClickable,
 } from "@/components/common/Table.styles";
-import { CompetitorId, CompetitorSelectionIndex, Score } from "@/types";
+import {
+	CompetitorId,
+	CompetitorSelectionIndex,
+	DisplayMode,
+	Score,
+} from "@/types";
 import React, { useCallback } from "react";
 
 import { alignByDecimal } from "@/helpers/alignment";
@@ -11,12 +16,11 @@ import { alignByDecimal } from "@/helpers/alignment";
 interface AdjudicatorTableRowProps {
 	id: CompetitorId;
 	name: string;
+	displayMode: DisplayMode;
 	selectedRounds: boolean[];
 	scores: Score[];
 	sum: Score;
 	gridScore: Score;
-	shouldShowSums: boolean;
-	shouldShowGrids: boolean;
 	selectionIndex: CompetitorSelectionIndex;
 	isFocused: boolean;
 	clickCompetitorRow?: (id: CompetitorId) => void;
@@ -26,12 +30,11 @@ interface AdjudicatorTableRowProps {
 export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 	id,
 	name,
+	displayMode,
 	selectedRounds,
 	scores,
 	sum,
 	gridScore,
-	shouldShowSums,
-	shouldShowGrids,
 	selectionIndex,
 	isFocused,
 	clickCompetitorRow,
@@ -74,7 +77,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 						</TdStyled>
 					),
 			)}
-			{shouldShowSums && (
+			{displayMode === DisplayMode.Championship && (
 				<TdStyled
 					selection={selectionIndex}
 					decoration={CellDecoration.ScoreSum}
@@ -83,7 +86,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 					{alignByDecimal(sum, 3)}
 				</TdStyled>
 			)}
-			{shouldShowGrids && (
+			{displayMode === DisplayMode.Championship && (
 				<TdStyled
 					selection={selectionIndex}
 					decoration={CellDecoration.GridScore}
