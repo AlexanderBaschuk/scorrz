@@ -539,12 +539,12 @@ describe("Championship first round selected", () => {
 		expect(adjudicatorTables[1]).not.toBeNull();
 	});
 
-	test("Has only selected round in adjudicator results", () => {
+	test("Has all rounds in adjudicator results", () => {
 		const state = prepareState();
 
 		const adjudicatorTables = adjudicatorTablesSelector(state);
 
-		expect(adjudicatorTables[0].rounds).toEqual(["H", "L", null]);
+		expect(adjudicatorTables[0].rounds).toEqual(["H", "L", "S"]);
 	});
 
 	test("Results by adjudicator1", () => {
@@ -557,14 +557,14 @@ describe("Championship first round selected", () => {
 			{
 				id: "234",
 				name: "Natasha",
-				scores: [60, 70, null],
+				scores: [60, 70, 50],
 				sum: 130,
 				gridScore: 100,
 			},
 			{
 				id: "123",
 				name: "Sasha",
-				scores: [70, 50, null],
+				scores: [70, 50, 60],
 				sum: 120,
 				gridScore: 75,
 			},
@@ -581,14 +581,14 @@ describe("Championship first round selected", () => {
 			{
 				id: "234",
 				name: "Natasha",
-				scores: [60, 60, null],
+				scores: [60, 60, 60.5],
 				sum: 120,
 				gridScore: 100,
 			},
 			{
 				id: "123",
 				name: "Sasha",
-				scores: [50, 60, null],
+				scores: [50, 60, 70],
 				sum: 110,
 				gridScore: 75,
 			},

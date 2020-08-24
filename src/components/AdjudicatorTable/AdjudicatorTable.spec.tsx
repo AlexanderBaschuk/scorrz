@@ -102,28 +102,40 @@ describe("AdjudicatorTable", () => {
 	);
 
 	test.each`
-		description                                                       | selectedRounds          | expectedHeaderCells                             | expectedCells
-		${"All rounds selected - displays all results"}                   | ${[true, true, true]}   | ${["Competitor", "H", "L", "S", "Sum", "Grid"]} | ${["123", "Sasha", "50", "60", "70", "180", "75"]}
-		${"Not all rounds selected - hides results of unselected rounds"} | ${[true, true, false]}  | ${["Competitor", "H", "L", "Sum", "Grid"]}      | ${["123", "Sasha", "50", "60", "180", "75"]}
-		${"One round selected - shows that round"}                        | ${[true, false, false]} | ${["Competitor", "H", "Sum", "Grid"]}           | ${["123", "Sasha", "50", "180", "75"]}
-	`(
-		"Championship mode. $description",
-		({ selectedRounds, expectedHeaderCells, expectedCells }) => {
-			const table = mount(
-				<AdjudicatorTable
-					adjudicatorName={adjudicatorName}
-					displayMode={DisplayMode.Championship}
-					rounds={rounds}
-					selectedRounds={selectedRounds}
-					resultRows={[competitorResults1]}
-				/>,
-			);
+		description                  | selectedRounds
+		${"All rounds selected"}     | ${[true, true, true]}
+		${"Not all rounds selected"} | ${[true, true, false]}
+		${"One round selected"}      | ${[true, false, false]}
+	`("Championship mode. $description", ({ selectedRounds }) => {
+		const table = mount(
+			<AdjudicatorTable
+				adjudicatorName={adjudicatorName}
+				displayMode={DisplayMode.Championship}
+				rounds={rounds}
+				selectedRounds={selectedRounds}
+				resultRows={[competitorResults1]}
+			/>,
+		);
 
-			const tableHeaderCells = getTableHeaderCells(table);
-			expect(tableHeaderCells).toEqual(expectedHeaderCells);
+		const tableHeaderCells = getTableHeaderCells(table);
+		expect(tableHeaderCells).toEqual([
+			"Competitor",
+			"H",
+			"L",
+			"S",
+			"Sum",
+			"Grid",
+		]);
 
-			const tableRowCells = getTableRowCells(table, 0);
-			expect(tableRowCells).toEqual(expectedCells);
-		},
-	);
+		const tableRowCells = getTableRowCells(table, 0);
+		expect(tableRowCells).toEqual([
+			"123",
+			"Sasha",
+			"50",
+			"60",
+			"70",
+			"180",
+			"75",
+		]);
+	});
 });

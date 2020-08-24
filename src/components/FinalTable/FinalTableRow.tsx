@@ -1,5 +1,5 @@
 import {
-	CellDecoration,
+	ColumnType,
 	TdStyled,
 	TrClickable,
 } from "@/components/common/Table.styles";
@@ -43,35 +43,35 @@ export const FinalTableRow: React.FC<FinalTableRowProps> = ({
 		<TrClickable onClick={onClick} onMouseEnter={onMouseEnter}>
 			<TdStyled
 				selection={selectionIndex}
-				decoration={CellDecoration.Place}
+				columnType={ColumnType.Place}
 				isFocused={isFocused}
 			>
 				{alignByDecimal(place, 2)}
 			</TdStyled>
 			<TdStyled
 				selection={selectionIndex}
-				decoration={CellDecoration.None}
+				columnType={ColumnType.None}
 				isFocused={isFocused}
 			>
 				{id}
 			</TdStyled>
 			<TdStyled
 				selection={selectionIndex}
-				decoration={CellDecoration.None}
+				columnType={ColumnType.None}
 				isFocused={isFocused}
 			>
 				{name}
 			</TdStyled>
 			<TdStyled
 				selection={selectionIndex}
-				decoration={CellDecoration.None}
+				columnType={ColumnType.None}
 				isFocused={isFocused}
 			>
 				{school}
 			</TdStyled>
 			<TdStyled
 				selection={selectionIndex}
-				decoration={CellDecoration.GridScore}
+				columnType={ColumnType.Grid}
 				isFocused={isFocused}
 			>
 				{alignByDecimal(Math.round(gridSum * 100) / 100, 3)}

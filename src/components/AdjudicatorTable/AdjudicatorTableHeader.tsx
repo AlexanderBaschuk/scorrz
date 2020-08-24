@@ -12,14 +12,21 @@ export const AdjudicatorTableHeader: React.FC<AdjudicatorTableHeaderProps> = ({
 	selectedRounds,
 	rounds,
 }) => {
-	return (
+	return displayMode === DisplayMode.Championship ? (
+		<tr>
+			<th colSpan={2}>Competitor</th>
+			{rounds.map((roundName, i) => (
+				<th key={i}>{roundName}</th>
+			))}
+			<th>Sum</th>
+			<th>Grid</th>
+		</tr>
+	) : (
 		<tr>
 			<th colSpan={2}>Competitor</th>
 			{rounds.map(
 				(roundName, i) => selectedRounds[i] && <th key={i}>{roundName}</th>,
 			)}
-			{displayMode === DisplayMode.Championship && <th>Sum</th>}
-			{displayMode === DisplayMode.Championship && <th>Grid</th>}
 		</tr>
 	);
 };

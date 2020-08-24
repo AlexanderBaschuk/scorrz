@@ -4,6 +4,7 @@ import {
 	AdjudicatorTableView,
 	Competitor,
 	CompetitorId,
+	DisplayMode,
 	FinalTableView,
 } from "./types";
 import {
@@ -43,6 +44,7 @@ export const adjudicatorTablesSelector = createSelector(
 	resultsSelector,
 	selectedAdjudicatorsSelector,
 	selectedRoundsSelector,
+	selectedChampionshipRoundSelector,
 	competitorsSelector,
 	sumsAndGridsSelector,
 	(
@@ -50,6 +52,7 @@ export const adjudicatorTablesSelector = createSelector(
 		results,
 		selectedAdjudicators,
 		selectedRounds,
+		selectedChampionshipRound,
 		competitors,
 		sumsAndGrids,
 	): AdjudicatorTableView[] =>
@@ -58,10 +61,12 @@ export const adjudicatorTablesSelector = createSelector(
 				return null;
 			}
 
+			const showAllRounds = selectedChampionshipRound !== undefined;
+
 			return {
 				adjudicatorName: adjudicator.adjudicatorName,
 				rounds: rounds.map((round, i) =>
-					selectedRounds[i] === true ? round.shortName : null,
+					showAllRounds || selectedRounds[i] === true ? round.shortName : null,
 				),
 				resultRows: adjudicator.resultLines
 					.map(
@@ -69,7 +74,7 @@ export const adjudicatorTablesSelector = createSelector(
 							id: resultLine.competitorId,
 							name: getCompetitorName(competitors, resultLine.competitorId),
 							scores: resultLine.score.map((score, i) =>
-								selectedRounds[i] === true ? score : null,
+								showAllRounds || selectedRounds[i] === true ? score : null,
 							),
 							sum: sumsAndGrids[adjId].get(resultLine.competitorId).sum,
 							gridScore: sumsAndGrids[adjId].get(resultLine.competitorId).grid,

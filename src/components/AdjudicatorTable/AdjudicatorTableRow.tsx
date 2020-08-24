@@ -1,5 +1,5 @@
 import {
-	CellDecoration,
+	ColumnType,
 	TdStyled,
 	TrClickable,
 } from "@/components/common/Table.styles";
@@ -52,26 +52,27 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 		<TrClickable onClick={onClick} onMouseEnter={onMouseEnter}>
 			<TdStyled
 				selection={selectionIndex}
-				decoration={CellDecoration.None}
+				columnType={ColumnType.Id}
 				isFocused={isFocused}
 			>
 				{id}
 			</TdStyled>
 			<TdStyled
 				selection={selectionIndex}
-				decoration={CellDecoration.None}
+				columnType={ColumnType.Name}
 				isFocused={isFocused}
 			>
 				{name}
 			</TdStyled>
 			{scores.map(
 				(score, i) =>
-					selectedRounds[i] && (
+					(displayMode === DisplayMode.Championship || selectedRounds[i]) && (
 						<TdStyled
 							key={i}
 							selection={selectionIndex}
-							decoration={CellDecoration.None}
+							columnType={ColumnType.Score}
 							isFocused={isFocused}
+							isActive={selectedRounds[i] === true}
 						>
 							{alignByDecimal(score, 2)}
 						</TdStyled>
@@ -80,7 +81,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 			{displayMode === DisplayMode.Championship && (
 				<TdStyled
 					selection={selectionIndex}
-					decoration={CellDecoration.ScoreSum}
+					columnType={ColumnType.Sum}
 					isFocused={isFocused}
 				>
 					{alignByDecimal(sum, 3)}
@@ -89,7 +90,7 @@ export const AdjudicatorTableRow: React.FC<AdjudicatorTableRowProps> = ({
 			{displayMode === DisplayMode.Championship && (
 				<TdStyled
 					selection={selectionIndex}
-					decoration={CellDecoration.GridScore}
+					columnType={ColumnType.Grid}
 					isFocused={isFocused}
 				>
 					{alignByDecimal(Math.round(gridScore * 100) / 100, 3)}
