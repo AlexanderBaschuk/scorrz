@@ -2,26 +2,41 @@ import { Button } from "@/components/common/Button.styles";
 import styled from "@emotion/styled";
 
 interface ButtonProps {
-	isSelected: boolean;
+	isSelected?: boolean;
+	isFocused?: boolean;
 }
 
 enum RoundSelectionButtonColor {
-	Main = "#f3ad63",
+	Idle = "#ffffff",
+	HoverIdle = "#fff6ed",
+	Selected = "#f3ad63",
 	HoverSelected = "#f1a250",
-	HoverUnselected = "#fff6ed",
 }
 
 export const RoundsSelectionButtonStyled = styled(Button)<ButtonProps>`
 	background-color: ${(props) =>
-		props.isSelected ? RoundSelectionButtonColor.Main : "white"};
+		getBackgroundColor(props.isSelected === true, props.isFocused === true)};
 	color: ${(props) =>
-		props.isSelected ? "white" : RoundSelectionButtonColor.Main};
+		props.isSelected === true ? "white" : RoundSelectionButtonColor.Selected};
 	font-size: 1.2em;
 
 	&:hover {
 		background-color: ${(props) =>
 			props.isSelected
 				? RoundSelectionButtonColor.HoverSelected
-				: RoundSelectionButtonColor.HoverUnselected};
+				: RoundSelectionButtonColor.HoverIdle};
 	}
 `;
+
+const getBackgroundColor = (isSelected: boolean, isFocused: boolean) => {
+	switch (true) {
+		case !isSelected && isFocused:
+			return RoundSelectionButtonColor.HoverIdle;
+		case isSelected && !isFocused:
+			return RoundSelectionButtonColor.Selected;
+		case isSelected && isFocused:
+			return RoundSelectionButtonColor.HoverSelected;
+		default:
+			return RoundSelectionButtonColor.Idle;
+	}
+};

@@ -4,21 +4,33 @@ import { RoundsSelectionButtonStyled } from "./RoundsSelection.styles";
 
 export interface RoundsSelectionButtonProps {
 	id: number;
-	isSelected: boolean;
-	onClick: (id: number) => void;
+	isSelected?: boolean;
+	isFocused?: boolean;
+	handleClick: (id: number) => void;
+	handleMouseEnter: (id: number) => void;
 }
 
 export const RoundsSelectionButton: React.FC<RoundsSelectionButtonProps> = ({
 	id,
 	isSelected,
-	onClick,
+	isFocused,
+	handleClick,
+	handleMouseEnter,
 	children,
 }) => {
 	const callback = useCallback(() => {
-		onClick(id);
-	}, [id, onClick]);
+		handleClick(id);
+	}, [id, handleClick]);
+	const enter = useCallback(() => {
+		handleMouseEnter(id);
+	}, [id, handleMouseEnter]);
 	return (
-		<RoundsSelectionButtonStyled onClick={callback} isSelected={isSelected}>
+		<RoundsSelectionButtonStyled
+			onClick={callback}
+			isSelected={isSelected}
+			isFocused={isFocused}
+			onMouseEnter={enter}
+		>
 			{children}
 		</RoundsSelectionButtonStyled>
 	);
