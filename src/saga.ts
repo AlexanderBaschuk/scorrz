@@ -24,5 +24,8 @@ function* loadResults(action) {
 
 export function* mainSaga() {
 	yield takeLatest([initResultsRequest], loadResults);
-	yield put(initResultsRequest("./results/SpbFeis2019intermediateCup-9-16.json"));
+	//yield put(initResultsRequest("./results/SpbFeis2019_IntermediateCup_9-16.json"));
+	//yield put(initResultsRequest("./results/SpbFeis2019_Open_16-27.json"));
+	//yield put(initResultsRequest("./results/ComFeis2020_Open_17-26.json"));
+	yield put(initResultsRequest("./results/MoscowFeis2019_Open_10-20.json"));
 }
