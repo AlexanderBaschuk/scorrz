@@ -1,5 +1,5 @@
 import { HEAVY, LIGHT, SET } from "@/testHelpers/StateBuilder";
-import { toggleAdjudicator, toggleCompetitor, toggleRound } from "@/actions";
+import { selectRound, toggleAdjudicator, toggleCompetitor } from "@/actions";
 
 import { Create } from "@/testHelpers/dsl";
 import { MockStore } from "redux-mock-store";
@@ -8,7 +8,6 @@ import React from "react";
 import { Scorrz } from "./Scorrz";
 import { State } from "@/types";
 import { mount } from "enzyme";
-import { reducer } from "@/reducer";
 
 const adjudicator1 = "Brendan O'Brian";
 const adjudicator2 = "Mary McElroy";
@@ -70,7 +69,7 @@ describe("Scorrz", () => {
 		roundsSelectionButtons.at(1).simulate("click");
 
 		const actions = store.getActions();
-		expect(actions).toContainEqual(toggleRound(1));
+		expect(actions).toContainEqual(selectRound(1));
 	});
 
 	test.each`

@@ -1,19 +1,25 @@
 import { CompetitorId, CompetitorSelectionIndex } from "@/types";
+import { focusCompetitor, toggleCompetitor } from "@/actions";
+import {
+	focusedCompetitorSelector,
+	selectedCompetitorsSelector,
+} from "@/selectors";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectedCompetitorsSelector } from "@/selectors";
-import { toggleCompetitor } from "@/actions";
 import { useCallback } from "react";
 
 interface UseCompetitorSelectionResult {
 	getCompetitorSelectionIndex: (CompetitorId) => CompetitorSelectionIndex;
+	focusedCompetitor?: CompetitorId;
 	selectCompetitor: (CompetitorId) => void;
+	hoverCompetitor: (CompetitorId?) => void;
 }
 
 export const useCompetitorSelection = (): UseCompetitorSelectionResult => {
 	const dispatch = useDispatch();
 
 	const selectedCompetitors = useSelector(selectedCompetitorsSelector);
+	const focusedCompetitor = useSelector(focusedCompetitorSelector);
 
 	const getCompetitorSelectionIndex = useCallback(
 		(id: CompetitorId): CompetitorSelectionIndex => {
@@ -30,5 +36,17 @@ export const useCompetitorSelection = (): UseCompetitorSelectionResult => {
 		[dispatch],
 	);
 
-	return { getCompetitorSelectionIndex, selectCompetitor };
+	const hoverCompetitor = useCallback(
+		(id: CompetitorId) => {
+			dispatch(focusCompetitor(id));
+		},
+		[dispatch],
+	);
+
+	return {
+		getCompetitorSelectionIndex,
+		focusedCompetitor,
+		selectCompetitor,
+		hoverCompetitor,
+	};
 };

@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 enum CellFontColor {
 	ScoreSum = "#00a524",
 	GridScore = "#035cff",
+	InactiveScore = "#d0d0d0",
 }
 
 export const SelectionColors = [
@@ -14,11 +15,16 @@ export const SelectionColors = [
 	"#fbcaf9",
 ];
 
-export enum CellDecoration {
+export const FOCUS_COLOR = "#f0f0f0";
+
+export enum ColumnType {
 	None = 0,
 	Place,
-	ScoreSum,
-	GridScore,
+	Id,
+	Name,
+	Score,
+	Sum,
+	Grid,
 }
 
 export interface TrProps {
@@ -27,7 +33,9 @@ export interface TrProps {
 
 export interface TdStyledProps {
 	selection: CompetitorSelectionIndex;
-	decoration: CellDecoration;
+	columnType: ColumnType;
+	isFocused?: boolean;
+	isActive?: boolean;
 }
 
 export const TableWrapperStyled = styled.div`
@@ -65,26 +73,53 @@ export const TrClickable = styled.tr`
 `;
 
 export const TdStyled = styled.td<TdStyledProps>`
-	background-color: ${(p) => SelectionColors[p.selection] ?? "none"};
-	${(p) => getFontWeightStyle(p.decoration)}
-	${(p) => getFontColorStyle(p.decoration)}
+	min-width: ${(p) => getMinWidth(p.columnType)};
+	background-color: ${(p) => getBackgroundColor(p.selection, p.isFocused)};
+	${(p) => getFontWeightStyle(p.columnType)}
+	${(p) => getFontColorStyle(p.columnType, p.isActive)}
 `;
 
-const getFontColorStyle = (decoration: CellDecoration) => {
-	switch (decoration) {
-		case CellDecoration.ScoreSum:
+const getBackgroundColor = (
+	selection: CompetitorSelectionIndex,
+	isFocused?: boolean,
+): string => {
+	// TODO. Also change color of selected cells when focused;
+	if (SelectionColors[selection]) return SelectionColors[selection];
+	return isFocused ? FOCUS_COLOR : "none";
+};
+
+const getFontColorStyle = (columnType: ColumnType, isActive: boolean) => {
+	if (isActive === false) return `color: ${CellFontColor.InactiveScore};`;
+	switch (columnType) {
+		case ColumnType.Sum:
 			return `color: ${CellFontColor.ScoreSum};`;
-		case CellDecoration.GridScore:
+		case ColumnType.Grid:
 			return `color: ${CellFontColor.GridScore};`;
 		default:
 			return undefined;
 	}
 };
 
-const getFontWeightStyle = (decoration: CellDecoration) => {
-	return decoration === CellDecoration.Place ||
-		decoration === CellDecoration.GridScore ||
-		decoration === CellDecoration.ScoreSum
+const getFontWeightStyle = (columnType: ColumnType) => {
+	return columnType === ColumnType.Place ||
+		columnType === ColumnType.Grid ||
+		columnType === ColumnType.Sum
 		? "font-weight: bold;"
 		: undefined;
+};
+
+const getMinWidth = (columnType: ColumnType) => {
+	switch (columnType) {
+		case ColumnType.Place:
+			return "2ch";
+		case ColumnType.Id:
+			return "3ch";
+		case ColumnType.Score:
+			return "4.5ch";
+		case ColumnType.Sum:
+		case ColumnType.Grid:
+			return "5.5ch";
+		default:
+			return 0;
+	}
 };

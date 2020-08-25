@@ -15,7 +15,8 @@ export class StateBuilder implements State {
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
-	selectedRounds: boolean[];
+	selectedRound?: number;
+	selectedChampionshipRound?: number;
 	selectedCompetitors: CompetitorId[];
 
 	constructor() {
@@ -25,13 +26,11 @@ export class StateBuilder implements State {
 
 	withRound = (value: Round) => {
 		this.rounds.push(value);
-		this.selectedRounds.push(true);
 		return this;
 	};
 
 	withRounds = (values: Round[]) => {
 		this.rounds.push(...values);
-		this.selectedRounds.push(...values.map((_) => true));
 		return this;
 	};
 
@@ -56,8 +55,15 @@ export class StateBuilder implements State {
 		return this;
 	};
 
-	withSelectedRounds = (values: boolean[]) => {
-		this.selectedRounds = values;
+	withSelectedRound = (value: number) => {
+		this.selectedRound = value;
+		this.selectedChampionshipRound = undefined;
+		return this;
+	};
+
+	withSelectedChampionshipRound = (value: number) => {
+		this.selectedChampionshipRound = value;
+		this.selectedRound = undefined;
 		return this;
 	};
 

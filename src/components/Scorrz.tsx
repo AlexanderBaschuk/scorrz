@@ -11,9 +11,14 @@ import {
 	loadingSelector,
 	roundsNamesSelector,
 	selectedAdjudicatorsSelector,
-	selectedRoundsSelector,
+	selectedChampionshipRoundSelector,
+	selectedRoundSelector,
 } from "@/selectors";
-import { toggleAdjudicator, toggleRound } from "@/actions";
+import {
+	selectChampionshipRound,
+	selectRound,
+	toggleAdjudicator,
+} from "@/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AdjudicatorSelection } from "./AdjudicatorSelection/AdjudicatorSelection";
@@ -33,7 +38,10 @@ export const Scorrz: React.FC = () => {
 	const adjudicators = useSelector(adjudicatorsSelector);
 	const rounds = useSelector(roundsNamesSelector);
 	const selectedAdjudicators = useSelector(selectedAdjudicatorsSelector);
-	const selectedRounds = useSelector(selectedRoundsSelector);
+	const selectedChampionshipRound = useSelector(
+		selectedChampionshipRoundSelector,
+	);
+	const selectedRound = useSelector(selectedRoundSelector);
 
 	const adjudicatorTables = useSelector(adjudicatorTablesSelector);
 	const finalTable = useSelector(finalTableSelector);
@@ -45,9 +53,16 @@ export const Scorrz: React.FC = () => {
 		[dispatch],
 	);
 
-	const toggleRoundInternal = useCallback(
-		(id: number | null) => {
-			dispatch(toggleRound(id));
+	const selectRoundInternal = useCallback(
+		(id: number) => {
+			dispatch(selectRound(id));
+		},
+		[dispatch],
+	);
+
+	const selectChampionshipRoundInternal = useCallback(
+		(id: number) => {
+			dispatch(selectChampionshipRound(id));
 		},
 		[dispatch],
 	);
@@ -72,9 +87,18 @@ export const Scorrz: React.FC = () => {
 				toggleAdjudicator={toggleAdjudicatorInternal}
 			/>
 			<RoundsSelection
+				title="Rounds: "
+				isCumulative={false}
 				rounds={rounds}
-				selectedRounds={selectedRounds}
-				toggleRound={toggleRoundInternal}
+				selectedRound={selectedRound}
+				selectRound={selectRoundInternal}
+			/>
+			<RoundsSelection
+				title="Championship: "
+				isCumulative={true}
+				rounds={rounds}
+				selectedRound={selectedChampionshipRound}
+				selectRound={selectChampionshipRoundInternal}
 			/>
 			{adjudicatorTables.map(
 				(adjResults, i) =>

@@ -4,6 +4,7 @@ import {
 	AdjudicatorTableView,
 	Competitor,
 	CompetitorId,
+	DisplayMode,
 	FinalTableView,
 } from "./types";
 import {
@@ -16,6 +17,7 @@ import {
 	resultsSelector,
 	roundsSelector,
 	selectedAdjudicatorsSelector,
+	selectedChampionshipRoundSelector,
 	selectedRoundsSelector,
 } from "./selectors";
 
@@ -42,6 +44,7 @@ export const adjudicatorTablesSelector = createSelector(
 	resultsSelector,
 	selectedAdjudicatorsSelector,
 	selectedRoundsSelector,
+	selectedChampionshipRoundSelector,
 	competitorsSelector,
 	sumsAndGridsSelector,
 	(
@@ -49,6 +52,7 @@ export const adjudicatorTablesSelector = createSelector(
 		results,
 		selectedAdjudicators,
 		selectedRounds,
+		selectedChampionshipRound,
 		competitors,
 		sumsAndGrids,
 	): AdjudicatorTableView[] =>
@@ -57,10 +61,12 @@ export const adjudicatorTablesSelector = createSelector(
 				return null;
 			}
 
+			const showAllRounds = selectedChampionshipRound !== undefined;
+
 			return {
 				adjudicatorName: adjudicator.adjudicatorName,
 				rounds: rounds.map((round, i) =>
-					selectedRounds[i] === true ? round.shortName : null,
+					showAllRounds || selectedRounds[i] === true ? round.shortName : null,
 				),
 				resultRows: adjudicator.resultLines
 					.map(
@@ -68,7 +74,7 @@ export const adjudicatorTablesSelector = createSelector(
 							id: resultLine.competitorId,
 							name: getCompetitorName(competitors, resultLine.competitorId),
 							scores: resultLine.score.map((score, i) =>
-								selectedRounds[i] === true ? score : null,
+								showAllRounds || selectedRounds[i] === true ? score : null,
 							),
 							sum: sumsAndGrids[adjId].get(resultLine.competitorId).sum,
 							gridScore: sumsAndGrids[adjId].get(resultLine.competitorId).grid,
@@ -86,18 +92,18 @@ export const adjudicatorTablesSelector = createSelector(
 
 export const finalTableSelector = createSelector(
 	selectedAdjudicatorsSelector,
-	selectedRoundsSelector,
+	selectedChampionshipRoundSelector,
 	competitorsSelector,
 	sumsAndGridsSelector,
 	(
 		selectedAdjudicators,
-		selectedRounds,
+		selectedChampionshipRound,
 		competitors,
 		sumsAndGrids,
 	): FinalTableView => {
 		if (selectedAdjudicators.filter((a) => a === true).length <= 1) return null;
 
-		if (selectedRounds.filter((a) => a === true).length === 0) return null;
+		if (selectedChampionshipRound === undefined) return null;
 
 		const allRequiredGrids = sumsAndGrids
 			.filter((_sg, i) => selectedAdjudicators[i] === true)
@@ -113,6 +119,7 @@ export const finalTableSelector = createSelector(
 			place: value.place,
 			id,
 			name: getCompetitorName(competitors, id),
+			school: getCompetitorSchool(competitors, id),
 			gridSum: value.gridSum,
 		})).sort((result1, result2) => {
 			const diff = result1.place - result2.place;
@@ -127,6 +134,9 @@ export const finalTableSelector = createSelector(
 
 const getCompetitorName = (competitors: Competitor[], id: CompetitorId) =>
 	getCompetitor(competitors, id)?.name ?? "";
+
+const getCompetitorSchool = (competitors: Competitor[], id: CompetitorId) =>
+	getCompetitor(competitors, id)?.school ?? "";
 
 const getCompetitor = (
 	competitors: Competitor[],

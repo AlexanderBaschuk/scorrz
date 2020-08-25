@@ -1,10 +1,12 @@
 import {
+	focusCompetitor,
 	initResultsFailure,
 	initResultsRequest,
 	initResultsSuccess,
+	selectChampionshipRound,
+	selectRound,
 	toggleAdjudicator,
 	toggleCompetitor,
-	toggleRound,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -27,10 +29,13 @@ export const reducer = createReducer(initialState, {
 			action.payload
 		];
 	},
-	[toggleRound.type]: (state, action) => {
-		state.selectedRounds[action.payload] = !state.selectedRounds[
-			action.payload
-		];
+	[selectRound.type]: (state, action) => {
+		state.selectedRound = action.payload;
+		state.selectedChampionshipRound = undefined;
+	},
+	[selectChampionshipRound.type]: (state, action) => {
+		state.selectedChampionshipRound = action.payload;
+		state.selectedRound = undefined;
 	},
 	[toggleCompetitor.type]: (state, action) => {
 		const competitorIndex = state.selectedCompetitors.findIndex(
@@ -45,5 +50,8 @@ export const reducer = createReducer(initialState, {
 			if (firstEmptyIndex >= 0)
 				state.selectedCompetitors[firstEmptyIndex] = action.payload;
 		}
+	},
+	[focusCompetitor.type]: (state, action) => {
+		state.focusedCompetitor = action.payload;
 	},
 });

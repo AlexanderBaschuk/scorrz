@@ -4,6 +4,11 @@ export type Score = number | undefined;
 
 export type CompetitorSelectionIndex = number | null;
 
+export enum DisplayMode {
+	SingleRounds,
+	Championship,
+}
+
 export interface Competitor {
 	id: CompetitorId;
 	name: string;
@@ -51,6 +56,7 @@ export interface FinalTableRowView {
 	place: number;
 	id: CompetitorId;
 	name: string;
+	school: string;
 	gridSum: Score;
 }
 
@@ -63,8 +69,10 @@ export interface State {
 	competitors: Competitor[];
 	results: AdjudicatorResults[];
 	selectedAdjudicators: boolean[];
-	selectedRounds: boolean[];
+	selectedRound?: number;
+	selectedChampionshipRound?: number;
 	selectedCompetitors: CompetitorId[];
+	focusedCompetitor?: CompetitorId;
 }
 
 export const initialState: State = {
@@ -75,6 +83,7 @@ export const initialState: State = {
 	competitors: [],
 	results: [],
 	selectedAdjudicators: [],
-	selectedRounds: [],
+	selectedRound: undefined,
+	selectedChampionshipRound: 1,
 	selectedCompetitors: [null, null, null, null, null],
 };
