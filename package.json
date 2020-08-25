@@ -12,6 +12,7 @@
 		"lint": "eslint --ext .ts,.tsx --fix src/",
 		"start": "webpack-dev-server --mode=development --hot --open",
 		"storybook": "start-storybook -p 6006",
+		"stryker": "docker run -v C:\\Code\\scorrz:/srv -w /srv --rm -ti hndoss/stryker-js:11-alpine run",
 		"test": "jest",
 		"watch": "webpack --watch --mode development"
 	},
