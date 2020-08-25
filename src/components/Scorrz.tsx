@@ -15,6 +15,7 @@ import {
 	selectedRoundSelector,
 } from "@/selectors";
 import {
+	initResultsRequest,
 	selectChampionshipRound,
 	selectRound,
 	toggleAdjudicator,
@@ -67,6 +68,13 @@ export const Scorrz: React.FC = () => {
 		[dispatch],
 	);
 
+	const loadChampionship = useCallback(
+		(filename: string) => {
+			dispatch(initResultsRequest(`./results/${filename}.json`));
+		},
+		[dispatch],
+	);
+
 	if (isLoading) {
 		return <>Loading...</>;
 	}
@@ -77,6 +85,32 @@ export const Scorrz: React.FC = () => {
 
 	return (
 		<ScorrzStyled>
+			<div>
+				<a
+					href="#"
+					onClick={() => loadChampionship("SpbFeis2019_IntermediateCup_9-16")}
+				>
+					SPb 2019 Preliminary
+				</a>
+			</div>
+			<div>
+				<a href="#" onClick={() => loadChampionship("SpbFeis2019_Open_16-27")}>
+					SPb 2019 Open
+				</a>
+			</div>
+			<div>
+				<a
+					href="#"
+					onClick={() => loadChampionship("MoscowFeis2019_Open_10-20")}
+				>
+					Moscow Feis 2019
+				</a>
+			</div>
+			<div>
+				<a href="#" onClick={() => loadChampionship("ComFeis2020_Open_17-26")}>
+					CoM Feis 2020
+				</a>
+			</div>
 			<CompetitionPageTitle
 				eventTitle={eventTitle}
 				competitionTitle={competitionTitle}
