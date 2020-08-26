@@ -1,0 +1,165 @@
+{
+	"eventTitle": "Saint-Petersburg Open Feis 2019",
+	"competitionTitle": "Open championship 16-27",
+	"rounds": [
+		{
+			"name": "Heavy",
+			"shortName": "H"
+		},
+		{
+			"name": "Light",
+			"shortName": "L"
+		},
+		{
+			"name": "Set",
+			"shortName": "S"
+		}
+	],
+	"competitors": [
+		{
+			"id": "371",
+			"name": "Tarasenko Alina",
+			"school": "McGahan Lees Cherepovets"
+		},
+		{
+			"id": "382",
+			"name": "Shebryukova Karina",
+			"school": "McGahan Lees Cherepovets"
+		},
+		{
+			"id": "383",
+			"name": "Abutalipova Adelia",
+			"school": "Carey Academy Ufa"
+		},
+		{
+			"id": "400",
+			"name": "Tsvetkova Stanislava",
+			"school": "Ceilidh Moscow"
+		},
+		{
+			"id": "410",
+			"name": "Buer Marthe",
+			"school": "Ronan McCormak School Oslo"
+		},
+		{
+			"id": "420",
+			"name": "Pushkareva Olesya",
+			"school": "Teire school Saint Petersburg"
+		},
+		{
+			"id": "435",
+			"name": "Kosenkova Anastasia",
+			"school": "Ceilidh Volgograd"
+		},
+		{
+			"id": "446",
+			"name": "Belousova Anastasiya",
+			"school": "Carey Academy Samara"
+		},
+		{
+			"id": "447",
+			"name": "Kryzhanovskii Maksim",
+			"school": "Iridan Academy Moscow"
+		},
+		{
+			"id": "458",
+			"name": "Moen Elisa",
+			"school": "Ronan McCormak School Oslo"
+		},
+		{
+			"id": "459",
+			"name": "Khomutova Anastasiia",
+			"school": "Carey Academy Ekaterinburg"
+		},
+		{
+			"id": "462",
+			"name": "Stifeeva Maria",
+			"school": "Red Star Academy Saint Petersburg"
+		},
+		{
+			"id": "396",
+			"name": "Nosova Veronika",
+			"school": "Ceilidh Moscow"
+		},
+		{
+			"id": "376",
+			"name": "Garbuzova Ulyana",
+			"school": "Teire school Moscow"
+		},
+		{
+			"id": "478",
+			"name": "Varaeva Anastasiya",
+			"school": "McGahan Lees Kursk"
+		},
+		{
+			"id": "460",
+			"name": "Protsenko Olga",
+			"school": "Iridan Academy Moscow"
+		}
+	],
+	"results": [
+		{
+			"adjudicatorName": "Cian Nolan",
+			"resultLines": [
+				{ "competitorId": "371", "score": [79, 80, null] },
+				{ "competitorId": "382", "score": [82, 76, 86.5] },
+				{ "competitorId": "383", "score": [76, 81, 83.5] },
+				{ "competitorId": "400", "score": [76, 82, 82] },
+				{ "competitorId": "410", "score": [77, 82.5, null] },
+				{ "competitorId": "420", "score": [78, 80.5, null] },
+				{ "competitorId": "435", "score": [80, 83, null] },
+				{ "competitorId": "446", "score": [86, 88, 87] },
+				{ "competitorId": "447", "score": [80, 82, 80] },
+				{ "competitorId": "458", "score": [80.5, 84.5, null] },
+				{ "competitorId": "459", "score": [79.5, 84, null] },
+				{ "competitorId": "462", "score": [77.5, 81.5, null] },
+				{ "competitorId": "396", "score": [77.5, 82.5, 81] },
+				{ "competitorId": "376", "score": [81, 87, 86] },
+				{ "competitorId": "478", "score": [84, 85, 86] },
+				{ "competitorId": "460", "score": [78, 81, null] }
+			]
+		},
+		{
+			"adjudicatorName": "Tanya Dirrane-Hobbs",
+			"resultLines": [
+				{ "competitorId": "371", "score": [77.5, 78, null] },
+				{ "competitorId": "382", "score": [77, 83, 81] },
+				{ "competitorId": "383", "score": [78.5, 80, 82] },
+				{ "competitorId": "400", "score": [77.5, 82, 77] },
+				{ "competitorId": "410", "score": [78.5, 78, null] },
+				{ "competitorId": "420", "score": [80, 80, null] },
+				{ "competitorId": "435", "score": [76, 79, null] },
+				{ "competitorId": "446", "score": [79, 81, 83] },
+				{ "competitorId": "447", "score": [81, 81, 76] },
+				{ "competitorId": "458", "score": [76.5, 79, null] },
+				{ "competitorId": "459", "score": [77, 80, null] },
+				{ "competitorId": "462", "score": [76, 77, null] },
+				{ "competitorId": "396", "score": [80, 81.5, 80] },
+				{ "competitorId": "376", "score": [79, 81, 79] },
+				{ "competitorId": "478", "score": [80.5, 80.5, 81.5] },
+				{ "competitorId": "460", "score": [78, 79, null] }
+			]
+		},
+		{
+			"adjudicatorName": "Stephen Masterson",
+			"resultLines": [
+				{ "competitorId": "371", "score": [78, 84, null] },
+				{ "competitorId": "382", "score": [85.5, 86, 85] },
+				{ "competitorId": "383", "score": [83, 84.5, 86] },
+				{ "competitorId": "400", "score": [85, 85, 83] },
+				{ "competitorId": "410", "score": [79, 83, null] },
+				{ "competitorId": "420", "score": [78, 82, null] },
+				{ "competitorId": "435", "score": [77, 79, null] },
+				{ "competitorId": "446", "score": [80.5, 79, 88.5] },
+				{ "competitorId": "447", "score": [87.5, 82, 78] },
+				{ "competitorId": "458", "score": [77, 78, null] },
+				{ "competitorId": "459", "score": [78.5, 79.5, null] },
+				{ "competitorId": "462", "score": [79, 77, null] },
+				{ "competitorId": "396", "score": [81, 86, 79] },
+				{ "competitorId": "376", "score": [86, 81, 84] },
+				{ "competitorId": "478", "score": [81, 80, 80] },
+				{ "competitorId": "460", "score": [80, 81.5, null] }
+			]
+		}
+	]
+}
