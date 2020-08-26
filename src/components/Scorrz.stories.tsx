@@ -1,6 +1,7 @@
 import {
 	AdjudicatorTableRowView,
 	CompetitorId,
+	DisplayMode,
 	FinalTableRowView,
 } from "@/types";
 import { number, object, text, withKnobs } from "@storybook/addon-knobs";
@@ -85,6 +86,7 @@ export const AdjudicatorTableStory: React.FC = () => {
 		<ScorrzStyled>
 			<AdjudicatorTable
 				adjudicatorName={text("adjudicatorName", "Adjudicator 1")}
+				displayMode={DisplayMode.Championship}
 				selectedRounds={object("selectedRounds", [true, false, true])}
 				rounds={rounds}
 				resultRows={rows}
