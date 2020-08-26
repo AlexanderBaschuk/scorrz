@@ -75,16 +75,9 @@ export const Scorrz: React.FC = () => {
 		[dispatch],
 	);
 
-	if (isLoading) {
-		return <>Loading...</>;
-	}
-
-	if (errorMessage !== undefined) {
-		return <>{errorMessage}</>;
-	}
-
-	return (
-		<ScorrzStyled>
+	const getIndex = () => (
+		<>
+			{" "}
 			<div>
 				<a
 					href="#"
@@ -111,6 +104,32 @@ export const Scorrz: React.FC = () => {
 					CoM Feis 2020
 				</a>
 			</div>
+		</>
+	);
+
+	if (isLoading) {
+		return (
+			<ScorrzStyled>
+				{getIndex()}
+				<br />
+				Loading...
+			</ScorrzStyled>
+		);
+	}
+
+	if (errorMessage !== undefined) {
+		return (
+			<ScorrzStyled>
+				{getIndex()}
+				<br />
+				{errorMessage}
+			</ScorrzStyled>
+		);
+	}
+
+	return (
+		<ScorrzStyled>
+			{getIndex()}
 			<CompetitionPageTitle
 				eventTitle={eventTitle}
 				competitionTitle={competitionTitle}
