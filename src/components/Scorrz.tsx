@@ -110,7 +110,7 @@ export const Scorrz: React.FC = () => {
 	if (isLoading) {
 		return (
 			<ScorrzStyled>
-				{getIndex()}
+				{/*getIndex()*/}
 				<br />
 				Loading...
 			</ScorrzStyled>
@@ -120,7 +120,7 @@ export const Scorrz: React.FC = () => {
 	if (errorMessage !== undefined) {
 		return (
 			<ScorrzStyled>
-				{getIndex()}
+				{/*getIndex()*/}
 				<br />
 				{errorMessage}
 			</ScorrzStyled>
@@ -129,7 +129,7 @@ export const Scorrz: React.FC = () => {
 
 	return (
 		<ScorrzStyled>
-			{getIndex()}
+			{/*getIndex()*/}
 			<CompetitionPageTitle
 				eventTitle={eventTitle}
 				competitionTitle={competitionTitle}
