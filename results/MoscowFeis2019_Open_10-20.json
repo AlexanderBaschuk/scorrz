@@ -1,0 +1,93 @@
+{
+	"eventTitle": "Moscow Feis 2019",
+	"competitionTitle": "Open Championship",
+	"rounds": [
+		{
+			"name": "Heavy",
+			"shortName": "H"
+		},
+		{
+			"name": "Light",
+			"shortName": "L"
+		},
+		{
+			"name": "Set",
+			"shortName": "S"
+		}
+	],
+	"competitors": [
+		{
+			"id": "379",
+			"name": "Belousova Anastasiya",
+			"school": "Carey Academy"
+		},
+		{ "id": "335", "name": "Nosova Veronika", "school": "Ceim Oir" },
+		{ "id": "320", "name": "Garbuzova Ulyana", "school": "Teire" },
+		{ "id": "316", "name": "Tarasenko Alina", "school": "McGahan Lees" },
+		{ "id": "380", "name": "Kryzhanovskii Maksim", "school": "Iridan" },
+		{ "id": "337", "name": "Tsvetkova Stanislava", "school": "Ceim Oir" },
+		{ "id": "324", "name": "Shebryukova Karina", "school": "McGahan Lees" },
+		{ "id": "314", "name": "Kuzmina Nina", "school": "Teire" },
+		{ "id": "359", "name": "Pushkareva Olesya", "school": "Teire" },
+		{ "id": "383", "name": "Protsenko Olga", "school": "Iridan" },
+		{ "id": "385", "name": "Stifeeva Maria", "school": "Red Star" },
+		{ "id": "392", "name": "Varaeva Anastasiya", "school": "McGahan Lees" },
+		{ "id": "369", "name": "Kosenkova Anastasia", "school": "Ceim Oir" }
+	],
+	"results": [
+		{
+			"adjudicatorName": "Helen Greene",
+			"resultLines": [
+				{ "competitorId": "379", "score": [86, 90, 85] },
+				{ "competitorId": "335", "score": [84, 84, 82] },
+				{ "competitorId": "320", "score": [83, 87.5, 80] },
+				{ "competitorId": "316", "score": [83.25, 78, 82.5] },
+				{ "competitorId": "380", "score": [82, 87, 83] },
+				{ "competitorId": "337", "score": [85, 88, 75] },
+				{ "competitorId": "324", "score": [83.5, 85, 75] },
+				{ "competitorId": "314", "score": [81, 86, 79] },
+				{ "competitorId": "359", "score": [82, 82, null] },
+				{ "competitorId": "383", "score": [78, 85, null] },
+				{ "competitorId": "385", "score": [79, 82, null] },
+				{ "competitorId": "392", "score": [80, 81, null] },
+				{ "competitorId": "369", "score": [80, 80, null] }
+			]
+		},
+		{
+			"adjudicatorName": "Jackie Scanlan",
+			"resultLines": [
+				{ "competitorId": "379", "score": [79, 81, 82] },
+				{ "competitorId": "335", "score": [80, 82, 81] },
+				{ "competitorId": "320", "score": [76, 78, 75] },
+				{ "competitorId": "316", "score": [74.5, 74, 76] },
+				{ "competitorId": "380", "score": [75, 77, 75] },
+				{ "competitorId": "337", "score": [78, 80, 80] },
+				{ "competitorId": "324", "score": [77, 77.5, 77] },
+				{ "competitorId": "314", "score": [74.5, 75, 73] },
+				{ "competitorId": "359", "score": [73.5, 76, null] },
+				{ "competitorId": "383", "score": [73, 74.5, null] },
+				{ "competitorId": "385", "score": [74, 73, null] },
+				{ "competitorId": "392", "score": [71, 72, null] },
+				{ "competitorId": "369", "score": [72.5, 74, null] }
+			]
+		},
+		{
+			"adjudicatorName": "Sonia Leonard-Hanly",
+			"resultLines": [
+				{ "competitorId": "379", "score": [90.7, 91.3, 94] },
+				{ "competitorId": "335", "score": [86.5, 88.5, 87] },
+				{ "competitorId": "320", "score": [91, 92, 83] },
+				{ "competitorId": "316", "score": [92, 87, 95] },
+				{ "competitorId": "380", "score": [88, 86, 82] },
+				{ "competitorId": "337", "score": [86, 88, 89] },
+				{ "competitorId": "324", "score": [90.3, 94.7, 86] },
+				{ "competitorId": "314", "score": [90.5, 91, 88.5] },
+				{ "competitorId": "359", "score": [87, 84, null] },
+				{ "competitorId": "383", "score": [82, 86.5, null] },
+				{ "competitorId": "385", "score": [87, 89, null] },
+				{ "competitorId": "392", "score": [83, 84, null] },
+				{ "competitorId": "369", "score": [82, 85, null] }
+			]
+		}
+	]
+}

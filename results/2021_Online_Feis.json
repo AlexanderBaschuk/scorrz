@@ -1,0 +1,252 @@
+{
+    "eventTitle": "Online Feis 2021",
+    "competitionTitle": "Open championship",
+    "rounds": [{
+            "name": "Heavy",
+            "shortName": "H"
+        }, {
+            "name": "Light",
+            "shortName": "L"
+        }, {
+            "name": "Set",
+            "shortName": "S"
+        }
+    ],
+    "competitors": [{
+            "id": "1",
+            "name": "1",
+            "school": ""
+        }, {
+            "id": "2",
+            "name": "2",
+            "school": ""
+        }, {
+            "id": "3",
+            "name": "3",
+            "school": ""
+        }, {
+            "id": "4",
+            "name": "4",
+            "school": ""
+        }, {
+            "id": "5",
+            "name": "Стася",
+            "school": "Ceim Oir"
+        }, {
+            "id": "6",
+            "name": "6",
+            "school": ""
+        }, {
+            "id": "7",
+            "name": "Вика",
+            "school": "Ceim Oir"
+        }, {
+            "id": "8",
+            "name": "8",
+            "school": ""
+        }, {
+            "id": "9",
+            "name": "Саша",
+            "school": "Ceim Oir"
+        }, {
+            "id": "10",
+            "name": "10",
+            "school": ""
+        }, {
+            "id": "11",
+            "name": "11",
+            "school": ""
+        }, {
+            "id": "12",
+            "name": "12",
+            "school": ""
+        }, {
+            "id": "13",
+            "name": "13",
+            "school": ""
+        }, {
+            "id": "14",
+            "name": "14",
+            "school": ""
+        }, {
+            "id": "15",
+            "name": "15",
+            "school": ""
+        }, {
+            "id": "16",
+            "name": "16",
+            "school": ""
+        }, {
+            "id": "17",
+            "name": "17",
+            "school": ""
+        }
+    ],
+    "results": [{
+            "adjudicatorName": "Kathy Irvine",
+            "resultLines": [{
+                    "competitorId": "1",
+                    "score": [84, 83, 80.5]
+                }, {
+                    "competitorId": "2",
+                    "score": [82, 81, 81]
+                }, {
+                    "competitorId": "3",
+                    "score": [81.75, 79.25, 78.75]
+                }, {
+                    "competitorId": "4",
+                    "score": [83, 80.5, 80.25]
+                }, {
+                    "competitorId": "5",
+                    "score": [81, 79.5, 79]
+                }, {
+                    "competitorId": "6",
+                    "score": [81.5, 80, 78]
+                }, {
+                    "competitorId": "7",
+                    "score": [81.25, 77.5, 79.25]
+                }, {
+                    "competitorId": "8",
+                    "score": [79.5, 81.5, 78.5]
+                }, {
+                    "competitorId": "9",
+                    "score": [80.5, 77.25, 78.25]
+                }, {
+                    "competitorId": "10",
+                    "score": [80, 79, 78.5]
+                }, {
+                    "competitorId": "11",
+                    "score": [79, 73.5, 75]
+                }, {
+                    "competitorId": "12",
+                    "score": [79.5, 77.25, 77.5]
+                }, {
+                    "competitorId": "13",
+                    "score": [76, 78, 73]
+                }, {
+                    "competitorId": "14",
+                    "score": [72, 72.5, 68]
+                }, {
+                    "competitorId": "15",
+                    "score": [73.5, 72.5, 68.5]
+                }, {
+                    "competitorId": "16",
+                    "score": [74.5, 73.5, 68]
+                }, {
+                    "competitorId": "17",
+                    "score": [73, 75, 68.5]
+                }
+            ]
+        }, {
+            "adjudicatorName": "Ann Byrne Gibbons",
+            "resultLines": [{
+                    "competitorId": "1",
+                    "score": [86, 88, 90]
+                }, {
+                    "competitorId": "2",
+                    "score": [87, 86, 92]
+                }, {
+                    "competitorId": "3",
+                    "score": [87, 89, 88]
+                }, {
+                    "competitorId": "4",
+                    "score": [87, 89.5, 88]
+                }, {
+                    "competitorId": "5",
+                    "score": [86, 87, 88]
+                }, {
+                    "competitorId": "6",
+                    "score": [82, 85, 85]
+                }, {
+                    "competitorId": "7",
+                    "score": [86, 86.5, 89]
+                }, {
+                    "competitorId": "8",
+                    "score": [81, 80, 82]
+                }, {
+                    "competitorId": "9",
+                    "score": [82, 82, 79]
+                }, {
+                    "competitorId": "10",
+                    "score": [80, 84, 85]
+                }, {
+                    "competitorId": "11",
+                    "score": [83, 83, 84]
+                }, {
+                    "competitorId": "12",
+                    "score": [82, 83, 81]
+                }, {
+                    "competitorId": "13",
+                    "score": [76, 82, 80]
+                }, {
+                    "competitorId": "14",
+                    "score": [77, 80, 82]
+                }, {
+                    "competitorId": "15",
+                    "score": [79, 83, 77]
+                }, {
+                    "competitorId": "16",
+                    "score": [78, 81, 74]
+                }, {
+                    "competitorId": "17",
+                    "score": [75, 78, 74]
+                }
+            ]
+        }, {
+            "adjudicatorName": "Reilly-Cannon",
+            "resultLines": [{
+                    "competitorId": "1",
+                    "score": [86, 86, 87]
+                }, {
+                    "competitorId": "2",
+                    "score": [83, 82, 84]
+                }, {
+                    "competitorId": "3",
+                    "score": [84.5, 85, 86]
+                }, {
+                    "competitorId": "4",
+                    "score": [81, 82, 82.5]
+                }, {
+                    "competitorId": "5",
+                    "score": [85, 84, 85]
+                }, {
+                    "competitorId": "6",
+                    "score": [83.5, 84.5, 83]
+                }, {
+                    "competitorId": "7",
+                    "score": [82.5, 83, 82.5]
+                }, {
+                    "competitorId": "8",
+                    "score": [82, 80, 82]
+                }, {
+                    "competitorId": "9",
+                    "score": [80.5, 81, 82.5]
+                }, {
+                    "competitorId": "10",
+                    "score": [77, 79, 81]
+                }, {
+                    "competitorId": "11",
+                    "score": [80, 79, 80]
+                }, {
+                    "competitorId": "12",
+                    "score": [79, 81.5, 81.5]
+                }, {
+                    "competitorId": "13",
+                    "score": [76, 77, 76]
+                }, {
+                    "competitorId": "14",
+                    "score": [73, 78, 77]
+                }, {
+                    "competitorId": "15",
+                    "score": [74, 75, 75.5]
+                }, {
+                    "competitorId": "16",
+                    "score": [75, 76, 75]
+                }, {
+                    "competitorId": "17",
+                    "score": [72, 73, 73]
+                }
+            ]
+        }
+    ]
+}
