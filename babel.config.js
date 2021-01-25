@@ -7,7 +7,7 @@ module.exports = {
 				targets: {
 					node: "current",
 				},
-				modules: false,
+				//modules: false,
 			},
 		],
 		"@babel/preset-typescript",
@@ -15,10 +15,10 @@ module.exports = {
 	],
 	env: {
 		production: {
-			plugins: ["emotion"],
+			plugins: ["@emotion"],
 		},
 		development: {
-			plugins: [["emotion", { sourceMap: true }]],
+			plugins: [["@emotion", { sourceMap: true }]],
 		},
 	},
 };
