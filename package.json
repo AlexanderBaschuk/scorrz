@@ -19,6 +19,9 @@
 		"type": "git",
 		"url": "git+https://github.com/AlexanderBaschuk/scorrz.git"
 	},
+	"resolutions": {
+		"acorn": "8.0.1"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.11.1",
 		"@babel/preset-env": "^7.11.0",
